@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+// position entry helper: p(label, { pct, val, weight, note })
+const p = (label, opts = {}) => ({ label, ...opts });
+
 const funds = [
   {
     name: "Berkshire Hathaway",
@@ -8,10 +11,36 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: 42,
-    newBuys: ["NYT (New York Times)", "LLYVA (Liberty Live-A)", "LLYVK (Liberty Live-C)", "DPZ (Domino's Pizza)"],
-    increased: ["CVX +6.6% (Chevron)", "CB +9.3% (Chubb)", "KR (Kroger)", "SIRI (SiriusXM)"],
-    reduced: ["AAPL −4.3%", "BAC −8.9%", "AMZN (significant cut)", "NU", "COF", "LSXMK", "LSXMA", "LPX", "SU"],
-    exits: ["None reported (0 complete exits)"],
+    // Top holdings by portfolio weight from Q4 2025 13F (SEC EDGAR)
+    topHoldings: [
+      { ticker: "AAPL", weight: "28.1%" },
+      { ticker: "AXP",  weight: "15.9%" },
+      { ticker: "BAC",  weight: "11.8%" },
+      { ticker: "KO",   weight: "8.5%"  },
+      { ticker: "CVX",  weight: "7.1%"  },
+      { ticker: "OXY",  weight: "4.5%"  },
+      { ticker: "MCO",  weight: "3.7%"  },
+      { ticker: "CB",   weight: "3.1%"  },
+    ],
+    newBuys: [
+      p("NYT (New York Times)"),
+      p("LLYVA (Liberty Live-A)"),
+      p("LLYVK (Liberty Live-C)"),
+      p("DPZ (Domino's Pizza)"),
+    ],
+    increased: [
+      p("CVX (Chevron)",  { pct: "+6.6%" }),
+      p("CB (Chubb)",     { pct: "+9.3%" }),
+      p("KR (Kroger)"),
+      p("SIRI (SiriusXM)"),
+    ],
+    reduced: [
+      p("AAPL (Apple)",           { pct: "−4.3%" }),
+      p("BAC (Bank of America)",  { pct: "−8.9%" }),
+      p("AMZN (Amazon)",          { note: "significant cut" }),
+      p("NU"), p("COF"), p("LSXMK"), p("LSXMA"), p("LPX"), p("SU"),
+    ],
+    exits: [p("None reported (0 complete exits)")],
     theme: "Rotating into insurance, energy & consumer staples; trimming mega-cap tech. New NYT stake signals media/value conviction.",
     sources: "13Radar, ValuSider, Seeking Alpha, SEC EDGAR",
     color: "#8B0000",
@@ -23,10 +52,29 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 2026",
     holdings: 1040,
-    newBuys: ["191 new positions incl. MPWR, CAT, BEN, WPC, GRMN, NKE, AG, ZETA"],
-    increased: ["NVDA +$253M (+54%)", "ORCL +$286M", "MU +$253M", "AMZN +$190M (+73%)", "AVGO +$111M", "NOW +$159M", "ANET +$85M", "SPY +$1.3B"],
-    reduced: ["GOOGL −$333M", "META −$128M", "MSFT −$113K shs", "UBER −$189M", "FI −$205M", "CSCO −$102M", "REGN −$126M"],
-    exits: ["AGNC, T (AT&T), ASTS, AFRM (Affirm), AKAM (Akamai), AVAV, and many others"],
+    newBuys: [
+      p("191 new positions incl. MPWR, CAT, BEN, WPC, GRMN, NKE, AG, ZETA"),
+    ],
+    increased: [
+      p("NVDA (Nvidia)",   { pct: "+54%",  val: "+$253M" }),
+      p("AMZN (Amazon)",   { pct: "+73%",  val: "+$190M" }),
+      p("SPY (S&P 500 ETF)",               { val: "+$1.3B" }),
+      p("ORCL (Oracle)",                   { val: "+$286M" }),
+      p("MU (Micron)",                     { val: "+$253M" }),
+      p("NOW (ServiceNow)",                { val: "+$159M" }),
+      p("AVGO (Broadcom)",                 { val: "+$111M" }),
+      p("ANET (Arista Networks)",          { val: "+$85M"  }),
+    ],
+    reduced: [
+      p("GOOGL (Alphabet)",  { val: "−$333M" }),
+      p("FI (Fiserv)",       { val: "−$205M" }),
+      p("UBER",              { val: "−$189M" }),
+      p("META",              { val: "−$128M" }),
+      p("REGN (Regeneron)",  { val: "−$126M" }),
+      p("CSCO (Cisco)",      { val: "−$102M" }),
+      p("MSFT",              { note: "−113K shares" }),
+    ],
+    exits: [p("AGNC, T (AT&T), ASTS, AFRM (Affirm), AKAM (Akamai), AVAV, and many others")],
     theme: "Massive AI infrastructure build-out: NVDA, ORCL, MU, AMZN. SPY position expanded dramatically. Trimming legacy tech & telecom.",
     sources: "StockZoa, TheStreet, Seeking Alpha, WhaleWisdom, HoldingsChannel",
     color: "#1a5276",
@@ -38,10 +86,21 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 2026",
     holdings: "5,000+",
-    newBuys: ["1,171 new stock positions incl. ARMG, CCCC, INEO, POWA, TIPB, TORO"],
-    increased: ["GLD +$4.2B", "UNH +$2.8B", "MSFT +$2.7B", "QQQ +$2.7B", "MSTR +$2.2B", "GOOG +$2.1B", "TSLA +$1.6B", "AAPL +$1.6B", "ORCL +$1.5B", "AMZN +$1.4B"],
-    reduced: ["Broad portfolio rebalancing across thousands of positions"],
-    exits: ["Multiple small positions rotated out"],
+    newBuys: [p("1,171 new positions incl. ARMG, CCCC, INEO, POWA, TIPB, TORO")],
+    increased: [
+      p("GLD (Gold ETF)",        { val: "+$4.2B" }),
+      p("UNH (UnitedHealth)",    { val: "+$2.8B" }),
+      p("MSFT (Microsoft)",      { val: "+$2.7B" }),
+      p("QQQ (Nasdaq ETF)",      { val: "+$2.7B" }),
+      p("MSTR (MicroStrategy)",  { val: "+$2.2B" }),
+      p("GOOG (Alphabet)",       { val: "+$2.1B" }),
+      p("TSLA (Tesla)",          { val: "+$1.6B" }),
+      p("AAPL (Apple)",          { val: "+$1.6B" }),
+      p("ORCL (Oracle)",         { val: "+$1.5B" }),
+      p("AMZN (Amazon)",         { val: "+$1.4B" }),
+    ],
+    reduced: [p("Broad portfolio rebalancing across thousands of positions")],
+    exits:   [p("Multiple small positions rotated out")],
     theme: "Massive accumulation in gold (GLD), healthcare (UNH), mega-cap tech (MSFT, GOOG, AAPL), and notably MicroStrategy/Bitcoin proxy (MSTR).",
     sources: "StockZoa, SEC EDGAR, HedgeFundAlpha",
     color: "#2c3e50",
@@ -53,10 +112,23 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: 11,
-    newBuys: ["META (Meta Platforms) — 11.4% of portfolio, major new conviction bet"],
-    increased: ["AMZN +65%", "BN (Brookfield) +49.7%"],
-    reduced: ["UBER −0.2%", "GOOG −2.5%", "HLT (trimmed before exit)", "CMG (trimmed before exit)"],
-    exits: ["HLT (Hilton) — full exit, cited valuation", "CMG (Chipotle) — full exit"],
+    newBuys: [
+      p("META (Meta Platforms)", { weight: "11.4%", note: "major new conviction bet" }),
+    ],
+    increased: [
+      p("AMZN (Amazon)",      { pct: "+65%" }),
+      p("BN (Brookfield)",    { pct: "+49.7%" }),
+    ],
+    reduced: [
+      p("UBER",  { pct: "−0.2%" }),
+      p("GOOG",  { pct: "−2.5%" }),
+      p("HLT (Hilton)",   { note: "trimmed before full exit" }),
+      p("CMG (Chipotle)", { note: "trimmed before full exit" }),
+    ],
+    exits: [
+      p("HLT (Hilton)",   { note: "full exit — cited valuation" }),
+      p("CMG (Chipotle)", { note: "full exit" }),
+    ],
     theme: "Concentrated pivot to AI/big tech: new META stake, big AMZN add. Exited hospitality (Hilton) and restaurant (Chipotle) on valuation concerns.",
     sources: "ValuSider, 13Radar, Seeking Alpha, GuruFocus",
     color: "#6c3483",
@@ -68,10 +140,32 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: 38,
-    newBuys: ["EWY (iShares South Korea ETF)", "BLL (Ball Corp)"],
-    increased: ["MU +200% (Micron)", "META +62%", "GOOG +29%", "OC +488% (Owens Corning)", "TSM (TSMC)", "AAL (American Airlines)"],
-    reduced: ["BABA −20%", "PDD trimmed", "JD trimmed", "BIDU trimmed", "NVDA reduced", "AMD reduced", "QCOM reduced", "WHR −29%"],
-    exits: ["FISV (Fiserv)", "TFC (Truist Financial)", "INTC (Intel)", "ORCL (Oracle)", "BEKE (KE Holdings)", "plus 4 others"],
+    newBuys: [
+      p("EWY (iShares South Korea ETF)"),
+      p("BLL (Ball Corp)"),
+    ],
+    increased: [
+      p("MU (Micron)",         { pct: "+200%" }),
+      p("OC (Owens Corning)",  { pct: "+488%" }),
+      p("META",                { pct: "+62%"  }),
+      p("GOOG (Alphabet)",     { pct: "+29%"  }),
+      p("TSM (TSMC)"),
+      p("AAL (American Airlines)"),
+    ],
+    reduced: [
+      p("BABA (Alibaba)",  { pct: "−20%" }),
+      p("WHR (Whirlpool)", { pct: "−29%" }),
+      p("PDD"),  p("JD"),  p("BIDU"),
+      p("NVDA"), p("AMD"), p("QCOM"),
+    ],
+    exits: [
+      p("INTC (Intel)"),
+      p("FISV (Fiserv)"),
+      p("ORCL (Oracle)"),
+      p("TFC (Truist Financial)"),
+      p("BEKE (KE Holdings)"),
+      p("plus 4 others"),
+    ],
     theme: "Rotating OUT of China tech (BABA, PDD, JD) and INTO US AI/semis (MU, META, GOOG). Exited Intel completely. New South Korea bet via EWY.",
     sources: "ValuSider, Yahoo Finance, Seeking Alpha, Gainify",
     color: "#b7950b",
@@ -83,10 +177,33 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: "~90",
-    newBuys: ["WLTH (Wealthfront) — new fintech bet on post-IPO dip", "PONY (Pony AI)"],
-    increased: ["CPNG (Coupang)", "NFLX (Netflix)", "SQ (Block)", "Z (Zillow)", "FLUT (Flutter Entertainment)", "CHME (Chime Financial)"],
-    reduced: ["MSFT −1.07M shs", "AMZN −1.03M shs", "NVDA −698K shs", "META −68K shs", "TSM −853K shs", "RDDT (Reddit)", "APP (AppLovin)", "GEV (GE Vernova)"],
-    exits: ["MDB (MongoDB) — full exit", "TRMF (Triumph Financial)", "VIA (Via Transportation)"],
+    newBuys: [
+      p("WLTH (Wealthfront)", { note: "new fintech bet on post-IPO dip" }),
+      p("PONY (Pony AI)"),
+    ],
+    increased: [
+      p("CPNG (Coupang)"),
+      p("NFLX (Netflix)"),
+      p("SQ (Block)"),
+      p("Z (Zillow)"),
+      p("FLUT (Flutter Entertainment)"),
+      p("CHME (Chime Financial)"),
+    ],
+    reduced: [
+      p("MSFT",  { note: "−1.07M shares" }),
+      p("AMZN",  { note: "−1.03M shares" }),
+      p("TSM",   { note: "−853K shares"  }),
+      p("NVDA",  { note: "−698K shares"  }),
+      p("META",  { note: "−68K shares"   }),
+      p("RDDT (Reddit)"),
+      p("APP (AppLovin)"),
+      p("GEV (GE Vernova)"),
+    ],
+    exits: [
+      p("MDB (MongoDB)", { note: "full exit" }),
+      p("TRMF (Triumph Financial)"),
+      p("VIA (Via Transportation)"),
+    ],
     theme: "Trimming mega-cap AI winners, rotating into fintech (Wealthfront, Chime, Block) and e-commerce (Coupang). Exited MongoDB entirely.",
     sources: "Seeking Alpha, StockZoa, HoldingsChannel, Intellectia",
     color: "#e67e22",
@@ -98,10 +215,26 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: "~80",
-    newBuys: ["GOOGL (Alphabet)", "AMZN (Amazon)", "ICE (Intercontinental Exchange)"],
-    increased: ["V +37.5% (Visa)", "MSFT +32.5%", "TSM +24.6%"],
-    reduced: ["COF −60% (Capital One)", "JPM −62%", "GM −48%"],
-    exits: ["BLK (BlackRock)", "PM (Philip Morris)", "META (Meta Platforms)"],
+    newBuys: [
+      p("GOOGL (Alphabet)"),
+      p("AMZN (Amazon)"),
+      p("ICE (Intercontinental Exchange)"),
+    ],
+    increased: [
+      p("V (Visa)",      { pct: "+37.5%" }),
+      p("MSFT",          { pct: "+32.5%" }),
+      p("TSM (TSMC)",    { pct: "+24.6%" }),
+    ],
+    reduced: [
+      p("JPM (JPMorgan)",    { pct: "−62%" }),
+      p("COF (Capital One)", { pct: "−60%" }),
+      p("GM (General Motors)", { pct: "−48%" }),
+    ],
+    exits: [
+      p("BLK (BlackRock)"),
+      p("PM (Philip Morris)"),
+      p("META (Meta Platforms)"),
+    ],
     theme: "Major rotation: exiting financials (BLK, JPM, COF) and consumer (PM, META). Building in GOOGL, AMZN, MSFT, and payments (Visa, ICE).",
     sources: "13Radar, StockZoa, Seeking Alpha, ValuSider",
     color: "#1e8449",
@@ -113,10 +246,31 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: 43,
-    newBuys: ["CMG (Chipotle)", "CEG (Constellation Energy)", "BABA (Alibaba)", "APG (APi Group)", "SPOT (Spotify)", "PGR (Progressive)"],
-    increased: ["NVDA significant increase", "UNP +107% (Union Pacific)", "DHR +1,100% (Danaher)", "RKT +138% (Rocket Cos)", "CRH", "BN (Brookfield)", "LYV (Live Nation)", "VST (Vistra)"],
-    reduced: ["Multiple smaller trims across portfolio"],
-    exits: ["FLUT (Flutter)", "META (Meta)", "APO (Apollo Global)", "Several smaller holdings"],
+    newBuys: [
+      p("CMG (Chipotle)"),
+      p("CEG (Constellation Energy)"),
+      p("BABA (Alibaba)"),
+      p("SPOT (Spotify)"),
+      p("PGR (Progressive)"),
+      p("APG (APi Group)"),
+    ],
+    increased: [
+      p("DHR (Danaher)",       { pct: "+1,100%" }),
+      p("RKT (Rocket Cos)",    { pct: "+138%"   }),
+      p("UNP (Union Pacific)", { pct: "+107%"   }),
+      p("NVDA",  { note: "significant increase" }),
+      p("VST (Vistra)"),
+      p("LYV (Live Nation)"),
+      p("BN (Brookfield)"),
+      p("CRH"),
+    ],
+    reduced: [p("Multiple smaller trims across portfolio")],
+    exits: [
+      p("FLUT (Flutter)"),
+      p("META (Meta)"),
+      p("APO (Apollo Global)"),
+      p("Several smaller holdings"),
+    ],
     theme: "New energy/utility bets (CEG, VST). Massive Danaher add (+1,100%). Picked up Chipotle (which Ackman just sold). New China re-entry via BABA.",
     sources: "Seeking Alpha, ValuSider, Fintel, 13Radar",
     color: "#c0392b",
@@ -128,10 +282,29 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 13, 2026",
     holdings: 244,
-    newBuys: ["127 new positions incl. XOP (S&P Oil & Gas ETF), RBRK (Rubrik), BILL (Bill Holdings), WEC, CRL, D (Dominion)"],
-    increased: ["XOP +$416M", "MSFT +$78M", "CRWV +$123M", "EXAS +$88M (Exact Sciences)", "NGD +$84M (New Gold)", "AMZN (+12% stake increase)", "NVDA", "TSM"],
-    reduced: ["SW (Smurfit Westrock) −$207M", "RSP −$139M", "Ford −$138M", "FXI −$111M", "KWEB −$101M"],
-    exits: ["ARMK (Aramark)", "BKNG (Booking)", "AMAT (Applied Materials)", "ALL (Allstate)", "ALNY (Alnylam)", "ADT", "and many others"],
+    newBuys: [
+      p("127 new positions incl. XOP, RBRK (Rubrik), BILL (Bill Holdings), WEC, CRL, D (Dominion)"),
+    ],
+    increased: [
+      p("XOP (Oil & Gas ETF)",      { val: "+$416M" }),
+      p("CRWV",                      { val: "+$123M" }),
+      p("EXAS (Exact Sciences)",     { val: "+$88M"  }),
+      p("NGD (New Gold)",            { val: "+$84M"  }),
+      p("MSFT",                      { val: "+$78M"  }),
+      p("AMZN (Amazon)",             { pct: "+12%"   }),
+      p("NVDA"), p("TSM (TSMC)"),
+    ],
+    reduced: [
+      p("SW (Smurfit Westrock)", { val: "−$207M" }),
+      p("RSP (Equal Weight ETF)", { val: "−$139M" }),
+      p("Ford (F)",               { val: "−$138M" }),
+      p("FXI (China Large-Cap ETF)", { val: "−$111M" }),
+      p("KWEB (China Internet ETF)",  { val: "−$101M" }),
+    ],
+    exits: [
+      p("ARMK (Aramark)"), p("BKNG (Booking)"), p("AMAT (Applied Materials)"),
+      p("ALL (Allstate)"),  p("ALNY (Alnylam)"), p("ADT"), p("and many others"),
+    ],
     theme: "Huge energy pivot via XOP. Heavy AI/cloud adds (MSFT, NVDA, TSM, AMZN). New cybersecurity bet (Rubrik). Cutting China ETFs (FXI, KWEB).",
     sources: "StockZoa, Seeking Alpha, 13F.info, Livewire Markets",
     color: "#7d3c98",
@@ -143,10 +316,22 @@ const funds = [
     quarter: "Q4 2025",
     filed: "Feb 17, 2026",
     holdings: "4,000+",
-    newBuys: ["421 new positions incl. Q (Qnity), Spotify bonds, Coinbase bonds"],
-    increased: ["AMD +6.8M shs (massive)", "QQQ +$3.8B", "MSFT +$1.9B", "AVGO +$1.0B", "META +$941M", "WDC +$848M", "ADBE +$737M", "IREN +$687M", "ISRG +$681M", "BE +$605M (Bloom Energy)", "NVDA +$584M"],
-    reduced: ["Multiple systematic rebalancing trades across thousands of positions"],
-    exits: ["Systematic turnover across smaller positions"],
+    newBuys: [p("421 new positions incl. Q (Qnity), Spotify bonds, Coinbase bonds")],
+    increased: [
+      p("QQQ (Nasdaq ETF)",   { val: "+$3.8B" }),
+      p("MSFT",               { val: "+$1.9B" }),
+      p("AVGO (Broadcom)",    { val: "+$1.0B" }),
+      p("META",               { val: "+$941M" }),
+      p("WDC (Western Digital)", { val: "+$848M" }),
+      p("ADBE (Adobe)",       { val: "+$737M" }),
+      p("IREN",               { val: "+$687M" }),
+      p("ISRG (Intuitive Surgical)", { val: "+$681M" }),
+      p("BE (Bloom Energy)",  { val: "+$605M" }),
+      p("NVDA",               { val: "+$584M" }),
+      p("AMD",                { note: "+6.8M shares — massive accumulation" }),
+    ],
+    reduced:  [p("Multiple systematic rebalancing trades across thousands of positions")],
+    exits:    [p("Systematic turnover across smaller positions")],
     theme: "Massive AMD accumulation (+6.8M shares). Heavy QQQ/tech-weighted buying. AI infrastructure theme (AVGO, NVDA, IREN). Clean energy (Bloom Energy).",
     sources: "StockZoa, HoldingsChannel, Fintel, Insider Monkey",
     color: "#117864",
@@ -192,24 +377,93 @@ function matches(text, query) {
   return text.toLowerCase().includes(query.toLowerCase());
 }
 
+function isPositive(str) { return str && (str.startsWith("+") || str.startsWith("+")); }
+function isNegative(str) { return str && (str.startsWith("−") || str.startsWith("-")); }
+
+function Chip({ value, type }) {
+  const colors = {
+    pct:    isNegative(value) ? { bg: "#fff3e0", text: "#e65100" } : { bg: "#e3f2fd", text: "#1565c0" },
+    val:    isNegative(value) ? { bg: "#fce4ec", text: "#c62828" } : { bg: "#e8f5e9", text: "#2e7d32" },
+    weight: { bg: "#ede7f6", text: "#6a1b9a" },
+  };
+  const { bg, text } = colors[type] || colors.weight;
+  return (
+    <span style={{
+      display: "inline-block",
+      background: bg,
+      color: text,
+      borderRadius: 4,
+      fontSize: 11,
+      fontWeight: 700,
+      padding: "1px 6px",
+      marginLeft: 5,
+      whiteSpace: "nowrap",
+      flexShrink: 0,
+    }}>{value}</span>
+  );
+}
+
 function Section({ label, color, prefix, items, query }) {
-  const filtered = query ? items.filter(t => matches(t, query)) : items;
+  const filtered = query ? items.filter(item => matches(item.label, query)) : items;
   if (query && filtered.length === 0) return null;
+  const muted = prefix === "↓" || prefix === "✕";
   return (
     <div style={{ marginBottom: 12 }}>
       <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color, marginBottom: 6 }}>{label}</div>
-      {filtered.map((t, i) => (
+      {filtered.map((item, i) => (
         <div key={i} style={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 2,
           fontSize: 13,
-          color: prefix === "↓" || prefix === "✕" ? "#555" : "#222",
-          padding: "2px 0",
+          color: muted ? "#555" : "#222",
+          padding: "3px 4px",
           lineHeight: 1.5,
-          background: query && matches(t, query) ? "#fffde7" : "transparent",
+          background: query && matches(item.label, query) ? "#fffde7" : "transparent",
           borderRadius: 3,
         }}>
-          {prefix} {highlight(t, query)}
+          <span style={{ marginRight: 3 }}>{prefix}</span>
+          <span style={{ flex: 1 }}>{highlight(item.label, query)}</span>
+          {item.pct    && <Chip value={item.pct}    type="pct" />}
+          {item.val    && <Chip value={item.val}    type="val" />}
+          {item.weight && <Chip value={item.weight} type="weight" />}
+          {item.note   && <span style={{ fontSize: 11, color: "#999", marginLeft: 4 }}>· {item.note}</span>}
         </div>
       ))}
+    </div>
+  );
+}
+
+function TopHoldings({ holdings, color }) {
+  if (!holdings?.length) return null;
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#999", marginBottom: 6 }}>Top Holdings by Weight</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+        {holdings.map((h, i) => (
+          <div key={i} style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 5,
+            background: "#f9f9f9",
+            border: "1px solid #ebebeb",
+            borderRadius: 6,
+            padding: "3px 8px",
+            fontSize: 12,
+          }}>
+            <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{h.ticker}</span>
+            <span style={{
+              background: `${color}22`,
+              color,
+              fontWeight: 700,
+              fontSize: 11,
+              borderRadius: 3,
+              padding: "0 4px",
+            }}>{h.weight}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -270,6 +524,7 @@ function FundCard({ fund, isOpen, onToggle, query }) {
             {fund.theme}
           </div>
 
+          <TopHoldings holdings={fund.topHoldings} color={fund.color} />
           <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={query} />
           <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={query} />
           <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={query} />
@@ -287,7 +542,7 @@ function FundCard({ fund, isOpen, onToggle, query }) {
 function fundMatchesQuery(fund, query) {
   if (!query) return true;
   return [...fund.newBuys, ...fund.increased, ...fund.reduced, ...fund.exits]
-    .some(t => matches(t, query));
+    .some(item => matches(item.label, query));
 }
 
 export default function HedgeFundTracker() {
