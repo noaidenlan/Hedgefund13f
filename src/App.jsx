@@ -173,13 +173,54 @@ const exits = [
   { stock: "China ETFs (FXI, KWEB)", funds: "Soros — significant reduction" },
 ];
 
-function FundCard({ fund, isOpen, onToggle }) {
+function highlight(text, query) {
+  if (!query) return text;
+  const idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  return (
+    <>
+      {text.slice(0, idx)}
+      <mark style={{ background: "#fff176", color: "#1a1a1a", borderRadius: 2, padding: "0 1px" }}>
+        {text.slice(idx, idx + query.length)}
+      </mark>
+      {text.slice(idx + query.length)}
+    </>
+  );
+}
+
+function matches(text, query) {
+  return text.toLowerCase().includes(query.toLowerCase());
+}
+
+function Section({ label, color, prefix, items, query }) {
+  const filtered = query ? items.filter(t => matches(t, query)) : items;
+  if (query && filtered.length === 0) return null;
+  return (
+    <div style={{ marginBottom: 12 }}>
+      <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color, marginBottom: 6 }}>{label}</div>
+      {filtered.map((t, i) => (
+        <div key={i} style={{
+          fontSize: 13,
+          color: prefix === "↓" || prefix === "✕" ? "#555" : "#222",
+          padding: "2px 0",
+          lineHeight: 1.5,
+          background: query && matches(t, query) ? "#fffde7" : "transparent",
+          borderRadius: 3,
+        }}>
+          {prefix} {highlight(t, query)}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FundCard({ fund, isOpen, onToggle, query }) {
   return (
     <div style={{
       background: "#fff",
       borderRadius: 10,
       marginBottom: 10,
-      border: "1px solid #e0e0e0",
+      border: query ? `1px solid ${fund.color}55` : "1px solid #e0e0e0",
       overflow: "hidden",
       boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04)",
       transition: "box-shadow 0.2s",
@@ -229,25 +270,10 @@ function FundCard({ fund, isOpen, onToggle }) {
             {fund.theme}
           </div>
 
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#2ecc71", marginBottom: 6 }}>New Buys</div>
-            {fund.newBuys.map((t, i) => <div key={i} style={{ fontSize: 13, color: "#222", padding: "2px 0", lineHeight: 1.5 }}>+ {t}</div>)}
-          </div>
-
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#3498db", marginBottom: 6 }}>Increased Positions</div>
-            {fund.increased.map((t, i) => <div key={i} style={{ fontSize: 13, color: "#222", padding: "2px 0", lineHeight: 1.5 }}>↑ {t}</div>)}
-          </div>
-
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#e67e22", marginBottom: 6 }}>Reduced / Trimmed</div>
-            {fund.reduced.map((t, i) => <div key={i} style={{ fontSize: 13, color: "#555", padding: "2px 0", lineHeight: 1.5 }}>↓ {t}</div>)}
-          </div>
-
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#e74c3c", marginBottom: 6 }}>Full Exits</div>
-            {fund.exits.map((t, i) => <div key={i} style={{ fontSize: 13, color: "#555", padding: "2px 0", lineHeight: 1.5 }}>✕ {t}</div>)}
-          </div>
+          <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={query} />
+          <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={query} />
+          <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={query} />
+          <Section label="Full Exits" color="#e74c3c" prefix="✕" items={fund.exits} query={query} />
 
           <div style={{ fontSize: 11, color: "#aaa", borderTop: "1px solid #eee", paddingTop: 8, marginTop: 4 }}>
             Sources: {fund.sources}
@@ -258,9 +284,19 @@ function FundCard({ fund, isOpen, onToggle }) {
   );
 }
 
+function fundMatchesQuery(fund, query) {
+  if (!query) return true;
+  return [...fund.newBuys, ...fund.increased, ...fund.reduced, ...fund.exits]
+    .some(t => matches(t, query));
+}
+
 export default function HedgeFundTracker() {
   const [openFunds, setOpenFunds] = useState({ 0: true });
   const [tab, setTab] = useState("funds");
+  const [search, setSearch] = useState("");
+
+  const query = search.trim();
+  const visibleFunds = funds.filter(f => fundMatchesQuery(f, query));
 
   const toggle = (i) => setOpenFunds(prev => ({ ...prev, [i]: !prev[i] }));
 
@@ -284,6 +320,41 @@ export default function HedgeFundTracker() {
           10 major funds · Filed Feb 2026 · Data as of Dec 31, 2025
         </div>
       </div>
+
+      <div style={{ position: "relative", marginBottom: 14 }}>
+        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 14, color: "#aaa", pointerEvents: "none" }}>🔍</span>
+        <input
+          type="text"
+          placeholder="Search ticker or fund name… e.g. NVDA, META, Berkshire"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          style={{
+            width: "100%",
+            boxSizing: "border-box",
+            padding: "10px 36px 10px 34px",
+            borderRadius: 8,
+            border: "1px solid #ddd",
+            fontSize: 13,
+            background: "#fff",
+            outline: "none",
+            color: "#1a1a1a",
+          }}
+        />
+        {search && (
+          <button
+            onClick={() => setSearch("")}
+            style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", fontSize: 16, color: "#aaa", lineHeight: 1 }}
+          >×</button>
+        )}
+      </div>
+
+      {query && (
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 10 }}>
+          {visibleFunds.length === 0
+            ? `No funds mention "${query}"`
+            : `${visibleFunds.length} fund${visibleFunds.length > 1 ? "s" : ""} mention "${query}"`}
+        </div>
+      )}
 
       <div style={{ display: "flex", gap: 6, marginBottom: 18, background: "#e8e6e1", borderRadius: 8, padding: 3 }}>
         {[
@@ -313,8 +384,8 @@ export default function HedgeFundTracker() {
 
       {tab === "funds" && (
         <div>
-          {funds.map((fund, i) => (
-            <FundCard key={i} fund={fund} isOpen={!!openFunds[i]} onToggle={() => toggle(i)} />
+          {visibleFunds.map((fund, i) => (
+            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[funds.indexOf(fund)]} onToggle={() => toggle(funds.indexOf(fund))} query={query} />
           ))}
         </div>
       )}
