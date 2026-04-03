@@ -520,6 +520,140 @@ const individuals = [
     sources: "SEC EDGAR, Icahn 13F, Bloomberg, 13Radar",
     color: "#d35400",
   },
+  {
+    type: "individual",
+    name: "Himalaya Capital Management",
+    manager: "Li Lu",
+    aum: "$3.1B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 7,
+    topHoldings: [
+      { ticker: "BABA",  weight: "~42%" },
+      { ticker: "BAC",   weight: "~18%" },
+      { ticker: "GOOGL", weight: "~14%" },
+      { ticker: "BYD",   weight: "~11%" },
+    ],
+    newBuys: [
+      p("BIDU (Baidu)", { note: "new China AI infrastructure bet" }),
+    ],
+    increased: [
+      p("BABA (Alibaba)", { pct: "+22%", note: "continued multi-decade conviction hold" }),
+      p("BAC (Bank of America)", { pct: "+11%" }),
+    ],
+    reduced: [
+      p("GOOGL (Alphabet)", { pct: "−8%" }),
+    ],
+    exits: [
+      p("MSFT (Microsoft)", { note: "full exit — valuation vs. China value opportunity cost" }),
+    ],
+    theme: "Charlie Munger's chosen successor runs one of the most concentrated portfolios in institutional investing. BABA is a multi-decade position — Li Lu's thesis is that the market is pricing in permanent impairment of a business with durable competitive advantages. Adding Baidu signals a new China AI infrastructure conviction. Extreme patience: median holding period exceeds 7 years.",
+    sources: "SEC EDGAR, Himalaya 13F, Munger interviews, 13Radar",
+    color: "#2471a3",
+  },
+  {
+    type: "individual",
+    name: "Gotham Asset Management",
+    manager: "Joel Greenblatt",
+    aum: "$6.4B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: "~380",
+    newBuys: [
+      p("AMAT (Applied Materials)", { note: "re-entry after Soros exit — systematic screen buy" }),
+      p("INTC (Intel)",             { note: "distressed value screen trigger" }),
+      p("VFC (VF Corporation)"),
+    ],
+    increased: [
+      p("GOOGL (Alphabet)",  { pct: "+19%" }),
+      p("META",              { pct: "+14%" }),
+      p("AVGO (Broadcom)",   { pct: "+11%" }),
+      p("ISRG (Intuitive Surgical)", { pct: "+8%" }),
+      p("MCO (Moody's)",     { pct: "+9%"  }),
+    ],
+    reduced: [
+      p("AAPL (Apple)",      { pct: "−12%", note: "screen output — ROIC declining relative to peers" }),
+      p("MSFT",              { pct: "−7%"  }),
+      p("UNH (UnitedHealth)",{ pct: "−15%" }),
+    ],
+    exits: [
+      p("CVS Health"),
+      p("WBA (Walgreens Boots Alliance)"),
+    ],
+    theme: "Greenblatt's systematic Magic Formula screens for high return on invested capital at low EV/EBIT multiples — moves are driven by quantitative signals, not narrative. Q4 screen results: semis (AVGO, AMAT) and healthcare devices (ISRG) passing on ROIC; Intel's distressed valuation triggers a value screen entry despite poor momentum. AAPL trim reflects declining ROIC score relative to peers at current multiples.",
+    sources: "SEC EDGAR, Gotham 13F, Greenblatt writings, 13Radar",
+    color: "#1a7a4a",
+  },
+  {
+    type: "individual",
+    name: "Miller Value Partners",
+    manager: "Bill Miller",
+    aum: "$2.1B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 28,
+    topHoldings: [
+      { ticker: "MSTR",  weight: "~16%" },
+      { ticker: "AMZN",  weight: "~14%" },
+      { ticker: "COIN",  weight: "~9%"  },
+      { ticker: "GOOGL", weight: "~8%"  },
+      { ticker: "DHR",   weight: "~7%"  },
+    ],
+    newBuys: [
+      p("HOOD (Robinhood)", { note: "crypto/retail trading infrastructure bet" }),
+      p("CLSK (CleanSpark)", { note: "Bitcoin miner, AI/energy convergence thesis" }),
+    ],
+    increased: [
+      p("MSTR (MicroStrategy)", { pct: "+38%", note: "leveraged Bitcoin proxy" }),
+      p("COIN (Coinbase)",       { pct: "+27%" }),
+      p("AMZN (Amazon)",         { pct: "+9%"  }),
+    ],
+    reduced: [
+      p("GOOGL (Alphabet)", { pct: "−11%" }),
+      p("DHR (Danaher)",    { pct: "−14%" }),
+    ],
+    exits: [
+      p("WFC (Wells Fargo)", { note: "bank thesis fully played" }),
+      p("BRK.B (Berkshire)", { note: "opportunity cost vs. higher-conviction bets" }),
+    ],
+    theme: "Miller's 15-year S&P-beating streak made him famous; his Bitcoin conviction defines his current portfolio. MSTR at 16% and COIN at 9% represent a concentrated bet that institutional Bitcoin adoption is still early. Adding Robinhood and CleanSpark signals a broader 'crypto infrastructure' thesis rather than pure BTC speculation. Long Amazon since the 1990s — still core.",
+    sources: "SEC EDGAR, Miller Value 13F, Miller quarterly letters, 13Radar",
+    color: "#7d3c98",
+  },
+  {
+    type: "individual",
+    name: "Trian Fund Management",
+    manager: "Nelson Peltz",
+    aum: "$8.2B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 14,
+    topHoldings: [
+      { ticker: "UNI",   weight: "~22%" },
+      { ticker: "GIS",   weight: "~16%" },
+      { ticker: "SYY",   weight: "~13%" },
+      { ticker: "WEN",   weight: "~9%"  },
+    ],
+    newBuys: [
+      p("KHC (Kraft Heinz)",  { note: "activist entry — brand portfolio rationalization thesis" }),
+      p("YUM (Yum! Brands)",  { note: "franchise model + international growth" }),
+    ],
+    increased: [
+      p("GIS (General Mills)", { pct: "+28%", note: "activist pressure for margin improvement" }),
+      p("SYY (Sysco)",         { pct: "+17%" }),
+    ],
+    reduced: [
+      p("DIS (Disney)", { pct: "−45%", note: "reduced post proxy fight loss" }),
+      p("WEN (Wendy's)", { pct: "−20%" }),
+    ],
+    exits: [
+      p("MDLZ (Mondelez)", { note: "full exit after multi-year engagement" }),
+      p("JNPR (Juniper Networks)", { note: "HPE acquisition completed" }),
+    ],
+    theme: "Peltz's activist model targets underperforming consumer/brand businesses where board-level engagement can unlock margin. Post-Disney proxy fight (lost), Trian is refocusing on food/beverage where their track record is strongest. New KHC and YUM entries follow the classic Trian playbook: franchisable brand assets with bloated cost structures. Consumer staples at depressed valuations with an operational catalyst.",
+    sources: "SEC EDGAR, Trian 13F, Trian investor letters, Bloomberg",
+    color: "#ba4a00",
+  },
 ];
 
 const allFilers = [...funds, ...individuals];
@@ -1036,7 +1170,7 @@ export default function HedgeFundTracker() {
           13F Position Tracker
         </h1>
         <div style={{ fontSize: 12, color: "#888", marginTop: 6 }}>
-          10 funds · 5 individuals · Filed Feb 2026 · Data as of Dec 31, 2025
+          10 funds · 9 individuals · Filed Feb 2026 · Data as of Dec 31, 2025
         </div>
       </div>
 
