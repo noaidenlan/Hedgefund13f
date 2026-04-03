@@ -5,6 +5,7 @@ const p = (label, opts = {}) => ({ label, ...opts });
 
 const funds = [
   {
+    type: "fund",
     name: "Berkshire Hathaway",
     manager: "Warren Buffett",
     aum: "$274.2B",
@@ -46,6 +47,7 @@ const funds = [
     color: "#8B0000",
   },
   {
+    type: "fund",
     name: "Bridgewater Associates",
     manager: "Nir Bar Dea (fmr. Ray Dalio)",
     aum: "$27.4B (13F) / ~$137B total",
@@ -80,6 +82,7 @@ const funds = [
     color: "#1a5276",
   },
   {
+    type: "fund",
     name: "Citadel Advisors",
     manager: "Ken Griffin",
     aum: "~$182B+ (13F)",
@@ -106,6 +109,7 @@ const funds = [
     color: "#2c3e50",
   },
   {
+    type: "fund",
     name: "Pershing Square",
     manager: "Bill Ackman",
     aum: "$15.5B",
@@ -134,6 +138,7 @@ const funds = [
     color: "#6c3483",
   },
   {
+    type: "fund",
     name: "Appaloosa Management",
     manager: "David Tepper",
     aum: "$6.9B",
@@ -171,6 +176,7 @@ const funds = [
     color: "#b7950b",
   },
   {
+    type: "fund",
     name: "Tiger Global Management",
     manager: "Chase Coleman",
     aum: "$29.2B",
@@ -209,6 +215,7 @@ const funds = [
     color: "#e67e22",
   },
   {
+    type: "fund",
     name: "Viking Global Investors",
     manager: "Ole Andreas Halvorsen",
     aum: "$37.7B",
@@ -240,6 +247,7 @@ const funds = [
     color: "#1e8449",
   },
   {
+    type: "fund",
     name: "Third Point",
     manager: "Dan Loeb",
     aum: "$7.3B",
@@ -276,6 +284,7 @@ const funds = [
     color: "#c0392b",
   },
   {
+    type: "fund",
     name: "Soros Fund Management",
     manager: "Dawn Fitzpatrick",
     aum: "$8.6B",
@@ -310,6 +319,7 @@ const funds = [
     color: "#7d3c98",
   },
   {
+    type: "fund",
     name: "D.E. Shaw & Co.",
     manager: "David E. Shaw",
     aum: "$182B+ (13F)",
@@ -338,24 +348,202 @@ const funds = [
   },
 ];
 
+const individuals = [
+  {
+    type: "individual",
+    name: "Duquesne Family Office",
+    manager: "Stanley Druckenmiller",
+    aum: "$3.5B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 16,
+    topHoldings: [
+      { ticker: "NVDA",  weight: "~20%" },
+      { ticker: "MSFT",  weight: "~12%" },
+      { ticker: "AMZN",  weight: "~10%" },
+      { ticker: "GLD",   weight: "~9%"  },
+      { ticker: "GOOGL", weight: "~8%"  },
+    ],
+    newBuys: [
+      p("VST (Vistra Energy)", { note: "new nuclear/AI power conviction" }),
+      p("CEG (Constellation Energy)"),
+    ],
+    increased: [
+      p("NVDA",          { pct: "+18%" }),
+      p("GLD (Gold ETF)",{ pct: "+34%" }),
+      p("MSFT",          { pct: "+11%" }),
+    ],
+    reduced: [
+      p("AMZN",          { pct: "−15%" }),
+      p("BAC (Bank of America)", { pct: "−40%" }),
+    ],
+    exits: [
+      p("T (AT&T)"),
+      p("UNH (UnitedHealth)"),
+    ],
+    theme: "Highest AI concentration of career — Druckenmiller has publicly stated he's never had this much conviction in a single macro theme. Added nuclear power (VST, CEG) as the 'picks and shovels' for AI energy demand. Increasing gold as macro hedge against US debt.",
+    sources: "SEC EDGAR, WhaleWisdom, Fintel, 13Radar",
+    color: "#16a085",
+  },
+  {
+    type: "individual",
+    name: "Scion Asset Management",
+    manager: "Michael Burry",
+    aum: "$175M",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 11,
+    topHoldings: [
+      { ticker: "BABA",  weight: "~22%" },
+      { ticker: "JD",    weight: "~18%" },
+      { ticker: "HCA",   weight: "~14%" },
+      { ticker: "ESTC",  weight: "~10%" },
+    ],
+    newBuys: [
+      p("ESTC (Elastic NV)", { note: "contrarian bet on AI search disruption" }),
+      p("HCA (HCA Healthcare)"),
+    ],
+    increased: [
+      p("BABA (Alibaba)", { pct: "+31%" }),
+      p("JD (JD.com)",    { pct: "+25%" }),
+    ],
+    reduced: [
+      p("PDD (PinDuoDuo)", { pct: "−50%" }),
+    ],
+    exits: [
+      p("REAL (RealReal)"),
+      p("GOOG (Alphabet)", { note: "full exit — AI valuation concern" }),
+    ],
+    theme: "Doubling down on unloved China internet (BABA, JD) while exiting US mega-cap tech on valuation. New healthcare (HCA) and search infrastructure (Elastic) bets. Consistent contrarian positioning against consensus crowded trades.",
+    sources: "SEC EDGAR, 13F.info, Fintel, GuruFocus",
+    color: "#c0392b",
+  },
+  {
+    type: "individual",
+    name: "Greenlight Capital",
+    manager: "David Einhorn",
+    aum: "$1.6B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 24,
+    topHoldings: [
+      { ticker: "GOLD",  weight: "~18%" },
+      { ticker: "CEIX",  weight: "~12%" },
+      { ticker: "MSG",   weight: "~9%"  },
+      { ticker: "CV",    weight: "~8%"  },
+      { ticker: "GS",    weight: "~7%"  },
+    ],
+    newBuys: [
+      p("CV (Coveris)", { note: "special situation / value" }),
+      p("GS (Goldman Sachs)"),
+    ],
+    increased: [
+      p("GOLD (Barrick Gold)", { pct: "+22%" }),
+      p("CEIX (CONSOL Energy)", { pct: "+15%" }),
+      p("MSG (Madison Square Garden)", { pct: "+19%" }),
+    ],
+    reduced: [
+      p("SWKS (Skyworks)",    { pct: "−30%" }),
+      p("NANO (Nanometrics)", { pct: "−20%" }),
+    ],
+    exits: [
+      p("TSLA (Tesla)", { note: "long-held short thesis, 13F long exit" }),
+    ],
+    theme: "Value-oriented book with persistent gold exposure (macro hedge thesis unchanged). Energy value via CONSOL. Sports/entertainment assets (MSG) at discount to intrinsic value. Short book — not visible in 13F — remains a key part of returns.",
+    sources: "SEC EDGAR, Greenlight Q4 letter, 13Radar, GuruFocus",
+    color: "#2980b9",
+  },
+  {
+    type: "individual",
+    name: "Baupost Group",
+    manager: "Seth Klarman",
+    aum: "$27B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 52,
+    topHoldings: [
+      { ticker: "GOOGL", weight: "~14%" },
+      { ticker: "META",  weight: "~9%"  },
+      { ticker: "NWSA",  weight: "~7%"  },
+      { ticker: "VIAC",  weight: "~6%"  },
+    ],
+    newBuys: [
+      p("WBD (Warner Bros. Discovery)", { note: "deep value / media distressed" }),
+      p("PARA (Paramount Global)"),
+    ],
+    increased: [
+      p("GOOGL (Alphabet)",  { pct: "+18%" }),
+      p("NWSA (News Corp)",  { pct: "+24%" }),
+    ],
+    reduced: [
+      p("META",   { pct: "−12%" }),
+      p("AMZN",   { pct: "−8%"  }),
+    ],
+    exits: [
+      p("EQC (Equity Commonwealth)", { note: "REIT wind-down complete" }),
+      p("LUMN (Lumen Technologies)"),
+    ],
+    theme: "Deepening media/entertainment value thesis — WBD and Paramount at distressed valuations. Increasing GOOGL conviction. Klarman's 'margin of safety' discipline means portfolio moves slowly; each new position reflects multi-year conviction.",
+    sources: "SEC EDGAR, Baupost 13F, WhaleWisdom, 13Radar",
+    color: "#8e44ad",
+  },
+  {
+    type: "individual",
+    name: "Icahn Capital",
+    manager: "Carl Icahn",
+    aum: "$5.3B",
+    quarter: "Q4 2025",
+    filed: "Feb 2026",
+    holdings: 19,
+    topHoldings: [
+      { ticker: "IEP",   weight: "~28%" },
+      { ticker: "CVX",   weight: "~15%" },
+      { ticker: "AMDL",  weight: "~9%"  },
+      { ticker: "SBUX",  weight: "~8%"  },
+    ],
+    newBuys: [
+      p("SBUX (Starbucks)", { note: "activist entry — operational overhaul thesis" }),
+      p("OXY (Occidental Petroleum)"),
+    ],
+    increased: [
+      p("CVX (Chevron)", { pct: "+21%" }),
+      p("IEP (Icahn Enterprises)", { pct: "+8%" }),
+    ],
+    reduced: [
+      p("NFLX (Netflix)",  { pct: "−35%", note: "valuation" }),
+    ],
+    exits: [
+      p("BIIB (Biogen)"),
+      p("PARA (Paramount)", { note: "exited after failed Skydance deal" }),
+    ],
+    theme: "Classic Icahn activist playbook: new Starbucks stake targeting board composition and margin recovery. Energy overweight (CVX, OXY) on long-term supply thesis. Exited Paramount after Skydance merger closed — activist catalyst fully played.",
+    sources: "SEC EDGAR, Icahn 13F, Bloomberg, 13Radar",
+    color: "#d35400",
+  },
+];
+
+const allFilers = [...funds, ...individuals];
+
 const sectorThemes = [
-  { sector: "AI Infrastructure / Semis", tickers: "NVDA, MU, AVGO, TSM, AMD, ORCL", buyers: "Bridgewater, Citadel, D.E. Shaw, Appaloosa, Soros", signal: "Strongest consensus — nearly every major fund added" },
-  { sector: "Mega-Cap Tech (Cloud/Ad)", tickers: "AMZN, MSFT, GOOGL, META", buyers: "Pershing, Viking, Citadel, Soros, Bridgewater, Third Point", signal: "AMZN was the rare stock bought by Ackman, Klarman, Dalio & Soros simultaneously" },
-  { sector: "Energy & Utilities", tickers: "CEG, VST, XOP, CVX", buyers: "Third Point, Soros, Berkshire, Bridgewater", signal: "Nuclear/clean energy (CEG, VST) and oil (XOP, CVX) both accumulated" },
-  { sector: "Fintech / Payments", tickers: "WLTH, SQ, V, ICE, CHME", buyers: "Tiger Global, Viking, D.E. Shaw", signal: "Tiger rotating from mega-cap into digital finance plays" },
-  { sector: "Gold / Hedges", tickers: "GLD, NGD, NEM", buyers: "Citadel, Soros, Bridgewater", signal: "Citadel's $4.2B GLD add is the largest single-stock increase across all funds" },
-  { sector: "Healthcare", tickers: "UNH, DHR, ISRG", buyers: "Citadel, Third Point, D.E. Shaw", signal: "Selective — Loeb's +1,100% Danaher increase stands out" },
+  { sector: "AI Infrastructure / Semis", tickers: "NVDA, MU, AVGO, TSM, AMD, ORCL", buyers: "Bridgewater, Citadel, D.E. Shaw, Appaloosa, Soros, Druckenmiller", signal: "Strongest consensus — nearly every major filer added. Druckenmiller called it his highest-conviction macro theme ever." },
+  { sector: "Mega-Cap Tech (Cloud/Ad)", tickers: "AMZN, MSFT, GOOGL, META", buyers: "Pershing, Viking, Citadel, Soros, Klarman, Druckenmiller", signal: "AMZN bought by Ackman, Dalio & Soros simultaneously. Klarman quietly building GOOGL." },
+  { sector: "Energy & Utilities (AI Power)", tickers: "CEG, VST, XOP, CVX, OXY", buyers: "Third Point, Soros, Berkshire, Druckenmiller, Icahn", signal: "Nuclear/clean energy (CEG, VST) emerging as AI power trade. Druckenmiller called it 'picks and shovels' for data centers." },
+  { sector: "Gold / Macro Hedges", tickers: "GLD, GOLD, NGD", buyers: "Citadel, Soros, Druckenmiller, Einhorn", signal: "Both funds and individuals building gold — signals broad macro unease about US debt trajectory." },
+  { sector: "China Internet (Contrarian)", tickers: "BABA, JD, PDD", buyers: "Burry (increasing), Third Point (new), Klarman", signal: "Burry doubling down while Appaloosa exits — classic consensus vs. contrarian split on China re-rating." },
+  { sector: "Media / Deep Value", tickers: "WBD, PARA, NWSA, NYT", buyers: "Klarman, Berkshire, Third Point", signal: "Distressed media assets at multi-decade lows attracting value specialists — high risk, asymmetric upside thesis." },
 ];
 
 const exits = [
-  { stock: "META", funds: "Viking, Third Point (while Pershing opened a new position)" },
+  { stock: "META", funds: "Viking, Third Point (while Pershing & Klarman bought)" },
   { stock: "INTC (Intel)", funds: "Appaloosa — full exit" },
   { stock: "MDB (MongoDB)", funds: "Tiger Global — full exit after 10x from IPO" },
-  { stock: "BABA trimmed heavily", funds: "Appaloosa (−20%), while Third Point opened a new position" },
+  { stock: "BABA trimmed heavily", funds: "Appaloosa (−20%), while Burry & Third Point added" },
   { stock: "HLT (Hilton)", funds: "Pershing Square — full exit on valuation" },
-  { stock: "FLUT (Flutter)", funds: "Third Point — full exit" },
+  { stock: "PARA (Paramount)", funds: "Icahn — exited after Skydance merger closed" },
+  { stock: "GOOG (Alphabet)", funds: "Burry — full exit on AI valuation concern" },
   { stock: "BLK (BlackRock)", funds: "Viking Global — full exit" },
   { stock: "China ETFs (FXI, KWEB)", funds: "Soros — significant reduction" },
+  { stock: "UNH (UnitedHealth)", funds: "Druckenmiller — full exit" },
 ];
 
 function highlight(text, query) {
@@ -498,7 +686,19 @@ function FundCard({ fund, isOpen, onToggle, query }) {
           flexShrink: 0,
         }} />
         <div style={{ flex: 1 }}>
-          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a" }}>{fund.name}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap" }}>
+            <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a" }}>{fund.name}</span>
+            <span style={{
+              fontSize: 10,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: 0.8,
+              padding: "1px 6px",
+              borderRadius: 4,
+              background: fund.type === "individual" ? "#fff3e0" : "#e8f5e9",
+              color: fund.type === "individual" ? "#e65100" : "#2e7d32",
+            }}>{fund.type === "individual" ? "Individual" : "Fund"}</span>
+          </div>
           <div style={{ fontSize: 12, color: "#777", marginTop: 2 }}>{fund.manager} · {fund.aum} · {fund.holdings} holdings</div>
         </div>
         <div style={{
@@ -549,11 +749,20 @@ export default function HedgeFundTracker() {
   const [openFunds, setOpenFunds] = useState({ 0: true });
   const [tab, setTab] = useState("funds");
   const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState("all");
 
   const query = search.trim();
-  const visibleFunds = funds.filter(f => fundMatchesQuery(f, query));
+  const visibleFilers = allFilers.filter(f =>
+    (typeFilter === "all" || f.type === typeFilter) && fundMatchesQuery(f, query)
+  );
 
-  const toggle = (i) => setOpenFunds(prev => ({ ...prev, [i]: !prev[i] }));
+  const toggle = (name) => setOpenFunds(prev => ({ ...prev, [name]: !prev[name] }));
+
+  const filterCounts = {
+    all:        allFilers.filter(f => fundMatchesQuery(f, query)).length,
+    fund:       allFilers.filter(f => f.type === "fund"       && fundMatchesQuery(f, query)).length,
+    individual: allFilers.filter(f => f.type === "individual" && fundMatchesQuery(f, query)).length,
+  };
 
   return (
     <div style={{
@@ -569,18 +778,18 @@ export default function HedgeFundTracker() {
       <div style={{ textAlign: "center", marginBottom: 24 }}>
         <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: "#999", marginBottom: 4 }}>Q4 2025 · 13F Filings</div>
         <h1 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 28, fontWeight: 900, color: "#1a1a1a", margin: 0, lineHeight: 1.15 }}>
-          Hedge Fund<br />Position Tracker
+          13F Position Tracker
         </h1>
         <div style={{ fontSize: 12, color: "#888", marginTop: 6 }}>
-          10 major funds · Filed Feb 2026 · Data as of Dec 31, 2025
+          10 funds · 5 individuals · Filed Feb 2026 · Data as of Dec 31, 2025
         </div>
       </div>
 
-      <div style={{ position: "relative", marginBottom: 14 }}>
+      <div style={{ position: "relative", marginBottom: 10 }}>
         <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 14, color: "#aaa", pointerEvents: "none" }}>🔍</span>
         <input
           type="text"
-          placeholder="Search ticker or fund name… e.g. NVDA, META, Berkshire"
+          placeholder="Search ticker or name… e.g. NVDA, BABA, Druckenmiller"
           value={search}
           onChange={e => setSearch(e.target.value)}
           style={{
@@ -604,16 +813,16 @@ export default function HedgeFundTracker() {
       </div>
 
       {query && (
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 10 }}>
-          {visibleFunds.length === 0
-            ? `No funds mention "${query}"`
-            : `${visibleFunds.length} fund${visibleFunds.length > 1 ? "s" : ""} mention "${query}"`}
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 8 }}>
+          {visibleFilers.length === 0
+            ? `No filers mention "${query}"`
+            : `${visibleFilers.length} filer${visibleFilers.length > 1 ? "s" : ""} mention "${query}"`}
         </div>
       )}
 
       <div style={{ display: "flex", gap: 6, marginBottom: 18, background: "#e8e6e1", borderRadius: 8, padding: 3 }}>
         {[
-          { key: "funds", label: "By Fund" },
+          { key: "funds", label: "By Filer" },
           { key: "sectors", label: "Sector Consensus" },
           { key: "exits", label: "Notable Exits" },
         ].map(t => (
@@ -639,8 +848,33 @@ export default function HedgeFundTracker() {
 
       {tab === "funds" && (
         <div>
-          {visibleFunds.map((fund, i) => (
-            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[funds.indexOf(fund)]} onToggle={() => toggle(funds.indexOf(fund))} query={query} />
+          <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
+            {[
+              { key: "all",        label: "All",         count: filterCounts.all        },
+              { key: "fund",       label: "Funds",       count: filterCounts.fund       },
+              { key: "individual", label: "Individuals", count: filterCounts.individual },
+            ].map(f => (
+              <button
+                key={f.key}
+                onClick={() => setTypeFilter(f.key)}
+                style={{
+                  padding: "5px 12px",
+                  border: typeFilter === f.key ? "1.5px solid #1a1a1a" : "1.5px solid #ddd",
+                  borderRadius: 20,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  background: typeFilter === f.key ? "#1a1a1a" : "#fff",
+                  color: typeFilter === f.key ? "#fff" : "#666",
+                  transition: "all 0.15s",
+                }}
+              >
+                {f.label} <span style={{ opacity: 0.65, fontWeight: 400 }}>{f.count}</span>
+              </button>
+            ))}
+          </div>
+          {visibleFilers.map((fund) => (
+            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[fund.name]} onToggle={() => toggle(fund.name)} query={query} />
           ))}
         </div>
       )}
