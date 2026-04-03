@@ -546,6 +546,132 @@ const exits = [
   { stock: "UNH (UnitedHealth)", funds: "Druckenmiller — full exit" },
 ];
 
+// ─── ANALYSIS DATA ────────────────────────────────────────────────────────────
+
+const macroNarrative = {
+  quarter: "Q4 2025",
+  headline: "The AI Supercycle, the Power Trade, and the Gold Hedge",
+  paragraphs: [
+    {
+      title: "The Consensus Regime",
+      body: "Q4 2025 filings reveal institutional capital unified around a single macro thesis: an AI-driven productivity supercycle that requires unprecedented physical infrastructure. The bet is no longer just software — it spans the full stack from semiconductors (NVDA, AMD, AVGO) to cloud hyperscalers (MSFT, AMZN, GOOGL) to the power grid enabling it all (CEG, VST, XOP). Bridgewater's +$1.3B SPY expansion alongside targeted NVDA and AMZN adds, Citadel's broad mega-cap accumulation, and D.E. Shaw's +$3.8B QQQ position all point to the same conclusion: risk-on, infrastructure-heavy, AI-first.",
+    },
+    {
+      title: "The Energy Surprise",
+      body: "The most underreported signal is energy. Five unrelated filers — Druckenmiller, Third Point, Soros, Icahn, and Berkshire — all increased energy exposure in Q4, but through different vehicles: nuclear (CEG, VST), oil (CVX, OXY), and broad ETFs (XOP). The common thread is AI data center demand. Druckenmiller called nuclear power 'picks and shovels for the AI trade.' Third Point's +1,100% Danaher position and simultaneous CEG/VST buys suggest Loeb sees a multi-year power infrastructure cycle playing out. This is not an oil trade — it is an energy scarcity trade driven by compute demand.",
+    },
+    {
+      title: "The Parallel Gold Bet",
+      body: "Simultaneously, Citadel's $4.2B GLD add, Soros's $416M XOP/gold position, Druckenmiller's +34% GLD increase, and Einhorn's persistent gold exposure tell a consistent macro hedge story: the fiscal cost of the AI supercycle is inflationary. These investors are not confused — they are holding both AI assets and gold because they believe the AI buildout will strain sovereign balance sheets and force central banks into difficult positions. Druckenmiller holding his highest-ever AI concentration while aggressively adding gold is the single most telling data point in the entire quarter's filings.",
+    },
+    {
+      title: "Forward Implication",
+      body: "History shows that when this many high-conviction, low-turnover managers cluster around a thesis simultaneously, the move has at least 2–4 more quarters of institutional momentum behind it before mean reversion. The risk to this view is a surprise demand signal (AI adoption disappoints) or a credit event that forces deleveraging across the board. The contrarian setup — Burry and Klarman in deeply unloved China internet and distressed media — suggests value capital is already anticipating where the next decade's returns may actually come from: not the consensus AI trade, but the assets the consensus has abandoned.",
+    },
+  ],
+  keySignals: [
+    { label: "Strongest Buy Consensus",  value: "NVDA, AMZN, MSFT — bought by 7+ filers simultaneously" },
+    { label: "Most Surprising New Bet",  value: "Nuclear power (CEG, VST) — 5 unrelated filers entered in the same quarter" },
+    { label: "Highest Individual Conviction", value: "Druckenmiller: largest AI allocation of career + +34% gold increase" },
+    { label: "Biggest Divergence",       value: "META: Pershing/Klarman buying while Viking/Third Point sold" },
+    { label: "Contrarian Setup",         value: "Burry doubling BABA/JD as Appaloosa exits — value vs. geopolitical risk" },
+    { label: "Key Risk to Consensus",    value: "AI capex disappointment or sovereign debt event forcing broad deleveraging" },
+  ],
+};
+
+const divergences = [
+  {
+    ticker: "META",
+    subtitle: "Mega-Cap AI vs. Valuation Fatigue",
+    bulls: {
+      filers: ["Pershing Square (new, 11.4% of portfolio)", "Baupost Group (increased)"],
+      thesis: "Ackman sees META's AI-powered ad targeting as a compounding moat — Llama models reduce compute costs while improving ad relevance. At ~22x forward earnings for a business growing 20%+, Klarman's margin-of-safety discipline is satisfied. The Reels and WhatsApp monetization optionality is unpriced.",
+    },
+    bears: {
+      filers: ["Viking Global (full exit)", "Third Point (full exit)", "Bridgewater (trimmed −$128M)"],
+      thesis: "Viking and Loeb both took profits after META's 400%+ run from the 2022 trough. At these multiples, the bar for upside surprise is high, and regulatory risk (EU fines, US antitrust) is a non-trivial tail. Bridgewater's systematic trim suggests quantitative factors have turned.",
+    },
+    verdict: "High-conviction split between value buyers (Ackman, Klarman) seeing durable business quality and momentum sellers taking profits. Watch Q1 2026 ad revenue guidance — will determine which side is right.",
+  },
+  {
+    ticker: "BABA",
+    subtitle: "China Bottoming vs. Geopolitical Discount",
+    bulls: {
+      filers: ["Michael Burry (increased +31%)", "Third Point (new position)", "Baupost (held)"],
+      thesis: "BABA trades at ~8x forward earnings with $50B+ net cash — a valuation that prices in near-permanent impairment. Burry's thesis: the regulatory crackdown is fully priced, AI monetization (Tongyi Qianwen) is a free call option, and the company is buying back aggressively. Historically, Burry's China re-entries have preceded 12–18 month re-ratings.",
+    },
+    bears: {
+      filers: ["Appaloosa (trimmed −20%)", "Soros (cut FXI/KWEB)", "Bridgewater (reduced exposure)"],
+      thesis: "Tepper, who made a high-profile China bet in 2023 and has been trimming since, sees geopolitical risk as genuinely unquantifiable. A Taiwan event or US secondary sanctions would not be priceable. The regulatory environment remains uncertain and Xi's capital allocation priorities are unpredictable.",
+    },
+    verdict: "The most analytically pure bull/bear split in the filings. Both sides have strong priors. Resolution likely requires a macro catalyst (US-China trade deal or escalation) rather than fundamentals alone.",
+  },
+  {
+    ticker: "NVDA",
+    subtitle: "AI Infrastructure Cycle vs. Cyclical Peak Risk",
+    bulls: {
+      filers: ["Bridgewater (+54%, +$253M)", "Citadel (+$large)", "D.E. Shaw (+$584M)", "Druckenmiller (+18%)", "Soros (added)", "Appaloosa (held)"],
+      thesis: "Six filers added simultaneously — an extraordinarily rare consensus. The bull case: NVIDIA's CUDA moat is 10+ years deep, Blackwell demand is backlogged into 2026, and the hyperscalers (MSFT, AMZN, GOOGL) have all publicly committed to multi-year capex expansion. This is not speculation — it is supply-constrained demand.",
+    },
+    bears: {
+      filers: ["Tiger Global (trimmed −698K shares)", "Appaloosa (reduced)"],
+      thesis: "Tiger's reduction is not a bear call — it's profit-taking after a 10x move. The structural bear case (few have made it publicly): NVDA trades at 30x revenue, China export restrictions permanently impair the TAM, and AMD/custom silicon (Google TPUs, Amazon Trainium) will compress margins over a 3–5 year horizon.",
+    },
+    verdict: "Not a true divergence — the 'bears' are profit-takers, not structural shorts. The near-unanimous institutional accumulation at these prices is itself the signal. Tactical risk vs. strategic conviction.",
+  },
+  {
+    ticker: "Energy (CEG / VST / CVX)",
+    subtitle: "AI Power Demand vs. Commodity Cycle Timing",
+    bulls: {
+      filers: ["Druckenmiller (new VST/CEG)", "Third Point (new CEG/VST)", "Soros (+$416M XOP)", "Icahn (+21% CVX)", "Berkshire (+6.6% CVX)"],
+      thesis: "AI data centers require 24/7 reliable power — only nuclear and gas can provide baseload. CEG and VST are the only publicly traded pure-play nuclear operators in the US. At current valuations they are pricing in ~8% power price growth; actual demand curves suggest 15–20% over 5 years. This is a decade-long structural underinvestment story, not a trade.",
+    },
+    bears: {
+      filers: ["Tiger Global (no energy exposure)", "Viking (no energy)", "D.E. Shaw (no meaningful energy add)"],
+      thesis: "Growth-oriented funds see energy as a value trap — regulatory and construction risk in nuclear is decades-long, and renewable costs continue to fall. The power thesis may be correct but the investment timeline is too long for their return targets.",
+    },
+    verdict: "One of the clearest emerging consensus themes — five filers entered simultaneously in Q4. When concentrated fund managers and macro traders agree on a sector, the institutional re-rating is typically 12–18 months ahead of retail recognition.",
+  },
+];
+
+// ─── CONVICTION COMPUTATION ───────────────────────────────────────────────────
+
+function extractTicker(label) {
+  if (!label || label.length > 55) return null;
+  const match = label.match(/^([A-Z]{1,6})\b/);
+  return match ? match[1] : null;
+}
+
+function computeConviction(filers) {
+  const scores = {};
+  const detail = {};
+
+  filers.forEach(filer => {
+    const process = (items, score, action) => {
+      items.forEach(item => {
+        const ticker = extractTicker(item.label);
+        if (!ticker || ticker.length < 2) return;
+        scores[ticker] = (scores[ticker] || 0) + score;
+        if (!detail[ticker]) detail[ticker] = { buyers: [], sellers: [] };
+        if (score > 0) detail[ticker].buyers.push({ name: filer.name, action });
+        else           detail[ticker].sellers.push({ name: filer.name, action });
+      });
+    };
+    process(filer.newBuys,   3, "New buy");
+    process(filer.increased, 2, "Increased");
+    process(filer.reduced,  -2, "Reduced");
+    process(filer.exits,    -3, "Exited");
+  });
+
+  const entries = Object.entries(scores)
+    .filter(([t]) => t !== "SPY" && t !== "QQQ" && t !== "RSP") // exclude pure ETFs
+    .map(([ticker, score]) => ({ ticker, score, ...detail[ticker] }))
+    .sort((a, b) => b.score - a.score);
+
+  const maxAbs = Math.max(...entries.map(e => Math.abs(e.score)));
+  return entries.map(e => ({ ...e, pct: Math.round((Math.abs(e.score) / maxAbs) * 100) }));
+}
+
 function highlight(text, query) {
   if (!query) return text;
   const idx = text.toLowerCase().indexOf(query.toLowerCase());
@@ -651,6 +777,135 @@ function TopHoldings({ holdings, color }) {
             }}>{h.weight}</span>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function AnalysisTab({ filers }) {
+  const conviction = computeConviction(filers);
+  const topBuys  = conviction.filter(e => e.score > 0).slice(0, 9);
+  const topSells = conviction.filter(e => e.score < 0).slice(-5).reverse();
+  const [openDiv, setOpenDiv] = useState(null);
+
+  return (
+    <div>
+      {/* ── MACRO NARRATIVE ─────────────────────────────────────── */}
+      <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", overflow: "hidden", marginBottom: 16 }}>
+        <div style={{ background: "linear-gradient(135deg, #1a1a1a, #2c3e50)", padding: "18px 20px" }}>
+          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: "#aaa", marginBottom: 6 }}>
+            {macroNarrative.quarter} · Macro Synthesis
+          </div>
+          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 20, fontWeight: 900, color: "#fff", lineHeight: 1.25 }}>
+            {macroNarrative.headline}
+          </div>
+        </div>
+
+        <div style={{ padding: "16px 20px" }}>
+          {macroNarrative.paragraphs.map((p, i) => (
+            <div key={i} style={{ marginBottom: 16 }}>
+              <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#999", marginBottom: 5 }}>{p.title}</div>
+              <div style={{ fontSize: 13, color: "#333", lineHeight: 1.65 }}>{p.body}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ padding: "0 20px 16px" }}>
+          <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#999", marginBottom: 10 }}>Key Signals</div>
+          {macroNarrative.keySignals.map((s, i) => (
+            <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 12 }}>
+              <div style={{ width: 6, height: 6, borderRadius: 3, background: "#2ecc71", marginTop: 5, flexShrink: 0 }} />
+              <div>
+                <span style={{ fontWeight: 700, color: "#333" }}>{s.label}:</span>{" "}
+                <span style={{ color: "#555" }}>{s.value}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── CONVICTION HEATMAP ──────────────────────────────────── */}
+      <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
+        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Conviction Heatmap</div>
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all 15 filers. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
+
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2ecc71", marginBottom: 8 }}>Strong Buy Consensus</div>
+        {topBuys.map((e, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 7 }}>
+            <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
+            <div style={{ flex: 1, height: 14, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
+              <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, #2ecc71, #27ae60)`, borderRadius: 4, transition: "width 0.4s" }} />
+            </div>
+            <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color: "#2ecc71", flexShrink: 0 }}>+{e.score}</div>
+            <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0 }}>{e.buyers?.length || 0} buyers</div>
+          </div>
+        ))}
+
+        <div style={{ borderTop: "1px solid #f0f0f0", margin: "14px 0" }} />
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e74c3c", marginBottom: 8 }}>Sell / Exit Consensus</div>
+        {topSells.map((e, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 7 }}>
+            <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
+            <div style={{ flex: 1, height: 14, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
+              <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, #e74c3c, #c0392b)`, borderRadius: 4 }} />
+            </div>
+            <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color: "#e74c3c", flexShrink: 0 }}>{e.score}</div>
+            <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0 }}>{e.sellers?.length || 0} sellers</div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── DIVERGENCE RADAR ────────────────────────────────────── */}
+      <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
+        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Divergence Radar</div>
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 14 }}>Where top filers are making opposite bets — and why each side may be right.</div>
+
+        {divergences.map((d, i) => {
+          const isOpen = openDiv === i;
+          return (
+            <div key={i} style={{ border: "1px solid #ebebeb", borderRadius: 8, marginBottom: 8, overflow: "hidden" }}>
+              <div
+                onClick={() => setOpenDiv(isOpen ? null : i)}
+                style={{ padding: "12px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", userSelect: "none" }}
+              >
+                <div>
+                  <span style={{ fontWeight: 800, fontSize: 15, color: "#1a1a1a" }}>{d.ticker}</span>
+                  <span style={{ fontSize: 12, color: "#888", marginLeft: 8 }}>{d.subtitle}</span>
+                </div>
+                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, background: "#e8f5e9", color: "#2e7d32", padding: "2px 6px", borderRadius: 4 }}>{d.bulls.filers.length} bulls</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, background: "#fce4ec", color: "#c62828", padding: "2px 6px", borderRadius: 4 }}>{d.bears.filers.length} bears</span>
+                  <span style={{ fontSize: 16, color: "#ccc", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
+                </div>
+              </div>
+              {isOpen && (
+                <div style={{ padding: "0 14px 14px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div style={{ background: "#f0faf4", borderRadius: 6, padding: "12px" }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2e7d32", marginBottom: 6 }}>Bull Case</div>
+                    <div style={{ fontSize: 11, color: "#555", marginBottom: 8, lineHeight: 1.4 }}>
+                      {d.bulls.filers.map((f, j) => <div key={j} style={{ fontWeight: 600, color: "#2e7d32" }}>· {f}</div>)}
+                    </div>
+                    <div style={{ fontSize: 12, color: "#333", lineHeight: 1.6 }}>{d.bulls.thesis}</div>
+                  </div>
+                  <div style={{ background: "#fef5f5", borderRadius: 6, padding: "12px" }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#c62828", marginBottom: 6 }}>Bear Case</div>
+                    <div style={{ fontSize: 11, color: "#555", marginBottom: 8, lineHeight: 1.4 }}>
+                      {d.bears.filers.map((f, j) => <div key={j} style={{ fontWeight: 600, color: "#c62828" }}>· {f}</div>)}
+                    </div>
+                    <div style={{ fontSize: 12, color: "#333", lineHeight: 1.6 }}>{d.bears.thesis}</div>
+                  </div>
+                  <div style={{ gridColumn: "1 / -1", background: "#fffde7", borderRadius: 6, padding: "10px 12px", fontSize: 12, color: "#555", lineHeight: 1.6 }}>
+                    <span style={{ fontWeight: 700, color: "#333" }}>Verdict: </span>{d.verdict}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ fontSize: 11, color: "#aaa", lineHeight: 1.6, padding: "0 4px" }}>
+        Analysis reflects Q4 2025 13F filings only. Conviction scores are mechanical — they do not account for position sizing, fund strategy, or non-disclosed short positions. This is not investment advice.
       </div>
     </div>
   );
@@ -822,9 +1077,10 @@ export default function HedgeFundTracker() {
 
       <div style={{ display: "flex", gap: 6, marginBottom: 18, background: "#e8e6e1", borderRadius: 8, padding: 3 }}>
         {[
-          { key: "funds", label: "By Filer" },
-          { key: "sectors", label: "Sector Consensus" },
-          { key: "exits", label: "Notable Exits" },
+          { key: "funds",    label: "By Filer"         },
+          { key: "sectors",  label: "Sector Consensus" },
+          { key: "exits",    label: "Notable Exits"    },
+          { key: "analysis", label: "Analysis"         },
         ].map(t => (
           <button
             key={t.key}
@@ -938,6 +1194,8 @@ export default function HedgeFundTracker() {
           ))}
         </div>
       )}
+
+      {tab === "analysis" && <AnalysisTab filers={allFilers} />}
 
       <div style={{
         marginTop: 24,
