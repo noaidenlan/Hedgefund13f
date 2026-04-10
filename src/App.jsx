@@ -921,6 +921,98 @@ function AnalysisTab({ filers }) {
   const topBuys  = conviction.filter(e => e.score > 0).slice(0, 9);
   const topSells = conviction.filter(e => e.score < 0).slice(-5).reverse();
   const [openDiv, setOpenDiv] = useState(null);
+  const [selectedTicker, setSelectedTicker] = useState(null);
+
+  const toggleTicker = (ticker) => setSelectedTicker(prev => prev === ticker ? null : ticker);
+  const selectedEntry = conviction.find(e => e.ticker === selectedTicker);
+
+  const HeatRow = ({ e, positive }) => {
+    const isSelected = selectedTicker === e.ticker;
+    const color = positive ? "#2ecc71" : "#e74c3c";
+    const darkColor = positive ? "#27ae60" : "#c0392b";
+    return (
+      <div style={{ marginBottom: 4 }}>
+        <div
+          onClick={() => toggleTicker(e.ticker)}
+          style={{
+            display: "flex", alignItems: "center", gap: 10,
+            padding: "5px 8px", borderRadius: 6, cursor: "pointer",
+            background: isSelected ? (positive ? "#f0faf4" : "#fef5f5") : "transparent",
+            border: isSelected ? `1px solid ${color}44` : "1px solid transparent",
+            transition: "background 0.15s",
+          }}
+        >
+          <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
+          <div style={{ flex: 1, height: 12, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
+            <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${darkColor})`, borderRadius: 4, transition: "width 0.4s" }} />
+          </div>
+          <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color, flexShrink: 0 }}>
+            {positive ? "+" : ""}{e.score}
+          </div>
+          <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0, width: 56 }}>
+            {positive ? `${e.buyers?.length || 0} buyers` : `${e.sellers?.length || 0} sellers`}
+          </div>
+          <div style={{ fontSize: 11, color, flexShrink: 0 }}>{isSelected ? "▲" : "▼"}</div>
+        </div>
+
+        {isSelected && selectedEntry && (
+          <div style={{
+            margin: "4px 0 8px 54px",
+            background: positive ? "#f9fef9" : "#fef9f9",
+            border: `1px solid ${color}33`,
+            borderRadius: 6, padding: "10px 12px",
+          }}>
+            {positive && selectedEntry.buyers?.length > 0 && (
+              <div style={{ marginBottom: selectedEntry.sellers?.length ? 8 : 0 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2e7d32", marginBottom: 5 }}>Bought / Increased</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {selectedEntry.buyers.map((b, i) => (
+                    <span key={i} style={{
+                      fontSize: 11, background: "#e8f5e9", color: "#2e7d32",
+                      borderRadius: 4, padding: "2px 7px", fontWeight: 600,
+                    }}>
+                      {b.name} <span style={{ opacity: 0.65, fontWeight: 400 }}>· {b.action}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {!positive && selectedEntry.sellers?.length > 0 && (
+              <div>
+                <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#c62828", marginBottom: 5 }}>Reduced / Exited</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {selectedEntry.sellers.map((s, i) => (
+                    <span key={i} style={{
+                      fontSize: 11, background: "#fce4ec", color: "#c62828",
+                      borderRadius: 4, padding: "2px 7px", fontWeight: 600,
+                    }}>
+                      {s.name} <span style={{ opacity: 0.65, fontWeight: 400 }}>· {s.action}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {/* show opposing side if any */}
+            {positive && selectedEntry.sellers?.length > 0 && (
+              <div style={{ marginTop: 8, paddingTop: 8, borderTop: `1px solid ${color}22` }}>
+                <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e65100", marginBottom: 5 }}>Also Reduced / Exited</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {selectedEntry.sellers.map((s, i) => (
+                    <span key={i} style={{
+                      fontSize: 11, background: "#fff3e0", color: "#e65100",
+                      borderRadius: 4, padding: "2px 7px", fontWeight: 600,
+                    }}>
+                      {s.name} <span style={{ opacity: 0.65, fontWeight: 400 }}>· {s.action}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -961,32 +1053,14 @@ function AnalysisTab({ filers }) {
       {/* ── CONVICTION HEATMAP ──────────────────────────────────── */}
       <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
         <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Conviction Heatmap</div>
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all 15 filers. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all 19 filers. Tap a row to see exactly who bought or sold. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
 
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2ecc71", marginBottom: 8 }}>Strong Buy Consensus</div>
-        {topBuys.map((e, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 7 }}>
-            <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
-            <div style={{ flex: 1, height: 14, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
-              <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, #2ecc71, #27ae60)`, borderRadius: 4, transition: "width 0.4s" }} />
-            </div>
-            <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color: "#2ecc71", flexShrink: 0 }}>+{e.score}</div>
-            <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0 }}>{e.buyers?.length || 0} buyers</div>
-          </div>
-        ))}
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2ecc71", marginBottom: 6 }}>Strong Buy Consensus</div>
+        {topBuys.map((e, i) => <HeatRow key={i} e={e} positive={true} />)}
 
         <div style={{ borderTop: "1px solid #f0f0f0", margin: "14px 0" }} />
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e74c3c", marginBottom: 8 }}>Sell / Exit Consensus</div>
-        {topSells.map((e, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 7 }}>
-            <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
-            <div style={{ flex: 1, height: 14, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
-              <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, #e74c3c, #c0392b)`, borderRadius: 4 }} />
-            </div>
-            <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color: "#e74c3c", flexShrink: 0 }}>{e.score}</div>
-            <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0 }}>{e.sellers?.length || 0} sellers</div>
-          </div>
-        ))}
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e74c3c", marginBottom: 6 }}>Sell / Exit Consensus</div>
+        {topSells.map((e, i) => <HeatRow key={i} e={e} positive={false} />)}
       </div>
 
       {/* ── DIVERGENCE RADAR ────────────────────────────────────── */}
@@ -1089,6 +1163,30 @@ function FundCard({ fund, isOpen, onToggle, query }) {
             }}>{fund.type === "individual" ? "Individual" : "Fund"}</span>
           </div>
           <div style={{ fontSize: 12, color: "#777", marginTop: 2 }}>{fund.manager} · {fund.aum} · {fund.holdings} holdings</div>
+          {!isOpen && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 5 }}>
+              {fund.newBuys.length > 0 && (
+                <span style={{ fontSize: 10, fontWeight: 700, background: "#e8f5e9", color: "#2e7d32", borderRadius: 3, padding: "1px 5px" }}>
+                  +{fund.newBuys.length} new
+                </span>
+              )}
+              {fund.increased.length > 0 && (
+                <span style={{ fontSize: 10, fontWeight: 700, background: "#e3f2fd", color: "#1565c0", borderRadius: 3, padding: "1px 5px" }}>
+                  ↑{fund.increased.length} added
+                </span>
+              )}
+              {fund.reduced.length > 0 && (
+                <span style={{ fontSize: 10, fontWeight: 700, background: "#fff3e0", color: "#e65100", borderRadius: 3, padding: "1px 5px" }}>
+                  ↓{fund.reduced.length} trimmed
+                </span>
+              )}
+              {fund.exits.length > 0 && (
+                <span style={{ fontSize: 10, fontWeight: 700, background: "#fce4ec", color: "#c62828", borderRadius: 3, padding: "1px 5px" }}>
+                  ✕{fund.exits.length} exited
+                </span>
+              )}
+            </div>
+          )}
         </div>
         <div style={{
           fontSize: 18,
