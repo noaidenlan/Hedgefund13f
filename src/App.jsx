@@ -828,6 +828,46 @@ function matches(text, query) {
 function isPositive(str) { return str && (str.startsWith("+") || str.startsWith("+")); }
 function isNegative(str) { return str && (str.startsWith("−") || str.startsWith("-")); }
 
+function findFilersForTicker(ticker, filers) {
+  if (!ticker) return [];
+  const re = new RegExp(`\\b${ticker}\\b`);
+  const result = [];
+  filers.forEach(filer => {
+    const match = (section) => filer[section].filter(item => re.test(item.label));
+    const hits = {
+      newBuys: match("newBuys"),
+      increased: match("increased"),
+      reduced: match("reduced"),
+      exits: match("exits"),
+      topHolding: filer.topHoldings?.find(h => h.ticker === ticker) || null,
+    };
+    const any = hits.newBuys.length || hits.increased.length || hits.reduced.length || hits.exits.length || hits.topHolding;
+    if (any) result.push({ filer, ...hits });
+  });
+  return result;
+}
+
+function parseAum(s) {
+  if (!s) return 0;
+  const m = String(s).match(/\$?\s*~?\s*([\d.,]+)\s*([BbMm])/);
+  if (!m) return 0;
+  const num = parseFloat(m[1].replace(/,/g, ""));
+  return m[2].toUpperCase() === "B" ? num * 1000 : num;
+}
+
+function parseHoldings(h) {
+  if (typeof h === "number") return h;
+  const m = String(h).match(/[\d,]+/);
+  return m ? parseInt(m[0].replace(/,/g, ""), 10) : 0;
+}
+
+function countNewBuys(filer) {
+  return filer.newBuys.reduce((acc, item) => {
+    const m = item.label.match(/^(\d+)\s+new\s+positions/i);
+    return acc + (m ? parseInt(m[1], 10) : 1);
+  }, 0);
+}
+
 function Chip({ value, type }) {
   const colors = {
     pct:    isNegative(value) ? { bg: "#fff3e0", text: "#e65100" } : { bg: "#e3f2fd", text: "#1565c0" },
@@ -851,55 +891,74 @@ function Chip({ value, type }) {
   );
 }
 
-function Section({ label, color, prefix, items, query }) {
+function Section({ label, color, prefix, items, query, onTickerClick }) {
   const filtered = query ? items.filter(item => matches(item.label, query)) : items;
   if (query && filtered.length === 0) return null;
   const muted = prefix === "↓" || prefix === "✕";
   return (
     <div style={{ marginBottom: 12 }}>
       <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color, marginBottom: 6 }}>{label}</div>
-      {filtered.map((item, i) => (
-        <div key={i} style={{
-          display: "flex",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 2,
-          fontSize: 13,
-          color: muted ? "#555" : "#222",
-          padding: "3px 4px",
-          lineHeight: 1.5,
-          background: query && matches(item.label, query) ? "#fffde7" : "transparent",
-          borderRadius: 3,
-        }}>
-          <span style={{ marginRight: 3 }}>{prefix}</span>
-          <span style={{ flex: 1 }}>{highlight(item.label, query)}</span>
-          {item.pct    && <Chip value={item.pct}    type="pct" />}
-          {item.val    && <Chip value={item.val}    type="val" />}
-          {item.weight && <Chip value={item.weight} type="weight" />}
-          {item.note   && <span style={{ fontSize: 11, color: "#999", marginLeft: 4 }}>· {item.note}</span>}
-        </div>
-      ))}
+      {filtered.map((item, i) => {
+        const ticker = extractTicker(item.label);
+        const clickable = ticker && onTickerClick;
+        return (
+          <div
+            key={i}
+            onClick={clickable ? (e) => { e.stopPropagation(); onTickerClick(ticker); } : undefined}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 2,
+              fontSize: 13,
+              color: muted ? "#555" : "#222",
+              padding: "3px 4px",
+              lineHeight: 1.5,
+              background: query && matches(item.label, query) ? "#fffde7" : "transparent",
+              borderRadius: 3,
+              cursor: clickable ? "pointer" : "default",
+            }}
+            onMouseEnter={clickable ? (e) => e.currentTarget.style.background = "#f5f5f5" : undefined}
+            onMouseLeave={clickable ? (e) => e.currentTarget.style.background = query && matches(item.label, query) ? "#fffde7" : "transparent" : undefined}
+          >
+            <span style={{ marginRight: 3 }}>{prefix}</span>
+            <span style={{ flex: 1 }}>{highlight(item.label, query)}</span>
+            {item.pct    && <Chip value={item.pct}    type="pct" />}
+            {item.val    && <Chip value={item.val}    type="val" />}
+            {item.weight && <Chip value={item.weight} type="weight" />}
+            {item.note   && <span style={{ fontSize: 11, color: "#999", marginLeft: 4 }}>· {item.note}</span>}
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-function TopHoldings({ holdings, color }) {
+function TopHoldings({ holdings, color, onTickerClick }) {
   if (!holdings?.length) return null;
   return (
     <div style={{ marginBottom: 14 }}>
       <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#999", marginBottom: 6 }}>Top Holdings by Weight</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
         {holdings.map((h, i) => (
-          <div key={i} style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 5,
-            background: "#f9f9f9",
-            border: "1px solid #ebebeb",
-            borderRadius: 6,
-            padding: "3px 8px",
-            fontSize: 12,
-          }}>
+          <div
+            key={i}
+            onClick={onTickerClick ? (e) => { e.stopPropagation(); onTickerClick(h.ticker); } : undefined}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+              background: "#f9f9f9",
+              border: "1px solid #ebebeb",
+              borderRadius: 6,
+              padding: "3px 8px",
+              fontSize: 12,
+              cursor: onTickerClick ? "pointer" : "default",
+              transition: "background 0.15s, border-color 0.15s",
+            }}
+            onMouseEnter={onTickerClick ? (e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = color; } : undefined}
+            onMouseLeave={onTickerClick ? (e) => { e.currentTarget.style.background = "#f9f9f9"; e.currentTarget.style.borderColor = "#ebebeb"; } : undefined}
+          >
             <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{h.ticker}</span>
             <span style={{
               background: `${color}22`,
@@ -916,100 +975,166 @@ function TopHoldings({ holdings, color }) {
   );
 }
 
-function AnalysisTab({ filers }) {
+function ModalRow({ item, label, color, prefix }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#333", padding: "3px 0 3px 14px", flexWrap: "wrap", lineHeight: 1.5 }}>
+      <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color, width: 68, flexShrink: 0, letterSpacing: 0.5 }}>{prefix} {label}</span>
+      <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
+      {item.pct    && <Chip value={item.pct}    type="pct" />}
+      {item.val    && <Chip value={item.val}    type="val" />}
+      {item.weight && <Chip value={item.weight} type="weight" />}
+      {item.note   && <span style={{ fontSize: 11, color: "#999" }}>· {item.note}</span>}
+    </div>
+  );
+}
+
+function TickerModal({ ticker, filers, onClose }) {
+  const hits = findFilersForTicker(ticker, filers);
+  const summary = {
+    newBuys:     hits.filter(h => h.newBuys.length).length,
+    increased:   hits.filter(h => h.increased.length).length,
+    reduced:     hits.filter(h => h.reduced.length).length,
+    exits:       hits.filter(h => h.exits.length).length,
+    topHoldings: hits.filter(h => h.topHolding).length,
+  };
+  const netScore =
+    hits.reduce((acc, h) => acc + h.newBuys.length * 3 + h.increased.length * 2 - h.reduced.length * 2 - h.exits.length * 3, 0);
+  const scoreColor = netScore > 0 ? "#2ecc71" : netScore < 0 ? "#e74c3c" : "#888";
+  const scoreLabel = netScore > 0 ? "Net Buy Conviction" : netScore < 0 ? "Net Sell Conviction" : "Mixed";
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, background: "rgba(20,20,20,0.55)",
+        zIndex: 1000, display: "flex", alignItems: "flex-start", justifyContent: "center",
+        padding: 16, overflowY: "auto", backdropFilter: "blur(2px)",
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: "#fff", borderRadius: 12, maxWidth: 640, width: "100%",
+          maxHeight: "92vh", overflow: "hidden", display: "flex", flexDirection: "column",
+          marginTop: 24, boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+        }}
+      >
+        <div style={{ padding: "18px 20px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
+          <div>
+            <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: "#999", marginBottom: 3 }}>Ticker Deep Dive</div>
+            <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 26, fontWeight: 900, color: "#1a1a1a", lineHeight: 1.1 }}>{ticker}</div>
+            <div style={{ fontSize: 12, color: "#777", marginTop: 4 }}>
+              {hits.length} of {filers.length} filers
+              {netScore !== 0 && (
+                <>
+                  {" · "}
+                  <span style={{ color: scoreColor, fontWeight: 700 }}>{scoreLabel} {netScore > 0 ? "+" : ""}{netScore}</span>
+                </>
+              )}
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            style={{
+              background: "#f0f0f0", border: "none", borderRadius: "50%",
+              width: 32, height: 32, fontSize: 18, cursor: "pointer", color: "#666",
+              flexShrink: 0, lineHeight: 1,
+            }}
+          >×</button>
+        </div>
+
+        {hits.length > 0 && (
+          <div style={{ padding: "12px 20px", background: "#fafafa", borderBottom: "1px solid #eee", display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {summary.newBuys > 0     && <span style={{ fontSize: 11, fontWeight: 700, background: "#e8f5e9", color: "#2e7d32", borderRadius: 4, padding: "3px 8px" }}>+{summary.newBuys} new buy{summary.newBuys > 1 ? "s" : ""}</span>}
+            {summary.increased > 0   && <span style={{ fontSize: 11, fontWeight: 700, background: "#e3f2fd", color: "#1565c0", borderRadius: 4, padding: "3px 8px" }}>↑{summary.increased} added</span>}
+            {summary.reduced > 0     && <span style={{ fontSize: 11, fontWeight: 700, background: "#fff3e0", color: "#e65100", borderRadius: 4, padding: "3px 8px" }}>↓{summary.reduced} trimmed</span>}
+            {summary.exits > 0       && <span style={{ fontSize: 11, fontWeight: 700, background: "#fce4ec", color: "#c62828", borderRadius: 4, padding: "3px 8px" }}>✕{summary.exits} exited</span>}
+            {summary.topHoldings > 0 && <span style={{ fontSize: 11, fontWeight: 700, background: "#ede7f6", color: "#6a1b9a", borderRadius: 4, padding: "3px 8px" }}>★{summary.topHoldings} top-weight</span>}
+          </div>
+        )}
+
+        <div style={{ overflowY: "auto", padding: "8px 0", flex: 1 }}>
+          {hits.length === 0 && (
+            <div style={{ padding: "40px 20px", textAlign: "center", color: "#888", fontSize: 13 }}>
+              No filers have notable activity in <strong>{ticker}</strong> this quarter.
+            </div>
+          )}
+          {hits.map(({ filer, newBuys, increased, reduced, exits, topHolding }, i) => (
+            <div
+              key={i}
+              style={{
+                padding: "12px 20px",
+                borderBottom: i < hits.length - 1 ? "1px solid #f5f5f5" : "none",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6, flexWrap: "wrap" }}>
+                <div style={{ width: 4, height: 20, background: filer.color, borderRadius: 2 }} />
+                <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 14, color: "#1a1a1a" }}>{filer.name}</div>
+                <span style={{
+                  fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.6,
+                  padding: "1px 5px", borderRadius: 3,
+                  background: filer.type === "individual" ? "#fff3e0" : "#e8f5e9",
+                  color: filer.type === "individual" ? "#e65100" : "#2e7d32",
+                }}>{filer.type === "individual" ? "Individual" : "Fund"}</span>
+                <span style={{ fontSize: 11, color: "#999" }}>· {filer.manager}</span>
+              </div>
+              {topHolding && (
+                <div style={{
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                  fontSize: 12, margin: "4px 0 6px 14px",
+                  background: "#ede7f6", color: "#6a1b9a",
+                  padding: "3px 10px", borderRadius: 4, fontWeight: 700,
+                }}>
+                  ★ Top holding · {topHolding.weight} of portfolio
+                </div>
+              )}
+              {newBuys.map((item, j)   => <ModalRow key={`nb-${j}`} item={item} label="New buy"   color="#2e7d32" prefix="+" />)}
+              {increased.map((item, j) => <ModalRow key={`in-${j}`} item={item} label="Increased" color="#1565c0" prefix="↑" />)}
+              {reduced.map((item, j)   => <ModalRow key={`rd-${j}`} item={item} label="Reduced"   color="#e65100" prefix="↓" />)}
+              {exits.map((item, j)     => <ModalRow key={`ex-${j}`} item={item} label="Exited"    color="#c62828" prefix="✕" />)}
+            </div>
+          ))}
+        </div>
+
+        <div style={{ padding: "10px 20px", borderTop: "1px solid #eee", background: "#fafafa", fontSize: 10, color: "#aaa", lineHeight: 1.5 }}>
+          Auto-matched across all filer sections and top holdings. Ticker matching uses whole-word boundary so GOOG and GOOGL are distinct.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AnalysisTab({ filers, onTickerClick }) {
   const conviction = computeConviction(filers);
   const topBuys  = conviction.filter(e => e.score > 0).slice(0, 9);
   const topSells = conviction.filter(e => e.score < 0).slice(-5).reverse();
   const [openDiv, setOpenDiv] = useState(null);
-  const [selectedTicker, setSelectedTicker] = useState(null);
-
-  const toggleTicker = (ticker) => setSelectedTicker(prev => prev === ticker ? null : ticker);
-  const selectedEntry = conviction.find(e => e.ticker === selectedTicker);
 
   const HeatRow = ({ e, positive }) => {
-    const isSelected = selectedTicker === e.ticker;
     const color = positive ? "#2ecc71" : "#e74c3c";
     const darkColor = positive ? "#27ae60" : "#c0392b";
     return (
-      <div style={{ marginBottom: 4 }}>
-        <div
-          onClick={() => toggleTicker(e.ticker)}
-          style={{
-            display: "flex", alignItems: "center", gap: 10,
-            padding: "5px 8px", borderRadius: 6, cursor: "pointer",
-            background: isSelected ? (positive ? "#f0faf4" : "#fef5f5") : "transparent",
-            border: isSelected ? `1px solid ${color}44` : "1px solid transparent",
-            transition: "background 0.15s",
-          }}
-        >
-          <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
-          <div style={{ flex: 1, height: 12, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
-            <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${darkColor})`, borderRadius: 4, transition: "width 0.4s" }} />
-          </div>
-          <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color, flexShrink: 0 }}>
-            {positive ? "+" : ""}{e.score}
-          </div>
-          <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0, width: 56 }}>
-            {positive ? `${e.buyers?.length || 0} buyers` : `${e.sellers?.length || 0} sellers`}
-          </div>
-          <div style={{ fontSize: 11, color, flexShrink: 0 }}>{isSelected ? "▲" : "▼"}</div>
+      <div
+        onClick={() => onTickerClick?.(e.ticker)}
+        style={{
+          display: "flex", alignItems: "center", gap: 10,
+          padding: "5px 8px", borderRadius: 6, cursor: "pointer", marginBottom: 4,
+          transition: "background 0.15s",
+        }}
+        onMouseEnter={(ev) => ev.currentTarget.style.background = positive ? "#f0faf4" : "#fef5f5"}
+        onMouseLeave={(ev) => ev.currentTarget.style.background = "transparent"}
+      >
+        <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
+        <div style={{ flex: 1, height: 12, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
+          <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${darkColor})`, borderRadius: 4, transition: "width 0.4s" }} />
         </div>
-
-        {isSelected && selectedEntry && (
-          <div style={{
-            margin: "4px 0 8px 54px",
-            background: positive ? "#f9fef9" : "#fef9f9",
-            border: `1px solid ${color}33`,
-            borderRadius: 6, padding: "10px 12px",
-          }}>
-            {positive && selectedEntry.buyers?.length > 0 && (
-              <div style={{ marginBottom: selectedEntry.sellers?.length ? 8 : 0 }}>
-                <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2e7d32", marginBottom: 5 }}>Bought / Increased</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {selectedEntry.buyers.map((b, i) => (
-                    <span key={i} style={{
-                      fontSize: 11, background: "#e8f5e9", color: "#2e7d32",
-                      borderRadius: 4, padding: "2px 7px", fontWeight: 600,
-                    }}>
-                      {b.name} <span style={{ opacity: 0.65, fontWeight: 400 }}>· {b.action}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {!positive && selectedEntry.sellers?.length > 0 && (
-              <div>
-                <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#c62828", marginBottom: 5 }}>Reduced / Exited</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {selectedEntry.sellers.map((s, i) => (
-                    <span key={i} style={{
-                      fontSize: 11, background: "#fce4ec", color: "#c62828",
-                      borderRadius: 4, padding: "2px 7px", fontWeight: 600,
-                    }}>
-                      {s.name} <span style={{ opacity: 0.65, fontWeight: 400 }}>· {s.action}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {/* show opposing side if any */}
-            {positive && selectedEntry.sellers?.length > 0 && (
-              <div style={{ marginTop: 8, paddingTop: 8, borderTop: `1px solid ${color}22` }}>
-                <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e65100", marginBottom: 5 }}>Also Reduced / Exited</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {selectedEntry.sellers.map((s, i) => (
-                    <span key={i} style={{
-                      fontSize: 11, background: "#fff3e0", color: "#e65100",
-                      borderRadius: 4, padding: "2px 7px", fontWeight: 600,
-                    }}>
-                      {s.name} <span style={{ opacity: 0.65, fontWeight: 400 }}>· {s.action}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+        <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color, flexShrink: 0 }}>
+          {positive ? "+" : ""}{e.score}
+        </div>
+        <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0, width: 56 }}>
+          {positive ? `${e.buyers?.length || 0} buyers` : `${e.sellers?.length || 0} sellers`}
+        </div>
+        <div style={{ fontSize: 11, color: "#ccc", flexShrink: 0 }}>›</div>
       </div>
     );
   };
@@ -1053,7 +1178,7 @@ function AnalysisTab({ filers }) {
       {/* ── CONVICTION HEATMAP ──────────────────────────────────── */}
       <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
         <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Conviction Heatmap</div>
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all 19 filers. Tap a row to see exactly who bought or sold. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all 19 filers. Tap any ticker for a full deep-dive. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
 
         <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2ecc71", marginBottom: 6 }}>Strong Buy Consensus</div>
         {topBuys.map((e, i) => <HeatRow key={i} e={e} positive={true} />)}
@@ -1070,6 +1195,7 @@ function AnalysisTab({ filers }) {
 
         {divergences.map((d, i) => {
           const isOpen = openDiv === i;
+          const singleTicker = /^[A-Z]{1,6}$/.test(d.ticker) ? d.ticker : null;
           return (
             <div key={i} style={{ border: "1px solid #ebebeb", borderRadius: 8, marginBottom: 8, overflow: "hidden" }}>
               <div
@@ -1077,7 +1203,17 @@ function AnalysisTab({ filers }) {
                 style={{ padding: "12px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", userSelect: "none" }}
               >
                 <div>
-                  <span style={{ fontWeight: 800, fontSize: 15, color: "#1a1a1a" }}>{d.ticker}</span>
+                  <span
+                    onClick={singleTicker ? (e) => { e.stopPropagation(); onTickerClick?.(singleTicker); } : undefined}
+                    style={{
+                      fontWeight: 800, fontSize: 15, color: "#1a1a1a",
+                      cursor: singleTicker ? "pointer" : "default",
+                      textDecoration: singleTicker ? "underline" : "none",
+                      textDecorationColor: "#ccc",
+                      textDecorationThickness: 1,
+                      textUnderlineOffset: 3,
+                    }}
+                  >{d.ticker}</span>
                   <span style={{ fontSize: 12, color: "#888", marginLeft: 8 }}>{d.subtitle}</span>
                 </div>
                 <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
@@ -1119,7 +1255,7 @@ function AnalysisTab({ filers }) {
   );
 }
 
-function FundCard({ fund, isOpen, onToggle, query }) {
+function FundCard({ fund, isOpen, onToggle, query, onTickerClick }) {
   return (
     <div style={{
       background: "#fff",
@@ -1211,11 +1347,11 @@ function FundCard({ fund, isOpen, onToggle, query }) {
             {fund.theme}
           </div>
 
-          <TopHoldings holdings={fund.topHoldings} color={fund.color} />
-          <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={query} />
-          <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={query} />
-          <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={query} />
-          <Section label="Full Exits" color="#e74c3c" prefix="✕" items={fund.exits} query={query} />
+          <TopHoldings holdings={fund.topHoldings} color={fund.color} onTickerClick={onTickerClick} />
+          <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={query} onTickerClick={onTickerClick} />
+          <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={query} onTickerClick={onTickerClick} />
+          <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={query} onTickerClick={onTickerClick} />
+          <Section label="Full Exits" color="#e74c3c" prefix="✕" items={fund.exits} query={query} onTickerClick={onTickerClick} />
 
           <div style={{ fontSize: 11, color: "#aaa", borderTop: "1px solid #eee", paddingTop: 8, marginTop: 4 }}>
             Sources: {fund.sources}
@@ -1232,18 +1368,44 @@ function fundMatchesQuery(fund, query) {
     .some(item => matches(item.label, query));
 }
 
+const SORT_OPTIONS = [
+  { key: "default",          label: "Default"         },
+  { key: "most-active",      label: "Most Active"     },
+  { key: "aum-desc",         label: "AUM (Largest)"   },
+  { key: "most-concentrated", label: "Most Concentrated" },
+];
+
+function applySort(filers, sortBy) {
+  const sorted = [...filers];
+  switch (sortBy) {
+    case "most-active":
+      return sorted.sort((a, b) => countNewBuys(b) - countNewBuys(a));
+    case "aum-desc":
+      return sorted.sort((a, b) => parseAum(b.aum) - parseAum(a.aum));
+    case "most-concentrated":
+      return sorted.sort((a, b) => parseHoldings(a.holdings) - parseHoldings(b.holdings));
+    default:
+      return sorted;
+  }
+}
+
 export default function HedgeFundTracker() {
   const [openFunds, setOpenFunds] = useState({ 0: true });
   const [tab, setTab] = useState("funds");
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("default");
+  const [selectedTicker, setSelectedTicker] = useState(null);
 
   const query = search.trim();
-  const visibleFilers = allFilers.filter(f =>
+  const filtered = allFilers.filter(f =>
     (typeFilter === "all" || f.type === typeFilter) && fundMatchesQuery(f, query)
   );
+  const visibleFilers = applySort(filtered, sortBy);
 
   const toggle = (name) => setOpenFunds(prev => ({ ...prev, [name]: !prev[name] }));
+  const openTicker = (ticker) => setSelectedTicker(ticker);
+  const closeTicker = () => setSelectedTicker(null);
 
   const filterCounts = {
     all:        allFilers.filter(f => fundMatchesQuery(f, query)).length,
@@ -1361,8 +1523,30 @@ export default function HedgeFundTracker() {
               </button>
             ))}
           </div>
+
+          <div style={{ display: "flex", gap: 6, marginBottom: 14, alignItems: "center", flexWrap: "wrap" }}>
+            <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#999", marginRight: 2 }}>Sort</span>
+            {SORT_OPTIONS.map(opt => (
+              <button
+                key={opt.key}
+                onClick={() => setSortBy(opt.key)}
+                style={{
+                  padding: "4px 10px",
+                  border: sortBy === opt.key ? "1.5px solid #1a1a1a" : "1.5px solid #ddd",
+                  borderRadius: 16,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  background: sortBy === opt.key ? "#1a1a1a" : "#fff",
+                  color: sortBy === opt.key ? "#fff" : "#666",
+                  transition: "all 0.15s",
+                }}
+              >{opt.label}</button>
+            ))}
+          </div>
+
           {visibleFilers.map((fund) => (
-            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[fund.name]} onToggle={() => toggle(fund.name)} query={query} />
+            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[fund.name]} onToggle={() => toggle(fund.name)} query={query} onTickerClick={openTicker} />
           ))}
         </div>
       )}
@@ -1427,7 +1611,11 @@ export default function HedgeFundTracker() {
         </div>
       )}
 
-      {tab === "analysis" && <AnalysisTab filers={allFilers} />}
+      {tab === "analysis" && <AnalysisTab filers={allFilers} onTickerClick={openTicker} />}
+
+      {selectedTicker && (
+        <TickerModal ticker={selectedTicker} filers={allFilers} onClose={closeTicker} />
+      )}
 
       <div style={{
         marginTop: 24,
