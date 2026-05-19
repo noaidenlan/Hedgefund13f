@@ -628,14 +628,58 @@ const individuals = [
     sources: "BusinessWire, Bloomberg, SEC EDGAR, Trian 13F",
     color: "#ba4a00",
   },
+  {
+    type: "individual",
+    name: "Situational Awareness LP",
+    manager: "Leopold Aschenbrenner",
+    aum: "~$13.67B (13F, incl. options notional)",
+    quarter: "Q1 2026",
+    filed: "May 15, 2026",
+    holdings: "~35",
+    topHoldings: [
+      { ticker: "BE",   weight: "top holding" },
+      { ticker: "SNDK", weight: "top 2" },
+      { ticker: "CRWV", weight: "top 3" },
+      { ticker: "IREN", weight: "top 4" },
+      { ticker: "CORZ", weight: "top 5" },
+    ],
+    newBuys: [
+      p("CLSK (CleanSpark)", { val: "~$90.5M", note: "10.6M shares — BTC miner repurposed as AI compute host" }),
+    ],
+    increased: [
+      p("BE (Bloom Energy)",     { val: "~$879M", note: "solid-oxide fuel cells for off-grid data centers" }),
+      p("SNDK (SanDisk)",        { val: "~$724M + $389M calls", note: "NAND flash storage for AI workloads" }),
+      p("CRWV (CoreWeave)",      { val: "~$556M + $141M calls", pct: "+672% calls", note: "GPU cloud infrastructure" }),
+      p("IREN (IREN Ltd)",       { val: "~$401M", note: "BTC miner transitioning to AI data center hosting" }),
+      p("CORZ (Core Scientific)", { val: "~$389M" }),
+      p("APLD (Applied Digital)", { val: "~$320M", note: "HPC/AI data centers" }),
+      p("RIOT (Riot Platforms)",  { val: "~$142M" }),
+    ],
+    reduced: [
+      p("SMH (Semiconductor ETF puts)", { val: "~$2.04B notional", note: "bearish bet on chip sector broadly" }),
+      p("NVDA (Nvidia puts)",    { val: "~$1.57B notional" }),
+      p("ORCL (Oracle puts)",    { val: "~$1.07B notional" }),
+      p("AVGO (Broadcom puts)",  { val: "~$1.01B notional" }),
+      p("AMD (puts)",            { val: "~$969M notional" }),
+      p("MU (Micron puts)",      { val: "~$584M notional" }),
+      p("TSM (TSMC puts)",       { val: "~$535M notional" }),
+    ],
+    exits: [
+      p("VST (Vistra Energy)", { note: "exited nuclear power position after large gains" }),
+      p("INTC (Intel) common", { note: "sold all 20.2M shares; retains 20.2M call options — bet on foundry optionality" }),
+    ],
+    theme: "Aschenbrenner is the most ideologically coherent investor in the cohort. His June 2024 165-page manifesto 'Situational Awareness: The Decade Ahead' predicted AGI by ~2027 and framed the hardware buildout as the defining economic opportunity of the era. His thesis: the constraint on AI is not algorithms but electrons — data centers need gigawatts of power that the grid cannot supply on short notice. Bitcoin miners already have grid connections and stranded power assets; they become AI compute hosts overnight. Hence: long BE, SNDK, CRWV, IREN, CORZ, APLD. The contrarian short (~$8.46B in puts against NVDA, AVGO, AMD, SMH, ORCL, MU, TSM) is deliberate — he avoids the 'crowded AI chip trade' entirely, betting that the infrastructure layer captures more value than chip incumbents. Fund launched September 2024 with Collison brothers and Nat Friedman as seed investors. Reported 100%+ returns in calendar year 2025.",
+    sources: "SEC EDGAR (CIK 0002045724), Fortune, CoinDesk, HedgeFundAlpha, 13f.info, Blockspace, WhaleWisdom",
+    color: "#0a3d62",
+  },
 ];
 
 const allFilers = [...funds, ...individuals];
 
 const sectorThemes = [
   { sector: "Cloud/AI Platform: MSFT & GOOGL as 'Safe Harbor'", tickers: "MSFT, GOOGL, GOOG, AMZN", buyers: "Pershing Square (MSFT new $2.09B), Third Point (MSFT +175%), Viking (MSFT +32%, GOOGL new), Berkshire (GOOGL tripled), Himalaya (GOOGL 44%), Baupost (AMZN +$490M)", signal: "The strongest cross-filer consensus of Q1 2026: Microsoft and Alphabet are being treated as the most durable AI cloud platforms at reasonable valuations. When 6+ filers independently converge on the same 2 stocks, the institutional re-rating is typically multi-year." },
-  { sector: "AI Semiconductors (Selective Conviction)", tickers: "NVDA, AVGO, MU, MRVL, INTC", buyers: "Citadel ($4B NVDA), Bridgewater (+NVDA, +MU, +MRVL), Appaloosa (MU +200%, SNDK new), Tiger Global (INTC new, AVGO +), D.E. Shaw (+AVGO, +IREN)", signal: "AI chip conviction remains strong at Citadel, Bridgewater, and D.E. Shaw. But the DeepSeek efficiency signal is causing divergence — Druckenmiller cut NVDA -70%, Burry bought NVDA puts. The consensus is fracturing at the edges." },
-  { sector: "AI Power Infrastructure", tickers: "VST, BE, IREN, KMI, CEG", buyers: "Appaloosa (VST +114%), D.E. Shaw (+BE, +IREN), Druckenmiller (BE new, PKB new)", signal: "Five filers in Q4 2025 discovered AI power; in Q1 2026 a new set doubled down. D.E. Shaw's IREN (+$687M) and Bloom Energy (+$605M) are the largest single-quarter adds. The AI data center power demand thesis is becoming a consensus — 12–18 months ahead of broad retail recognition." },
+  { sector: "AI Semiconductors (Selective Conviction)", tickers: "NVDA, AVGO, MU, MRVL, INTC", buyers: "Citadel ($4B NVDA), Bridgewater (+NVDA, +MU, +MRVL), Appaloosa (MU +200%), Tiger Global (INTC new, AVGO +), D.E. Shaw (+AVGO)", signal: "AI chip conviction remains strong at Citadel, Bridgewater, and D.E. Shaw. But the consensus is fracturing: Druckenmiller cut NVDA -70%, Burry holds NVDA puts, and Aschenbrenner has $8.46B in puts against the entire chip sector (SMH, NVDA, AVGO, AMD, MU, TSM). The most contested trade in the cohort." },
+  { sector: "AI Power Infrastructure", tickers: "BE, IREN, CORZ, APLD, CLSK, RIOT", buyers: "Situational Awareness (BE ~$879M, IREN ~$401M, CORZ ~$389M, CLSK +$90.5M), D.E. Shaw (IREN +$687M, BE +$605M), Appaloosa (VST +114%), Druckenmiller (BE new)", signal: "Aschenbrenner's thesis is the purest expression: AI will consume all available electricity, and Bitcoin miners already have the grid connections. BE, CORZ, APLD, IREN, CLSK, RIOT are all 'power infrastructure repurposed as AI compute.' D.E. Shaw independently reached the same conclusion. This is the fastest-growing cross-filer theme in the cohort." },
   { sector: "Value Working vs. Growth Compression", tickers: "GRBK, NBR, MOH, LULU, QSR, CROX", buyers: "Greenlight (+6.5% Q1), Miller Deep Value (+8.39% Q1), Baupost, Scion (MOH, LULU)", signal: "S&P 500 returned -4.4% in Q1 2026. Value managers dramatically outperformed. When the market sells growth on macro uncertainty, concentrated value investors with pre-identified catalysts generate the best risk-adjusted returns. Q1 2026 may mark the inflection point where value leadership persists." },
   { sector: "China De-Risking (Broad Cohort)", tickers: "BABA, PDD, JD, FXI", buyers: "Counter-thesis: Himalaya (PDD at 14.6% unchanged)", signal: "Appaloosa (-33% BABA), D.E. Shaw (-$1.2B BABA), Scion (full China tech exit). The tariff environment is accelerating China position exits. Only Himalaya Capital (Li Lu) maintains meaningful China conviction — PDD unchanged at 14.6%. When all but one of 19 filers is exiting China, the contrarian setup for a re-rating is building." },
   { sector: "Airlines: Near-Total Institutional Exit", tickers: "AAL, UAL, DAL", buyers: "Against consensus: Berkshire (DAL new — but buying the quality airline, not the weak one)", signal: "Appaloosa fully exited AAL and UAL in Q1 ahead of tariff-driven demand uncertainty. The cross-filer consensus: airlines are exposed to fuel costs, demand recession risk, and tariff disruption. Berkshire's DAL entry (buying Delta specifically — higher-margin, international-capable) is the only contrarian airline bet, and it distinguishes quality from commodity carriers." },
@@ -1408,7 +1452,7 @@ export default function HedgeFundTracker() {
           13F Position Tracker
         </h1>
         <div style={{ fontSize: 12, color: "#888", marginTop: 6 }}>
-          10 funds · 9 individuals · Filed May 2026 · Data as of Mar 31, 2026
+          10 funds · 10 individuals · Filed May 2026 · Data as of Mar 31, 2026
         </div>
       </div>
 
