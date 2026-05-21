@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // position entry helper: p(label, { pct, val, weight, note })
 const p = (label, opts = {}) => ({ label, ...opts });
@@ -676,6 +676,31 @@ const individuals = [
 
 const allFilers = [...funds, ...individuals];
 
+// Q4 2025 snapshot data for quarter-over-quarter comparison
+// Holdings counts reflect position counts from Q4 2025 13F filings (period: Dec 31, 2025)
+const q4Data = {
+  "Berkshire Hathaway":         { aum: "~$265B",              holdings: 42   },
+  "Bridgewater Associates":     { aum: "~$26.5B (13F)",       holdings: 1020 },
+  "Citadel Advisors":           { aum: "~$632B",              holdings: 12200},
+  "Pershing Square":            { aum: "~$14.2B",             holdings: 9    },
+  "Appaloosa Management":       { aum: "~$7.3B",              holdings: 35   },
+  "Tiger Global Management":    { aum: "~$21.5B",             holdings: 54   },
+  "Viking Global Investors":    { aum: "~$33.8B",             holdings: 72   },
+  "Third Point":                { aum: "~$6.8B (~$1.9B 13F)", holdings: 31   },
+  "Soros Fund Management":      { aum: "~$8.5B",              holdings: 175  },
+  "D.E. Shaw & Co.":            { aum: "~$172B (13F)",        holdings: 4410 },
+  "Duquesne Family Office":     { aum: "~$3.9B",              holdings: 37   },
+  "Scion Asset Management":     { aum: "~$130M",              holdings: 8    },
+  "Greenlight Capital":         { aum: "~$2.72B",             holdings: 41   },
+  "Baupost Group":              { aum: "~$4.8B",              holdings: 26   },
+  "Icahn Capital":              { aum: "~$9.2B",              holdings: 13   },
+  "Himalaya Capital Management":{ aum: "~$2.9B",              holdings: 9    },
+  "Gotham Asset Management":    { aum: "~$10.5B",             holdings: 1612 },
+  "Miller Value Partners":      { aum: "~$262M",              holdings: 34   },
+  "Trian Fund Management":      { aum: "~$8.8B",              holdings: 7    },
+  // Situational Awareness LP: first known 13F filing — no Q4 2025 data
+};
+
 const sectorThemes = [
   { sector: "Cloud/AI Platform: MSFT & GOOGL as 'Safe Harbor'", tickers: "MSFT, GOOGL, GOOG, AMZN", buyers: "Pershing Square (MSFT new $2.09B), Third Point (MSFT +175%), Viking (MSFT +32%, GOOGL new), Berkshire (GOOGL tripled), Himalaya (GOOGL 44%), Baupost (AMZN +$490M)", signal: "The strongest cross-filer consensus of Q1 2026: Microsoft and Alphabet are being treated as the most durable AI cloud platforms at reasonable valuations. When 6+ filers independently converge on the same 2 stocks, the institutional re-rating is typically multi-year." },
   { sector: "AI Semiconductors (Selective Conviction)", tickers: "NVDA, AVGO, MU, MRVL, INTC", buyers: "Citadel ($4B NVDA), Bridgewater (+NVDA, +MU, +MRVL), Appaloosa (MU +200%), Tiger Global (INTC new, AVGO +), D.E. Shaw (+AVGO)", signal: "AI chip conviction remains strong at Citadel, Bridgewater, and D.E. Shaw. But the consensus is fracturing: Druckenmiller cut NVDA -70%, Burry holds NVDA puts, and Aschenbrenner has $8.46B in puts against the entire chip sector (SMH, NVDA, AVGO, AMD, MU, TSM). The most contested trade in the cohort." },
@@ -788,6 +813,30 @@ const divergences = [
     },
     verdict: "The most analytically pure bull/bear split in Q1 2026 filings. Both sides have legitimate, internally-consistent frameworks. Resolution requires a macro catalyst (US-China tariff resolution or escalation) rather than fundamentals alone. Li Lu's 44% Alphabet + 14.6% PDD concentration is either the most courageous or most dangerous portfolio in the cohort — that question will be answered in Q2 2026.",
   },
+  {
+    ticker: "SMH",
+    subtitle: "AI value accrues to power infrastructure, not chip designers",
+    bulls: {
+      filers: [
+        "Citadel (~$4B NVDA long, +$2.2B AVGO)",
+        "Bridgewater (+$253M NVDA, +MU, +MRVL new)",
+        "Tiger Global (+AVGO, +NVDA)",
+        "Appaloosa (+200% MU)",
+        "D.E. Shaw (+AVGO)",
+        "Third Point (4th consecutive NVDA add)",
+      ],
+      thesis: "Six of the largest quantitative and fundamental managers remain structurally long AI chips. The bull case: NVIDIA Blackwell is backlogged through 2026, hyperscalers have guided $650B+ combined 2026 capex, and the CUDA software moat is irreplaceable. Chip designers capture value through proprietary architecture and software lock-in. DeepSeek-style efficiency gains historically increase total AI compute demand rather than reducing it — more people using cheaper AI means more total GPU-hours consumed.",
+    },
+    bears: {
+      filers: [
+        "Aschenbrenner / Situational Awareness ($8.46B puts: SMH $2.04B, NVDA $1.57B, ORCL $1.07B, AVGO $1.01B, AMD $969M, MU $584M, TSM $535M)",
+        "Druckenmiller (NVDA −70%, −80% over 2 quarters)",
+        "Burry (NVDA + PLTR puts ~$85M total)",
+      ],
+      thesis: "The rotation thesis: AI value will accrue to the physical layer — electrons, grid connections, cooling capacity — not to chip designers. Bitcoin miners (CORZ, IREN, APLD, RIOT) already have the critical asset: utility-scale grid connections. Bloom Energy provides off-grid power. SanDisk provides NAND storage for inference. As chip architectures commoditize via open-source models and efficiency gains, gross margins compress toward hardware commodity levels. Aschenbrenner's $8.46B in sector-wide puts is simultaneously the largest single bearish position in the cohort and a paired long in AI power infrastructure — a structural rotation bet, not just a valuation call.",
+    },
+    verdict: "The most architecturally sophisticated divergence of Q1 2026. Aschenbrenner is simultaneously the most bearish on chips ($8.46B puts) and most bullish on AI power infrastructure ($3B+ longs) in the entire cohort — a single-investor rotation that D.E. Shaw independently replicated at smaller scale (+$687M IREN, +$605M Bloom Energy). If AI training costs continue falling 10x every 18 months (historical trend), hardware margins compress and infrastructure moats strengthen. If proprietary architectures maintain pricing power (NVIDIA's historical outcome), the chip bulls win. Watch gross margin trends in NVDA's Q2 2026 earnings vs. power infrastructure revenue growth at BE and IREN for the first empirical test.",
+  },
 ];
 
 // ─── CONVICTION COMPUTATION ───────────────────────────────────────────────────
@@ -888,6 +937,20 @@ function countNewBuys(filer) {
     const m = item.label.match(/^(\d+)\s+new\s+positions/i);
     return acc + (m ? parseInt(m[1], 10) : 1);
   }, 0);
+}
+
+function formatAumDelta(q1Aum, q4Aum) {
+  const v1 = parseAum(q1Aum);
+  const v4 = parseAum(q4Aum);
+  if (!v1 || !v4) return null;
+  const deltaM = v1 - v4;
+  const pctNum = (deltaM / v4) * 100;
+  const absM = Math.abs(deltaM);
+  const sign = deltaM >= 0 ? "+" : "−";
+  const label = absM >= 1000
+    ? `${sign}$${(absM / 1000).toFixed(1)}B`
+    : `${sign}$${Math.round(absM)}M`;
+  return { label: `${label} (${deltaM >= 0 ? "+" : ""}${pctNum.toFixed(1)}%)`, positive: deltaM >= 0 };
 }
 
 function Chip({ value, type }) {
@@ -1011,6 +1074,7 @@ function ModalRow({ item, label, color, prefix }) {
 }
 
 function TickerModal({ ticker, filers, onClose }) {
+  const [copied, setCopied] = useState(false);
   const hits = findFilersForTicker(ticker, filers);
   const summary = {
     newBuys:     hits.filter(h => h.newBuys.length).length,
@@ -1055,14 +1119,32 @@ function TickerModal({ ticker, filers, onClose }) {
               )}
             </div>
           </div>
-          <button
-            onClick={onClose}
-            style={{
-              background: "#f0f0f0", border: "none", borderRadius: "50%",
-              width: 32, height: 32, fontSize: 18, cursor: "pointer", color: "#666",
-              flexShrink: 0, lineHeight: 1,
-            }}
-          >×</button>
+          <div style={{ display: "flex", gap: 8, flexShrink: 0, alignItems: "center" }}>
+            <button
+              onClick={() => {
+                const url = `${window.location.origin}${window.location.pathname}#ticker=${ticker}`;
+                navigator.clipboard.writeText(url).then(() => {
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                });
+              }}
+              style={{
+                background: copied ? "#e8f5e9" : "#f0f0f0",
+                border: "none", borderRadius: 6,
+                padding: "0 10px", height: 32, fontSize: 11, fontWeight: 700,
+                cursor: "pointer", color: copied ? "#2e7d32" : "#666",
+                transition: "all 0.2s", whiteSpace: "nowrap",
+              }}
+            >{copied ? "✓ Copied!" : "🔗 Share"}</button>
+            <button
+              onClick={onClose}
+              style={{
+                background: "#f0f0f0", border: "none", borderRadius: "50%",
+                width: 32, height: 32, fontSize: 18, cursor: "pointer", color: "#666",
+                flexShrink: 0, lineHeight: 1,
+              }}
+            >×</button>
+          </div>
         </div>
 
         {hits.length > 0 && (
@@ -1277,7 +1359,11 @@ function AnalysisTab({ filers, onTickerClick }) {
   );
 }
 
-function FundCard({ fund, isOpen, onToggle, query, onTickerClick }) {
+function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
+  const q4 = q4Data[fund.name] || null;
+  const holdingsDelta = q4 ? parseHoldings(fund.holdings) - q4.holdings : null;
+  const aumDelta = q4 ? formatAumDelta(fund.aum, q4.aum) : null;
+
   return (
     <div style={{
       background: "#fff",
@@ -1353,6 +1439,61 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick }) {
           transition: "transform 0.2s",
         }}>▾</div>
       </div>
+
+      {showQ4 && (
+        <div style={{
+          padding: "9px 16px 9px 28px",
+          background: "#f8f7f3",
+          borderTop: "1px solid #eae8e3",
+          fontSize: 11,
+        }}>
+          <div style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: "#bbb", marginBottom: 5 }}>
+            Q4 2025 → Q1 2026
+          </div>
+          {!q4 ? (
+            <span style={{ color: "#aaa", fontStyle: "italic" }}>First 13F filing — no prior quarter data</span>
+          ) : (
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+              <div>
+                <span style={{ color: "#aaa" }}>AUM </span>
+                <span style={{ fontWeight: 700, color: "#777" }}>{q4.aum}</span>
+                <span style={{ color: "#ccc" }}> → </span>
+                <span style={{ fontWeight: 700, color: "#333" }}>{fund.aum}</span>
+                {aumDelta && (
+                  <span style={{
+                    marginLeft: 5, fontWeight: 700, fontSize: 10,
+                    color: aumDelta.positive ? "#2e7d32" : "#c62828",
+                    background: aumDelta.positive ? "#e8f5e9" : "#fce4ec",
+                    padding: "1px 5px", borderRadius: 3,
+                  }}>{aumDelta.label}</span>
+                )}
+              </div>
+              <div>
+                <span style={{ color: "#aaa" }}>Holdings </span>
+                <span style={{ fontWeight: 700, color: "#777" }}>{q4.holdings.toLocaleString()}</span>
+                <span style={{ color: "#ccc" }}> → </span>
+                <span style={{ fontWeight: 700, color: "#333" }}>{typeof fund.holdings === "number" ? fund.holdings.toLocaleString() : fund.holdings}</span>
+                {holdingsDelta !== 0 && (
+                  <span style={{
+                    marginLeft: 5, fontWeight: 700, fontSize: 10,
+                    color: holdingsDelta > 0 ? "#1565c0" : "#c62828",
+                    background: holdingsDelta > 0 ? "#e3f2fd" : "#fce4ec",
+                    padding: "1px 5px", borderRadius: 3,
+                  }}>{holdingsDelta > 0 ? `+${holdingsDelta.toLocaleString()}` : holdingsDelta.toLocaleString()}</span>
+                )}
+              </div>
+              <div>
+                <span style={{ color: "#aaa" }}>Q1 activity </span>
+                {fund.newBuys.length > 0 && <span style={{ color: "#2e7d32", fontWeight: 700 }}>+{fund.newBuys.length} new</span>}
+                {fund.exits.length > 0  && <span style={{ color: "#c62828", fontWeight: 700 }}>{fund.newBuys.length ? " · " : ""}✕{fund.exits.length} exit{fund.exits.length > 1 ? "s" : ""}</span>}
+                {fund.increased.length > 0 && <span style={{ color: "#1565c0", fontWeight: 700 }}>{(fund.newBuys.length || fund.exits.length) ? " · " : ""}↑{fund.increased.length}</span>}
+                {fund.reduced.length > 0   && <span style={{ color: "#e65100", fontWeight: 700 }}>{(fund.newBuys.length || fund.exits.length || fund.increased.length) ? " · " : ""}↓{fund.reduced.length}</span>}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {isOpen && (
         <div style={{ padding: "0 16px 16px 34px" }}>
           <div style={{
@@ -1418,6 +1559,26 @@ export default function HedgeFundTracker() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [sortBy, setSortBy] = useState("default");
   const [selectedTicker, setSelectedTicker] = useState(null);
+  const [showQ4, setShowQ4] = useState(false);
+
+  // Deep links: parse hash on mount
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash) return;
+    const params = new URLSearchParams(hash);
+    const t = params.get("tab");
+    const tk = params.get("ticker");
+    if (t && ["funds","sectors","exits","analysis"].includes(t)) setTab(t);
+    if (tk) setSelectedTicker(tk.toUpperCase());
+  }, []);
+
+  // Deep links: sync hash to state
+  useEffect(() => {
+    const parts = [];
+    if (tab !== "funds") parts.push(`tab=${tab}`);
+    if (selectedTicker) parts.push(`ticker=${selectedTicker}`);
+    window.history.replaceState(null, "", parts.length ? `#${parts.join("&")}` : window.location.pathname);
+  }, [tab, selectedTicker]);
 
   const query = search.trim();
   const filtered = allFilers.filter(f =>
@@ -1565,10 +1726,25 @@ export default function HedgeFundTracker() {
                 }}
               >{opt.label}</button>
             ))}
+            <button
+              onClick={() => setShowQ4(v => !v)}
+              style={{
+                marginLeft: "auto",
+                padding: "4px 11px",
+                border: showQ4 ? "1.5px solid #6c3483" : "1.5px solid #ddd",
+                borderRadius: 16,
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: "pointer",
+                background: showQ4 ? "#6c3483" : "#fff",
+                color: showQ4 ? "#fff" : "#888",
+                transition: "all 0.15s",
+              }}
+            >{showQ4 ? "▶ Q4 Compare ON" : "▶ Q4 Compare"}</button>
           </div>
 
           {visibleFilers.map((fund) => (
-            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[fund.name]} onToggle={() => toggle(fund.name)} query={query} onTickerClick={openTicker} />
+            <FundCard key={fund.name} fund={fund} isOpen={query ? true : !!openFunds[fund.name]} onToggle={() => toggle(fund.name)} query={query} onTickerClick={openTicker} showQ4={showQ4} />
           ))}
         </div>
       )}
