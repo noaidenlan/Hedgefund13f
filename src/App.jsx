@@ -500,11 +500,8 @@ const individuals = [
     newBuys: [],
     increased: [
       p("IEP (Icahn Enterprises LP)", { pct: "+5.87%" }),
-      p("GEHC (GE Healthcare)",        { pct: "+0.37%" }),
     ],
-    reduced: [
-      p("SOLV (Solventum / 3M spin-off)", { pct: "−2.67%", note: "ongoing activist engagement" }),
-    ],
+    reduced: [],
     exits: [],
     theme: "Icahn Capital's Q1 2026 is maintenance mode — the portfolio is entirely defined by activist control stakes. IEP at 49% of AUM is self-referential (Icahn owning Icahn's vehicle). CVI (CVR Energy, refining) is the largest external bet; the refining hedge book drag (-8.2% investment returns, +4.4% ex-hedges) is working against Q1 returns as oil prices stabilized. SWX (Southwest Gas) remains a post-activist-win holding. The Janus Henderson AI transformation (across all managed assets) is the conceptual backdrop for Icahn's broader thesis that traditional asset management needs a complete reinvention — a view shared by Trian.",
     sources: "SEC EDGAR, Quiver Quant, Icahn Enterprises Q1 2026 earnings, Bloomberg",
@@ -706,7 +703,7 @@ const sectorThemes = [
   { sector: "AI Semiconductors (Selective Conviction)", tickers: "NVDA, AVGO, MU, MRVL, INTC", buyers: "Citadel ($4B NVDA), Bridgewater (+NVDA, +MU, +MRVL), Appaloosa (MU +200%), Tiger Global (INTC new, AVGO +), D.E. Shaw (+AVGO)", signal: "AI chip conviction remains strong at Citadel, Bridgewater, and D.E. Shaw. But the consensus is fracturing: Druckenmiller cut NVDA -70%, Burry holds NVDA puts, and Aschenbrenner has $8.46B in puts against the entire chip sector (SMH, NVDA, AVGO, AMD, MU, TSM). The most contested trade in the cohort." },
   { sector: "AI Power Infrastructure", tickers: "BE, IREN, CORZ, APLD, CLSK, RIOT", buyers: "Situational Awareness (BE ~$879M, IREN ~$401M, CORZ ~$389M, CLSK +$90.5M), D.E. Shaw (IREN +$687M, BE +$605M), Appaloosa (VST +114%), Druckenmiller (BE new)", signal: "Aschenbrenner's thesis is the purest expression: AI will consume all available electricity, and Bitcoin miners already have the grid connections. BE, CORZ, APLD, IREN, CLSK, RIOT are all 'power infrastructure repurposed as AI compute.' D.E. Shaw independently reached the same conclusion. This is the fastest-growing cross-filer theme in the cohort." },
   { sector: "Value Working vs. Growth Compression", tickers: "GRBK, NBR, MOH, LULU, QSR, CROX", buyers: "Greenlight (+6.5% Q1), Miller Deep Value (+8.39% Q1), Baupost, Scion (MOH, LULU)", signal: "S&P 500 returned -4.4% in Q1 2026. Value managers dramatically outperformed. When the market sells growth on macro uncertainty, concentrated value investors with pre-identified catalysts generate the best risk-adjusted returns. Q1 2026 may mark the inflection point where value leadership persists." },
-  { sector: "China De-Risking (Broad Cohort)", tickers: "BABA, PDD, JD, FXI", buyers: "Counter-thesis: Himalaya (PDD at 14.6% unchanged)", signal: "Appaloosa (-33% BABA), D.E. Shaw (-$1.2B BABA), Scion (full China tech exit). The tariff environment is accelerating China position exits. Only Himalaya Capital (Li Lu) maintains meaningful China conviction — PDD unchanged at 14.6%. When all but one of 19 filers is exiting China, the contrarian setup for a re-rating is building." },
+  { sector: "China De-Risking (Broad Cohort)", tickers: "BABA, PDD, JD, FXI", buyers: "Counter-thesis: Himalaya (PDD at 14.6% unchanged)", signal: "Appaloosa (-33% BABA), D.E. Shaw (-$1.2B BABA), Scion (full China tech exit). The tariff environment is accelerating China position exits. Only Himalaya Capital (Li Lu) maintains meaningful China conviction — PDD unchanged at 14.6%. When all but one of 20 filers is exiting China, the contrarian setup for a re-rating is building." },
   { sector: "Airlines: Near-Total Institutional Exit", tickers: "AAL, UAL, DAL", buyers: "Against consensus: Berkshire (DAL new — but buying the quality airline, not the weak one)", signal: "Appaloosa fully exited AAL and UAL in Q1 ahead of tariff-driven demand uncertainty. The cross-filer consensus: airlines are exposed to fuel costs, demand recession risk, and tariff disruption. Berkshire's DAL entry (buying Delta specifically — higher-margin, international-capable) is the only contrarian airline bet, and it distinguishes quality from commodity carriers." },
 ];
 
@@ -747,7 +744,7 @@ const macroNarrative = {
     },
     {
       title: "The Macro Hedge Expansion",
-      body: "Four of nineteen filers now carry explicit macro protection: Third Point (SPY puts — largest hedge in recent history), Soros (SPY puts + energy puts), Burry ($85M in NVDA and PLTR puts), and Greenlight (gold — drove Q1 outperformance). This is a material expansion from prior quarters. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' for markets crystallizes the concern: the tariff shock (announced early April, post Q1 reporting period), sovereign debt trajectories, and AI capex disappointment risk are all visible to sophisticated managers. The fact that this level of hedging is visible in 13F filings — which only show long equity positions — means the true macro protection is even larger than what is disclosed.",
+      body: "Five of twenty filers now carry explicit macro protection: Third Point (SPY puts — largest hedge in recent history), Soros (SPY puts + energy puts), Burry ($85M in NVDA and PLTR puts), Greenlight (gold — drove Q1 outperformance), and Aschenbrenner ($8.46B in chip-sector puts — by far the largest bearish book in the cohort). This is a material expansion from prior quarters. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' for markets crystallizes the concern: the tariff shock (announced early April, post Q1 reporting period), sovereign debt trajectories, and AI capex disappointment risk are all visible to sophisticated managers. The fact that this level of hedging is visible in 13F filings — which only show long equity positions — means the true macro protection is even larger than what is disclosed.",
     },
   ],
   keySignals: [
@@ -756,7 +753,7 @@ const macroNarrative = {
     { label: "Biggest Conviction Flip", value: "Druckenmiller: cut NVDA -70% after calling it 'highest-conviction theme ever' in Q4 2025 — DeepSeek changed his view" },
     { label: "Value Beat in Q1", value: "Greenlight +6.5%, Miller Deep Value +8.39% vs. S&P 500 -4.4% — value managers dominated" },
     { label: "Emerging AI Power Consensus", value: "Appaloosa +114% Vistra, D.E. Shaw +$687M IREN, +$605M Bloom Energy — AI power demand is Q2-Q3 2026's next crowded trade" },
-    { label: "Key Risk Signal", value: "4 of 19 filers have explicit macro hedges (SPY puts, NVDA puts, gold) — highest defensive positioning in the cohort's history" },
+    { label: "Key Risk Signal", value: "5 of 20 filers have explicit macro hedges (SPY puts, NVDA puts, chip-sector puts, gold) — highest defensive positioning in the cohort's history" },
   ],
 };
 
@@ -896,12 +893,12 @@ function matches(text, query) {
   return text.toLowerCase().includes(query.toLowerCase());
 }
 
-function isPositive(str) { return str && (str.startsWith("+") || str.startsWith("+")); }
 function isNegative(str) { return str && (str.startsWith("−") || str.startsWith("-")); }
 
 function findFilersForTicker(ticker, filers) {
   if (!ticker) return [];
-  const re = new RegExp(`\\b${ticker}\\b`);
+  const escaped = ticker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`\\b${escaped}\\b`);
   const result = [];
   filers.forEach(filer => {
     const match = (section) => filer[section].filter(item => re.test(item.label));
@@ -934,7 +931,7 @@ function parseHoldings(h) {
 
 function countNewBuys(filer) {
   return filer.newBuys.reduce((acc, item) => {
-    const m = item.label.match(/^(\d+)\s+new\s+positions/i);
+    const m = item.label.match(/^[~≈]?\s*(\d+)\s+new\s+positions/i);
     return acc + (m ? parseInt(m[1], 10) : 1);
   }, 0);
 }
@@ -977,7 +974,9 @@ function Chip({ value, type }) {
 }
 
 function Section({ label, color, prefix, items, query, onTickerClick }) {
-  const filtered = query ? items.filter(item => matches(item.label, query)) : items;
+  if (!items || items.length === 0) return null;
+  const itemMatches = (item) => matches(item.label, query) || (item.note && matches(item.note, query));
+  const filtered = query ? items.filter(itemMatches) : items;
   if (query && filtered.length === 0) return null;
   const muted = prefix === "↓" || prefix === "✕";
   return (
@@ -1076,6 +1075,17 @@ function ModalRow({ item, label, color, prefix }) {
 function TickerModal({ ticker, filers, onClose }) {
   const [copied, setCopied] = useState(false);
   const hits = findFilersForTicker(ticker, filers);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [onClose]);
   const summary = {
     newBuys:     hits.filter(h => h.newBuys.length).length,
     increased:   hits.filter(h => h.increased.length).length,
@@ -1210,8 +1220,11 @@ function TickerModal({ ticker, filers, onClose }) {
 
 function AnalysisTab({ filers, onTickerClick }) {
   const conviction = computeConviction(filers);
-  const topBuys  = conviction.filter(e => e.score > 0).slice(0, 9);
-  const topSells = conviction.filter(e => e.score < 0).slice(-5).reverse();
+  const [showAllConviction, setShowAllConviction] = useState(false);
+  const allBuys  = conviction.filter(e => e.score > 0);
+  const allSells = conviction.filter(e => e.score < 0).reverse();
+  const topBuys  = showAllConviction ? allBuys  : allBuys.slice(0, 9);
+  const topSells = showAllConviction ? allSells : allSells.slice(0, 5);
   const [openDiv, setOpenDiv] = useState(null);
 
   const HeatRow = ({ e, positive }) => {
@@ -1282,7 +1295,7 @@ function AnalysisTab({ filers, onTickerClick }) {
       {/* ── CONVICTION HEATMAP ──────────────────────────────────── */}
       <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
         <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Conviction Heatmap</div>
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all 19 filers. Tap any ticker for a full deep-dive. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
+        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all {filers.length} filers. Tap any ticker for a full deep-dive. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
 
         <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2ecc71", marginBottom: 6 }}>Strong Buy Consensus</div>
         {topBuys.map((e, i) => <HeatRow key={i} e={e} positive={true} />)}
@@ -1290,6 +1303,21 @@ function AnalysisTab({ filers, onTickerClick }) {
         <div style={{ borderTop: "1px solid #f0f0f0", margin: "14px 0" }} />
         <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e74c3c", marginBottom: 6 }}>Sell / Exit Consensus</div>
         {topSells.map((e, i) => <HeatRow key={i} e={e} positive={false} />)}
+
+        {(allBuys.length > 9 || allSells.length > 5) && (
+          <button
+            onClick={() => setShowAllConviction(v => !v)}
+            style={{
+              marginTop: 10, width: "100%", padding: "8px 0",
+              border: "1px dashed #ddd", borderRadius: 6, background: "#fafafa",
+              fontSize: 12, fontWeight: 600, color: "#888", cursor: "pointer",
+            }}
+          >
+            {showAllConviction
+              ? "Show top tickers only"
+              : `Show all ${allBuys.length + allSells.length} scored tickers`}
+          </button>
+        )}
       </div>
 
       {/* ── DIVERGENCE RADAR ────────────────────────────────────── */}
@@ -1327,7 +1355,7 @@ function AnalysisTab({ filers, onTickerClick }) {
                 </div>
               </div>
               {isOpen && (
-                <div style={{ padding: "0 14px 14px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div style={{ padding: "0 14px 14px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
                   <div style={{ background: "#f0faf4", borderRadius: 6, padding: "12px" }}>
                     <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2e7d32", marginBottom: 6 }}>Bull Case</div>
                     <div style={{ fontSize: 11, color: "#555", marginBottom: 8, lineHeight: 1.4 }}>
@@ -1363,6 +1391,9 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
   const q4 = q4Data[fund.name] || null;
   const holdingsDelta = q4 ? parseHoldings(fund.holdings) - q4.holdings : null;
   const aumDelta = q4 ? formatAumDelta(fund.aum, q4.aum) : null;
+  // if the query hit the filer's name/manager, don't filter the position lists
+  const nameMatch = query && (matches(fund.name, query) || matches(fund.manager, query));
+  const sectionQuery = nameMatch ? "" : query;
 
   return (
     <div style={{
@@ -1511,10 +1542,10 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
           </div>
 
           <TopHoldings holdings={fund.topHoldings} color={fund.color} onTickerClick={onTickerClick} />
-          <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={query} onTickerClick={onTickerClick} />
-          <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={query} onTickerClick={onTickerClick} />
-          <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={query} onTickerClick={onTickerClick} />
-          <Section label="Full Exits" color="#e74c3c" prefix="✕" items={fund.exits} query={query} onTickerClick={onTickerClick} />
+          <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="Full Exits" color="#e74c3c" prefix="✕" items={fund.exits} query={sectionQuery} onTickerClick={onTickerClick} />
 
           <div style={{ fontSize: 11, color: "#aaa", borderTop: "1px solid #eee", paddingTop: 8, marginTop: 4 }}>
             Sources: {fund.sources}
@@ -1527,8 +1558,9 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
 
 function fundMatchesQuery(fund, query) {
   if (!query) return true;
+  if (matches(fund.name, query) || matches(fund.manager, query)) return true;
   return [...fund.newBuys, ...fund.increased, ...fund.reduced, ...fund.exits]
-    .some(item => matches(item.label, query));
+    .some(item => matches(item.label, query) || (item.note && matches(item.note, query)));
 }
 
 const SORT_OPTIONS = [
@@ -1553,7 +1585,7 @@ function applySort(filers, sortBy) {
 }
 
 export default function HedgeFundTracker() {
-  const [openFunds, setOpenFunds] = useState({ 0: true });
+  const [openFunds, setOpenFunds] = useState({ [allFilers[0].name]: true });
   const [tab, setTab] = useState("funds");
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -1652,7 +1684,8 @@ export default function HedgeFundTracker() {
         </div>
       )}
 
-      <div style={{ display: "flex", gap: 6, marginBottom: 18, background: "#e8e6e1", borderRadius: 8, padding: 3 }}>
+      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "#f5f4f0", padding: "8px 0 10px", marginBottom: 8 }}>
+      <div style={{ display: "flex", gap: 6, background: "#e8e6e1", borderRadius: 8, padding: 3, boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
         {[
           { key: "funds",    label: "By Filer"         },
           { key: "sectors",  label: "Sector Consensus" },
@@ -1678,10 +1711,11 @@ export default function HedgeFundTracker() {
           >{t.label}</button>
         ))}
       </div>
+      </div>
 
       {tab === "funds" && (
         <div>
-          <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
+          <div style={{ display: "flex", gap: 6, marginBottom: 14, alignItems: "center", flexWrap: "wrap" }}>
             {[
               { key: "all",        label: "All",         count: filterCounts.all        },
               { key: "fund",       label: "Funds",       count: filterCounts.fund       },
@@ -1705,6 +1739,16 @@ export default function HedgeFundTracker() {
                 {f.label} <span style={{ opacity: 0.65, fontWeight: 400 }}>{f.count}</span>
               </button>
             ))}
+            <div style={{ marginLeft: "auto", display: "flex", gap: 4 }}>
+              <button
+                onClick={() => setOpenFunds(Object.fromEntries(allFilers.map(f => [f.name, true])))}
+                style={{ padding: "4px 9px", border: "1px solid #ddd", borderRadius: 14, fontSize: 11, fontWeight: 600, cursor: "pointer", background: "#fff", color: "#888" }}
+              >Expand all</button>
+              <button
+                onClick={() => setOpenFunds({})}
+                style={{ padding: "4px 9px", border: "1px solid #ddd", borderRadius: 14, fontSize: 11, fontWeight: 600, cursor: "pointer", background: "#fff", color: "#888" }}
+              >Collapse all</button>
+            </div>
           </div>
 
           <div style={{ display: "flex", gap: 6, marginBottom: 14, alignItems: "center", flexWrap: "wrap" }}>
