@@ -950,25 +950,42 @@ function formatAumDelta(q1Aum, q4Aum) {
   return { label: `${label} (${deltaM >= 0 ? "+" : ""}${pctNum.toFixed(1)}%)`, positive: deltaM >= 0 };
 }
 
+// ─── DESIGN TOKENS ─────────────────────────────────────────────────────────────
+const T = {
+  bg:        "#07090f",
+  card:      "#0d1117",
+  cardAlt:   "#111827",
+  border:    "#1e2737",
+  border2:   "#2d3748",
+  t1:        "#e6edf3",
+  t2:        "#8b949e",
+  t3:        "#6e7681",
+  buy:       "#3fb950",
+  buyBg:     "#3fb95018",
+  sell:      "#f85149",
+  sellBg:    "#f8514918",
+  trim:      "#d29922",
+  trimBg:    "#d2992218",
+  accent:    "#58a6ff",
+  accentBg:  "#58a6ff18",
+  purple:    "#bc8cff",
+  purpleBg:  "#bc8cff18",
+  gold:      "#e3b341",
+};
+
 function Chip({ value, type }) {
   const colors = {
-    pct:    isNegative(value) ? { bg: "#fff3e0", text: "#e65100" } : { bg: "#e3f2fd", text: "#1565c0" },
-    val:    isNegative(value) ? { bg: "#fce4ec", text: "#c62828" } : { bg: "#e8f5e9", text: "#2e7d32" },
-    weight: { bg: "#ede7f6", text: "#6a1b9a" },
+    pct:    isNegative(value) ? { bg: T.trimBg,   text: T.trim   } : { bg: T.accentBg, text: T.accent  },
+    val:    isNegative(value) ? { bg: T.sellBg,   text: T.sell   } : { bg: T.buyBg,    text: T.buy     },
+    weight: { bg: T.purpleBg, text: T.purple },
   };
   const { bg, text } = colors[type] || colors.weight;
   return (
     <span style={{
-      display: "inline-block",
-      background: bg,
-      color: text,
-      borderRadius: 4,
-      fontSize: 11,
-      fontWeight: 700,
-      padding: "1px 6px",
-      marginLeft: 5,
-      whiteSpace: "nowrap",
-      flexShrink: 0,
+      display: "inline-block", background: bg, color: text,
+      borderRadius: 4, fontSize: 10, fontWeight: 700,
+      padding: "2px 7px", marginLeft: 5, whiteSpace: "nowrap", flexShrink: 0,
+      border: `1px solid ${text}30`, letterSpacing: 0.3,
     }}>{value}</span>
   );
 }
@@ -979,9 +996,14 @@ function Section({ label, color, prefix, items, query, onTickerClick }) {
   const filtered = query ? items.filter(itemMatches) : items;
   if (query && filtered.length === 0) return null;
   const muted = prefix === "↓" || prefix === "✕";
+  const pc = { "+": T.buy, "↑": T.accent, "↓": T.trim, "✕": T.sell }[prefix] || T.t3;
+  const pcBg = { "+": T.buyBg, "↑": T.accentBg, "↓": T.trimBg, "✕": T.sellBg }[prefix] || T.border;
   return (
-    <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color, marginBottom: 6 }}>{label}</div>
+    <div style={{ marginBottom: 14 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 7 }}>
+        <span style={{ background: pcBg, color: pc, border: `1px solid ${pc}35`, borderRadius: 4, padding: "1px 7px", fontSize: 10, fontWeight: 700, letterSpacing: 0.3 }}>{prefix}</span>
+        <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: pc }}>{label}</span>
+      </div>
       {filtered.map((item, i) => {
         const ticker = extractTicker(item.label);
         const clickable = ticker && onTickerClick;
@@ -990,27 +1012,22 @@ function Section({ label, color, prefix, items, query, onTickerClick }) {
             key={i}
             onClick={clickable ? (e) => { e.stopPropagation(); onTickerClick(ticker); } : undefined}
             style={{
-              display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: 2,
-              fontSize: 13,
-              color: muted ? "#555" : "#222",
-              padding: "3px 4px",
-              lineHeight: 1.5,
-              background: query && matches(item.label, query) ? "#fffde7" : "transparent",
-              borderRadius: 3,
-              cursor: clickable ? "pointer" : "default",
+              display: "flex", alignItems: "center", flexWrap: "wrap", gap: 2,
+              fontSize: 13, color: muted ? T.t3 : T.t2,
+              padding: "4px 6px", lineHeight: 1.55,
+              background: query && itemMatches(item) ? `${T.accent}12` : "transparent",
+              borderRadius: 5, cursor: clickable ? "pointer" : "default",
+              borderLeft: "2px solid transparent",
+              transition: "background 0.12s, border-color 0.12s, color 0.12s",
             }}
-            onMouseEnter={clickable ? (e) => e.currentTarget.style.background = "#f5f5f5" : undefined}
-            onMouseLeave={clickable ? (e) => e.currentTarget.style.background = query && matches(item.label, query) ? "#fffde7" : "transparent" : undefined}
+            onMouseEnter={clickable ? (e) => { e.currentTarget.style.background = T.accentBg; e.currentTarget.style.borderLeftColor = T.accent; e.currentTarget.style.color = T.t1; } : undefined}
+            onMouseLeave={clickable ? (e) => { e.currentTarget.style.background = query && itemMatches(item) ? `${T.accent}12` : "transparent"; e.currentTarget.style.borderLeftColor = "transparent"; e.currentTarget.style.color = muted ? T.t3 : T.t2; } : undefined}
           >
-            <span style={{ marginRight: 3 }}>{prefix}</span>
             <span style={{ flex: 1 }}>{highlight(item.label, query)}</span>
             {item.pct    && <Chip value={item.pct}    type="pct" />}
             {item.val    && <Chip value={item.val}    type="val" />}
             {item.weight && <Chip value={item.weight} type="weight" />}
-            {item.note   && <span style={{ fontSize: 11, color: "#999", marginLeft: 4 }}>· {item.note}</span>}
+            {item.note   && <span style={{ fontSize: 11, color: T.t3, marginLeft: 4 }}>· {item.note}</span>}
           </div>
         );
       })}
@@ -1022,7 +1039,7 @@ function TopHoldings({ holdings, color, onTickerClick }) {
   if (!holdings?.length) return null;
   return (
     <div style={{ marginBottom: 14 }}>
-      <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#999", marginBottom: 6 }}>Top Holdings by Weight</div>
+      <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: T.t3, marginBottom: 7 }}>Top Holdings by Weight</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
         {holdings.map((h, i) => (
           <div
@@ -1032,20 +1049,20 @@ function TopHoldings({ holdings, color, onTickerClick }) {
               display: "flex",
               alignItems: "center",
               gap: 5,
-              background: "#f9f9f9",
-              border: "1px solid #ebebeb",
+              background: T.cardAlt,
+              border: `1px solid ${T.border}`,
               borderRadius: 6,
               padding: "3px 8px",
               fontSize: 12,
               cursor: onTickerClick ? "pointer" : "default",
               transition: "background 0.15s, border-color 0.15s",
             }}
-            onMouseEnter={onTickerClick ? (e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = color; } : undefined}
-            onMouseLeave={onTickerClick ? (e) => { e.currentTarget.style.background = "#f9f9f9"; e.currentTarget.style.borderColor = "#ebebeb"; } : undefined}
+            onMouseEnter={onTickerClick ? (e) => { e.currentTarget.style.background = `${color}18`; e.currentTarget.style.borderColor = `${color}60`; } : undefined}
+            onMouseLeave={onTickerClick ? (e) => { e.currentTarget.style.background = T.cardAlt; e.currentTarget.style.borderColor = T.border; } : undefined}
           >
-            <span style={{ fontWeight: 700, color: "#1a1a1a" }}>{h.ticker}</span>
+            <span style={{ fontWeight: 700, color: T.t1 }}>{h.ticker}</span>
             <span style={{
-              background: `${color}22`,
+              background: `${color}25`,
               color,
               fontWeight: 700,
               fontSize: 11,
@@ -1061,13 +1078,13 @@ function TopHoldings({ holdings, color, onTickerClick }) {
 
 function ModalRow({ item, label, color, prefix }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#333", padding: "3px 0 3px 14px", flexWrap: "wrap", lineHeight: 1.5 }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: T.t2, padding: "3px 0 3px 14px", flexWrap: "wrap", lineHeight: 1.5 }}>
       <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color, width: 68, flexShrink: 0, letterSpacing: 0.5 }}>{prefix} {label}</span>
-      <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
+      <span style={{ flex: 1, minWidth: 0, color: T.t1 }}>{item.label}</span>
       {item.pct    && <Chip value={item.pct}    type="pct" />}
       {item.val    && <Chip value={item.val}    type="val" />}
       {item.weight && <Chip value={item.weight} type="weight" />}
-      {item.note   && <span style={{ fontSize: 11, color: "#999" }}>· {item.note}</span>}
+      {item.note   && <span style={{ fontSize: 11, color: T.t3 }}>· {item.note}</span>}
     </div>
   );
 }
@@ -1086,6 +1103,7 @@ function TickerModal({ ticker, filers, onClose }) {
       document.body.style.overflow = prevOverflow;
     };
   }, [onClose]);
+
   const summary = {
     newBuys:     hits.filter(h => h.newBuys.length).length,
     increased:   hits.filter(h => h.increased.length).length,
@@ -1093,38 +1111,41 @@ function TickerModal({ ticker, filers, onClose }) {
     exits:       hits.filter(h => h.exits.length).length,
     topHoldings: hits.filter(h => h.topHolding).length,
   };
-  const netScore =
-    hits.reduce((acc, h) => acc + h.newBuys.length * 3 + h.increased.length * 2 - h.reduced.length * 2 - h.exits.length * 3, 0);
-  const scoreColor = netScore > 0 ? "#2ecc71" : netScore < 0 ? "#e74c3c" : "#888";
-  const scoreLabel = netScore > 0 ? "Net Buy Conviction" : netScore < 0 ? "Net Sell Conviction" : "Mixed";
+  const netScore = hits.reduce((acc, h) => acc + h.newBuys.length * 3 + h.increased.length * 2 - h.reduced.length * 2 - h.exits.length * 3, 0);
+  const scoreColor = netScore > 0 ? T.buy : netScore < 0 ? T.sell : T.t3;
+  const scoreLabel = netScore > 0 ? "Net Buy" : netScore < 0 ? "Net Sell" : "Mixed";
 
   return (
     <div
       onClick={onClose}
       style={{
-        position: "fixed", inset: 0, background: "rgba(20,20,20,0.55)",
+        position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)",
         zIndex: 1000, display: "flex", alignItems: "flex-start", justifyContent: "center",
-        padding: 16, overflowY: "auto", backdropFilter: "blur(2px)",
+        padding: 16, overflowY: "auto", backdropFilter: "blur(4px)",
       }}
     >
       <div
         onClick={e => e.stopPropagation()}
         style={{
-          background: "#fff", borderRadius: 12, maxWidth: 640, width: "100%",
+          background: T.card, borderRadius: 14, maxWidth: 640, width: "100%",
           maxHeight: "92vh", overflow: "hidden", display: "flex", flexDirection: "column",
-          marginTop: 24, boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+          marginTop: 24, border: `1px solid ${T.border}`,
+          boxShadow: "0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(88,166,255,0.08)",
         }}
       >
-        <div style={{ padding: "18px 20px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
+        {/* Header */}
+        <div style={{ padding: "18px 20px", borderBottom: `1px solid ${T.border}`, display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: "#999", marginBottom: 3 }}>Ticker Deep Dive</div>
-            <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 26, fontWeight: 900, color: "#1a1a1a", lineHeight: 1.1 }}>{ticker}</div>
-            <div style={{ fontSize: 12, color: "#777", marginTop: 4 }}>
-              {hits.length} of {filers.length} filers
+            <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: T.t3, marginBottom: 4 }}>Ticker Deep Dive</div>
+            <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 30, fontWeight: 900, color: T.accent, lineHeight: 1 }}>{ticker}</div>
+            <div style={{ fontSize: 12, color: T.t2, marginTop: 5, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+              <span>{hits.length} of {filers.length} filers</span>
               {netScore !== 0 && (
                 <>
-                  {" · "}
-                  <span style={{ color: scoreColor, fontWeight: 700 }}>{scoreLabel} {netScore > 0 ? "+" : ""}{netScore}</span>
+                  <span style={{ color: T.border2 }}>·</span>
+                  <span style={{ color: scoreColor, fontWeight: 700, background: `${scoreColor}18`, padding: "1px 7px", borderRadius: 4, border: `1px solid ${scoreColor}30`, fontSize: 11 }}>
+                    {scoreLabel} {netScore > 0 ? "+" : ""}{netScore}
+                  </span>
                 </>
               )}
             </div>
@@ -1139,38 +1160,40 @@ function TickerModal({ ticker, filers, onClose }) {
                 });
               }}
               style={{
-                background: copied ? "#e8f5e9" : "#f0f0f0",
-                border: "none", borderRadius: 6,
-                padding: "0 10px", height: 32, fontSize: 11, fontWeight: 700,
-                cursor: "pointer", color: copied ? "#2e7d32" : "#666",
+                background: copied ? T.buyBg : T.cardAlt,
+                border: `1px solid ${copied ? T.buy : T.border}`,
+                borderRadius: 6, padding: "0 10px", height: 32, fontSize: 11, fontWeight: 700,
+                cursor: "pointer", color: copied ? T.buy : T.t2,
                 transition: "all 0.2s", whiteSpace: "nowrap",
               }}
-            >{copied ? "✓ Copied!" : "🔗 Share"}</button>
+            >{copied ? "✓ Copied!" : "⎘ Share"}</button>
             <button
               onClick={onClose}
               style={{
-                background: "#f0f0f0", border: "none", borderRadius: "50%",
-                width: 32, height: 32, fontSize: 18, cursor: "pointer", color: "#666",
-                flexShrink: 0, lineHeight: 1,
+                background: T.cardAlt, border: `1px solid ${T.border}`, borderRadius: "50%",
+                width: 32, height: 32, fontSize: 18, cursor: "pointer", color: T.t2,
+                flexShrink: 0, lineHeight: 1, transition: "border-color 0.15s",
               }}
             >×</button>
           </div>
         </div>
 
+        {/* Summary pills */}
         {hits.length > 0 && (
-          <div style={{ padding: "12px 20px", background: "#fafafa", borderBottom: "1px solid #eee", display: "flex", gap: 6, flexWrap: "wrap" }}>
-            {summary.newBuys > 0     && <span style={{ fontSize: 11, fontWeight: 700, background: "#e8f5e9", color: "#2e7d32", borderRadius: 4, padding: "3px 8px" }}>+{summary.newBuys} new buy{summary.newBuys > 1 ? "s" : ""}</span>}
-            {summary.increased > 0   && <span style={{ fontSize: 11, fontWeight: 700, background: "#e3f2fd", color: "#1565c0", borderRadius: 4, padding: "3px 8px" }}>↑{summary.increased} added</span>}
-            {summary.reduced > 0     && <span style={{ fontSize: 11, fontWeight: 700, background: "#fff3e0", color: "#e65100", borderRadius: 4, padding: "3px 8px" }}>↓{summary.reduced} trimmed</span>}
-            {summary.exits > 0       && <span style={{ fontSize: 11, fontWeight: 700, background: "#fce4ec", color: "#c62828", borderRadius: 4, padding: "3px 8px" }}>✕{summary.exits} exited</span>}
-            {summary.topHoldings > 0 && <span style={{ fontSize: 11, fontWeight: 700, background: "#ede7f6", color: "#6a1b9a", borderRadius: 4, padding: "3px 8px" }}>★{summary.topHoldings} top-weight</span>}
+          <div style={{ padding: "10px 20px", background: T.cardAlt, borderBottom: `1px solid ${T.border}`, display: "flex", gap: 6, flexWrap: "wrap" }}>
+            {summary.newBuys > 0     && <span style={{ fontSize: 11, fontWeight: 700, background: T.buyBg,    color: T.buy,    border: `1px solid ${T.buy}30`,    borderRadius: 4, padding: "3px 8px" }}>+{summary.newBuys} new buy{summary.newBuys > 1 ? "s" : ""}</span>}
+            {summary.increased > 0   && <span style={{ fontSize: 11, fontWeight: 700, background: T.accentBg, color: T.accent, border: `1px solid ${T.accent}30`,  borderRadius: 4, padding: "3px 8px" }}>↑{summary.increased} added</span>}
+            {summary.reduced > 0     && <span style={{ fontSize: 11, fontWeight: 700, background: T.trimBg,   color: T.trim,   border: `1px solid ${T.trim}30`,    borderRadius: 4, padding: "3px 8px" }}>↓{summary.reduced} trimmed</span>}
+            {summary.exits > 0       && <span style={{ fontSize: 11, fontWeight: 700, background: T.sellBg,   color: T.sell,   border: `1px solid ${T.sell}30`,    borderRadius: 4, padding: "3px 8px" }}>✕{summary.exits} exited</span>}
+            {summary.topHoldings > 0 && <span style={{ fontSize: 11, fontWeight: 700, background: T.purpleBg, color: T.purple, border: `1px solid ${T.purple}30`,  borderRadius: 4, padding: "3px 8px" }}>★{summary.topHoldings} top-weight</span>}
           </div>
         )}
 
+        {/* Filer list */}
         <div style={{ overflowY: "auto", padding: "8px 0", flex: 1 }}>
           {hits.length === 0 && (
-            <div style={{ padding: "40px 20px", textAlign: "center", color: "#888", fontSize: 13 }}>
-              No filers have notable activity in <strong>{ticker}</strong> this quarter.
+            <div style={{ padding: "48px 20px", textAlign: "center", color: T.t3, fontSize: 13 }}>
+              No filers have notable activity in <strong style={{ color: T.t2 }}>{ticker}</strong> this quarter.
             </div>
           )}
           {hits.map(({ filer, newBuys, increased, reduced, exits, topHolding }, i) => (
@@ -1178,39 +1201,41 @@ function TickerModal({ ticker, filers, onClose }) {
               key={i}
               style={{
                 padding: "12px 20px",
-                borderBottom: i < hits.length - 1 ? "1px solid #f5f5f5" : "none",
+                borderBottom: i < hits.length - 1 ? `1px solid ${T.border}` : "none",
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6, flexWrap: "wrap" }}>
-                <div style={{ width: 4, height: 20, background: filer.color, borderRadius: 2 }} />
-                <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 14, color: "#1a1a1a" }}>{filer.name}</div>
+                <div style={{ width: 4, height: 20, background: filer.color, borderRadius: 2, boxShadow: `0 0 8px ${filer.color}80` }} />
+                <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 14, color: T.t1 }}>{filer.name}</div>
                 <span style={{
                   fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.6,
                   padding: "1px 5px", borderRadius: 3,
-                  background: filer.type === "individual" ? "#fff3e0" : "#e8f5e9",
-                  color: filer.type === "individual" ? "#e65100" : "#2e7d32",
+                  background: filer.type === "individual" ? T.trimBg : T.buyBg,
+                  color: filer.type === "individual" ? T.trim : T.buy,
+                  border: `1px solid ${filer.type === "individual" ? T.trim : T.buy}30`,
                 }}>{filer.type === "individual" ? "Individual" : "Fund"}</span>
-                <span style={{ fontSize: 11, color: "#999" }}>· {filer.manager}</span>
+                <span style={{ fontSize: 11, color: T.t3 }}>· {filer.manager}</span>
               </div>
               {topHolding && (
                 <div style={{
                   display: "inline-flex", alignItems: "center", gap: 6,
                   fontSize: 12, margin: "4px 0 6px 14px",
-                  background: "#ede7f6", color: "#6a1b9a",
+                  background: T.purpleBg, color: T.purple,
                   padding: "3px 10px", borderRadius: 4, fontWeight: 700,
+                  border: `1px solid ${T.purple}30`,
                 }}>
                   ★ Top holding · {topHolding.weight} of portfolio
                 </div>
               )}
-              {newBuys.map((item, j)   => <ModalRow key={`nb-${j}`} item={item} label="New buy"   color="#2e7d32" prefix="+" />)}
-              {increased.map((item, j) => <ModalRow key={`in-${j}`} item={item} label="Increased" color="#1565c0" prefix="↑" />)}
-              {reduced.map((item, j)   => <ModalRow key={`rd-${j}`} item={item} label="Reduced"   color="#e65100" prefix="↓" />)}
-              {exits.map((item, j)     => <ModalRow key={`ex-${j}`} item={item} label="Exited"    color="#c62828" prefix="✕" />)}
+              {newBuys.map((item, j)   => <ModalRow key={`nb-${j}`} item={item} label="New buy"   color={T.buy}    prefix="+" />)}
+              {increased.map((item, j) => <ModalRow key={`in-${j}`} item={item} label="Increased" color={T.accent} prefix="↑" />)}
+              {reduced.map((item, j)   => <ModalRow key={`rd-${j}`} item={item} label="Reduced"   color={T.trim}   prefix="↓" />)}
+              {exits.map((item, j)     => <ModalRow key={`ex-${j}`} item={item} label="Exited"    color={T.sell}   prefix="✕" />)}
             </div>
           ))}
         </div>
 
-        <div style={{ padding: "10px 20px", borderTop: "1px solid #eee", background: "#fafafa", fontSize: 10, color: "#aaa", lineHeight: 1.5 }}>
+        <div style={{ padding: "10px 20px", borderTop: `1px solid ${T.border}`, background: T.cardAlt, fontSize: 10, color: T.t3, lineHeight: 1.5 }}>
           Auto-matched across all filer sections and top holdings. Ticker matching uses whole-word boundary so GOOG and GOOGL are distinct.
         </div>
       </div>
@@ -1228,8 +1253,8 @@ function AnalysisTab({ filers, onTickerClick }) {
   const [openDiv, setOpenDiv] = useState(null);
 
   const HeatRow = ({ e, positive }) => {
-    const color = positive ? "#2ecc71" : "#e74c3c";
-    const darkColor = positive ? "#27ae60" : "#c0392b";
+    const color = positive ? T.buy : T.sell;
+    const glowColor = positive ? "#3fb95040" : "#f8514940";
     return (
       <div
         onClick={() => onTickerClick?.(e.ticker)}
@@ -1238,20 +1263,20 @@ function AnalysisTab({ filers, onTickerClick }) {
           padding: "5px 8px", borderRadius: 6, cursor: "pointer", marginBottom: 4,
           transition: "background 0.15s",
         }}
-        onMouseEnter={(ev) => ev.currentTarget.style.background = positive ? "#f0faf4" : "#fef5f5"}
+        onMouseEnter={(ev) => ev.currentTarget.style.background = `${color}12`}
         onMouseLeave={(ev) => ev.currentTarget.style.background = "transparent"}
       >
-        <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: "#1a1a1a", flexShrink: 0 }}>{e.ticker}</div>
-        <div style={{ flex: 1, height: 12, background: "#f0f0f0", borderRadius: 4, overflow: "hidden" }}>
-          <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${darkColor})`, borderRadius: 4, transition: "width 0.4s" }} />
+        <div style={{ width: 46, fontWeight: 700, fontSize: 12, color: T.t1, flexShrink: 0 }}>{e.ticker}</div>
+        <div style={{ flex: 1, height: 10, background: T.border, borderRadius: 4, overflow: "hidden" }}>
+          <div style={{ width: `${e.pct}%`, height: "100%", background: `linear-gradient(90deg, ${color}, ${color}aa)`, borderRadius: 4, transition: "width 0.4s", boxShadow: `0 0 6px ${glowColor}` }} />
         </div>
         <div style={{ width: 28, textAlign: "right", fontSize: 11, fontWeight: 700, color, flexShrink: 0 }}>
           {positive ? "+" : ""}{e.score}
         </div>
-        <div style={{ fontSize: 11, color: "#aaa", flexShrink: 0, width: 56 }}>
+        <div style={{ fontSize: 11, color: T.t3, flexShrink: 0, width: 60, textAlign: "right" }}>
           {positive ? `${e.buyers?.length || 0} buyers` : `${e.sellers?.length || 0} sellers`}
         </div>
-        <div style={{ fontSize: 11, color: "#ccc", flexShrink: 0 }}>›</div>
+        <div style={{ fontSize: 11, color: T.border2, flexShrink: 0 }}>›</div>
       </div>
     );
   };
@@ -1259,12 +1284,13 @@ function AnalysisTab({ filers, onTickerClick }) {
   return (
     <div>
       {/* ── MACRO NARRATIVE ─────────────────────────────────────── */}
-      <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", overflow: "hidden", marginBottom: 16 }}>
-        <div style={{ background: "linear-gradient(135deg, #1a1a1a, #2c3e50)", padding: "18px 20px" }}>
-          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: "#aaa", marginBottom: 6 }}>
+      <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, overflow: "hidden", marginBottom: 16 }}>
+        <div style={{ background: "linear-gradient(135deg, #0d1830 0%, #111827 60%, #0d1117 100%)", padding: "20px 20px", borderBottom: `1px solid ${T.border}`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(ellipse at 80% 50%, #58a6ff10, transparent 60%)", pointerEvents: "none" }} />
+          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: T.t3, marginBottom: 6, position: "relative" }}>
             {macroNarrative.quarter} · Macro Synthesis
           </div>
-          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 20, fontWeight: 900, color: "#fff", lineHeight: 1.25 }}>
+          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 20, fontWeight: 900, color: T.t1, lineHeight: 1.25, position: "relative" }}>
             {macroNarrative.headline}
           </div>
         </div>
@@ -1272,20 +1298,20 @@ function AnalysisTab({ filers, onTickerClick }) {
         <div style={{ padding: "16px 20px" }}>
           {macroNarrative.paragraphs.map((p, i) => (
             <div key={i} style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#999", marginBottom: 5 }}>{p.title}</div>
-              <div style={{ fontSize: 13, color: "#333", lineHeight: 1.65 }}>{p.body}</div>
+              <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.accent, marginBottom: 5 }}>{p.title}</div>
+              <div style={{ fontSize: 13, color: T.t2, lineHeight: 1.7 }}>{p.body}</div>
             </div>
           ))}
         </div>
 
         <div style={{ padding: "0 20px 16px" }}>
-          <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#999", marginBottom: 10 }}>Key Signals</div>
+          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.t3, marginBottom: 10 }}>Key Signals</div>
           {macroNarrative.keySignals.map((s, i) => (
             <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 12 }}>
-              <div style={{ width: 6, height: 6, borderRadius: 3, background: "#2ecc71", marginTop: 5, flexShrink: 0 }} />
+              <div style={{ width: 5, height: 5, borderRadius: "50%", background: T.buy, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px ${T.buy}` }} />
               <div>
-                <span style={{ fontWeight: 700, color: "#333" }}>{s.label}:</span>{" "}
-                <span style={{ color: "#555" }}>{s.value}</span>
+                <span style={{ fontWeight: 700, color: T.t1 }}>{s.label}:</span>{" "}
+                <span style={{ color: T.t2 }}>{s.value}</span>
               </div>
             </div>
           ))}
@@ -1293,25 +1319,28 @@ function AnalysisTab({ filers, onTickerClick }) {
       </div>
 
       {/* ── CONVICTION HEATMAP ──────────────────────────────────── */}
-      <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
-        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Conviction Heatmap</div>
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 16 }}>Auto-scored across all {filers.length} filers. Tap any ticker for a full deep-dive. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
+      <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, padding: "16px 20px", marginBottom: 16 }}>
+        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 17, color: T.t1, marginBottom: 4 }}>Conviction Heatmap</div>
+        <div style={{ fontSize: 12, color: T.t3, marginBottom: 16 }}>Auto-scored across all {filers.length} filers. Tap any ticker for a full deep-dive. New buy = +3 · Increased = +2 · Reduced = −2 · Exited = −3</div>
 
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2ecc71", marginBottom: 6 }}>Strong Buy Consensus</div>
+        <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.buy, marginBottom: 8 }}>Strong Buy Consensus</div>
         {topBuys.map((e, i) => <HeatRow key={i} e={e} positive={true} />)}
 
-        <div style={{ borderTop: "1px solid #f0f0f0", margin: "14px 0" }} />
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#e74c3c", marginBottom: 6 }}>Sell / Exit Consensus</div>
+        <div style={{ borderTop: `1px solid ${T.border}`, margin: "14px 0" }} />
+        <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.sell, marginBottom: 8 }}>Sell / Exit Consensus</div>
         {topSells.map((e, i) => <HeatRow key={i} e={e} positive={false} />)}
 
         {(allBuys.length > 9 || allSells.length > 5) && (
           <button
             onClick={() => setShowAllConviction(v => !v)}
             style={{
-              marginTop: 10, width: "100%", padding: "8px 0",
-              border: "1px dashed #ddd", borderRadius: 6, background: "#fafafa",
-              fontSize: 12, fontWeight: 600, color: "#888", cursor: "pointer",
+              marginTop: 12, width: "100%", padding: "9px 0",
+              border: `1px dashed ${T.border2}`, borderRadius: 6, background: "transparent",
+              fontSize: 12, fontWeight: 600, color: T.t3, cursor: "pointer",
+              transition: "color 0.15s, border-color 0.15s",
             }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = T.t1; e.currentTarget.style.borderColor = T.accent; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = T.t3; e.currentTarget.style.borderColor = T.border2; }}
           >
             {showAllConviction
               ? "Show top tickers only"
@@ -1321,57 +1350,60 @@ function AnalysisTab({ filers, onTickerClick }) {
       </div>
 
       {/* ── DIVERGENCE RADAR ────────────────────────────────────── */}
-      <div style={{ background: "#fff", borderRadius: 10, border: "1px solid #e0e0e0", padding: "16px 20px", marginBottom: 16 }}>
-        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a", marginBottom: 4 }}>Divergence Radar</div>
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 14 }}>Where top filers are making opposite bets — and why each side may be right.</div>
+      <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, padding: "16px 20px", marginBottom: 16 }}>
+        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 17, color: T.t1, marginBottom: 4 }}>Divergence Radar</div>
+        <div style={{ fontSize: 12, color: T.t3, marginBottom: 14 }}>Where top filers are making opposite bets — and why each side may be right.</div>
 
         {divergences.map((d, i) => {
           const isOpen = openDiv === i;
           const singleTicker = /^[A-Z]{1,6}$/.test(d.ticker) ? d.ticker : null;
           return (
-            <div key={i} style={{ border: "1px solid #ebebeb", borderRadius: 8, marginBottom: 8, overflow: "hidden" }}>
+            <div key={i} style={{ border: `1px solid ${T.border}`, borderRadius: 8, marginBottom: 8, overflow: "hidden", transition: "border-color 0.15s" }}>
               <div
                 onClick={() => setOpenDiv(isOpen ? null : i)}
-                style={{ padding: "12px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", userSelect: "none" }}
+                style={{ padding: "12px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", userSelect: "none", background: isOpen ? T.cardAlt : "transparent", transition: "background 0.15s" }}
               >
                 <div>
                   <span
                     onClick={singleTicker ? (e) => { e.stopPropagation(); onTickerClick?.(singleTicker); } : undefined}
                     style={{
-                      fontWeight: 800, fontSize: 15, color: "#1a1a1a",
+                      fontWeight: 800, fontSize: 15, color: T.t1,
                       cursor: singleTicker ? "pointer" : "default",
                       textDecoration: singleTicker ? "underline" : "none",
-                      textDecorationColor: "#ccc",
+                      textDecorationColor: T.border2,
                       textDecorationThickness: 1,
                       textUnderlineOffset: 3,
+                      transition: "color 0.15s",
                     }}
+                    onMouseEnter={singleTicker ? (e) => { e.currentTarget.style.color = T.accent; } : undefined}
+                    onMouseLeave={singleTicker ? (e) => { e.currentTarget.style.color = T.t1; } : undefined}
                   >{d.ticker}</span>
-                  <span style={{ fontSize: 12, color: "#888", marginLeft: 8 }}>{d.subtitle}</span>
+                  <span style={{ fontSize: 12, color: T.t3, marginLeft: 8 }}>{d.subtitle}</span>
                 </div>
                 <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, background: "#e8f5e9", color: "#2e7d32", padding: "2px 6px", borderRadius: 4 }}>{d.bulls.filers.length} bulls</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, background: "#fce4ec", color: "#c62828", padding: "2px 6px", borderRadius: 4 }}>{d.bears.filers.length} bears</span>
-                  <span style={{ fontSize: 16, color: "#ccc", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, background: T.buyBg, color: T.buy, border: `1px solid ${T.buy}30`, padding: "2px 7px", borderRadius: 4 }}>{d.bulls.filers.length} bulls</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, background: T.sellBg, color: T.sell, border: `1px solid ${T.sell}30`, padding: "2px 7px", borderRadius: 4 }}>{d.bears.filers.length} bears</span>
+                  <span style={{ fontSize: 14, color: T.border2, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
                 </div>
               </div>
               {isOpen && (
-                <div style={{ padding: "0 14px 14px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 12 }}>
-                  <div style={{ background: "#f0faf4", borderRadius: 6, padding: "12px" }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#2e7d32", marginBottom: 6 }}>Bull Case</div>
-                    <div style={{ fontSize: 11, color: "#555", marginBottom: 8, lineHeight: 1.4 }}>
-                      {d.bulls.filers.map((f, j) => <div key={j} style={{ fontWeight: 600, color: "#2e7d32" }}>· {f}</div>)}
+                <div style={{ padding: "0 14px 14px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 10, borderTop: `1px solid ${T.border}` }}>
+                  <div style={{ background: T.buyBg, borderRadius: 8, padding: "12px", border: `1px solid ${T.buy}20`, marginTop: 10 }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.buy, marginBottom: 6 }}>Bull Case</div>
+                    <div style={{ marginBottom: 8, lineHeight: 1.4 }}>
+                      {d.bulls.filers.map((f, j) => <div key={j} style={{ fontSize: 11, fontWeight: 600, color: T.buy }}>· {f}</div>)}
                     </div>
-                    <div style={{ fontSize: 12, color: "#333", lineHeight: 1.6 }}>{d.bulls.thesis}</div>
+                    <div style={{ fontSize: 12, color: T.t2, lineHeight: 1.65 }}>{d.bulls.thesis}</div>
                   </div>
-                  <div style={{ background: "#fef5f5", borderRadius: 6, padding: "12px" }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: "#c62828", marginBottom: 6 }}>Bear Case</div>
-                    <div style={{ fontSize: 11, color: "#555", marginBottom: 8, lineHeight: 1.4 }}>
-                      {d.bears.filers.map((f, j) => <div key={j} style={{ fontWeight: 600, color: "#c62828" }}>· {f}</div>)}
+                  <div style={{ background: T.sellBg, borderRadius: 8, padding: "12px", border: `1px solid ${T.sell}20`, marginTop: 10 }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.sell, marginBottom: 6 }}>Bear Case</div>
+                    <div style={{ marginBottom: 8, lineHeight: 1.4 }}>
+                      {d.bears.filers.map((f, j) => <div key={j} style={{ fontSize: 11, fontWeight: 600, color: T.sell }}>· {f}</div>)}
                     </div>
-                    <div style={{ fontSize: 12, color: "#333", lineHeight: 1.6 }}>{d.bears.thesis}</div>
+                    <div style={{ fontSize: 12, color: T.t2, lineHeight: 1.65 }}>{d.bears.thesis}</div>
                   </div>
-                  <div style={{ gridColumn: "1 / -1", background: "#fffde7", borderRadius: 6, padding: "10px 12px", fontSize: 12, color: "#555", lineHeight: 1.6 }}>
-                    <span style={{ fontWeight: 700, color: "#333" }}>Verdict: </span>{d.verdict}
+                  <div style={{ gridColumn: "1 / -1", background: `${T.gold}12`, borderRadius: 8, padding: "10px 12px", fontSize: 12, color: T.t2, lineHeight: 1.65, border: `1px solid ${T.gold}25`, marginTop: 0 }}>
+                    <span style={{ fontWeight: 700, color: T.gold }}>Verdict: </span>{d.verdict}
                   </div>
                 </div>
               )}
@@ -1380,7 +1412,7 @@ function AnalysisTab({ filers, onTickerClick }) {
         })}
       </div>
 
-      <div style={{ fontSize: 11, color: "#aaa", lineHeight: 1.6, padding: "0 4px" }}>
+      <div style={{ fontSize: 11, color: T.t3, lineHeight: 1.6, padding: "0 4px" }}>
         Analysis reflects Q1 2026 13F filings only. Conviction scores are mechanical — they do not account for position sizing, fund strategy, or non-disclosed short positions. This is not investment advice.
       </div>
     </div>
@@ -1391,19 +1423,18 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
   const q4 = q4Data[fund.name] || null;
   const holdingsDelta = q4 ? parseHoldings(fund.holdings) - q4.holdings : null;
   const aumDelta = q4 ? formatAumDelta(fund.aum, q4.aum) : null;
-  // if the query hit the filer's name/manager, don't filter the position lists
   const nameMatch = query && (matches(fund.name, query) || matches(fund.manager, query));
   const sectionQuery = nameMatch ? "" : query;
 
   return (
     <div style={{
-      background: "#fff",
-      borderRadius: 10,
+      background: T.card,
+      borderRadius: 12,
       marginBottom: 10,
-      border: query ? `1px solid ${fund.color}55` : "1px solid #e0e0e0",
+      border: `1px solid ${query ? `${fund.color}40` : T.border}`,
       overflow: "hidden",
-      boxShadow: isOpen ? "0 4px 20px rgba(0,0,0,0.08)" : "0 1px 3px rgba(0,0,0,0.04)",
-      transition: "box-shadow 0.2s",
+      boxShadow: isOpen ? `0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px ${fund.color}20` : "0 2px 8px rgba(0,0,0,0.2)",
+      transition: "box-shadow 0.2s, border-color 0.2s",
     }}>
       <div
         onClick={onToggle}
@@ -1414,49 +1445,54 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
           alignItems: "center",
           gap: 12,
           userSelect: "none",
+          background: isOpen ? `linear-gradient(135deg, ${fund.color}10, transparent)` : "transparent",
+          transition: "background 0.2s",
         }}
       >
         <div style={{
-          width: 6,
+          width: 4,
           height: 40,
-          borderRadius: 3,
+          borderRadius: 2,
           background: fund.color,
           flexShrink: 0,
+          boxShadow: isOpen ? `0 0 12px ${fund.color}80` : "none",
+          transition: "box-shadow 0.2s",
         }} />
         <div style={{ flex: 1 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap" }}>
-            <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: "#1a1a1a" }}>{fund.name}</span>
+            <span style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 16, color: T.t1 }}>{fund.name}</span>
             <span style={{
-              fontSize: 10,
+              fontSize: 9,
               fontWeight: 700,
               textTransform: "uppercase",
               letterSpacing: 0.8,
               padding: "1px 6px",
               borderRadius: 4,
-              background: fund.type === "individual" ? "#fff3e0" : "#e8f5e9",
-              color: fund.type === "individual" ? "#e65100" : "#2e7d32",
+              background: fund.type === "individual" ? T.trimBg : T.buyBg,
+              color: fund.type === "individual" ? T.trim : T.buy,
+              border: `1px solid ${fund.type === "individual" ? T.trim : T.buy}30`,
             }}>{fund.type === "individual" ? "Individual" : "Fund"}</span>
           </div>
-          <div style={{ fontSize: 12, color: "#777", marginTop: 2 }}>{fund.manager} · {fund.aum} · {fund.holdings} holdings</div>
+          <div style={{ fontSize: 12, color: T.t3, marginTop: 2 }}>{fund.manager} · {fund.aum} · {fund.holdings} holdings</div>
           {!isOpen && (
             <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 5 }}>
               {fund.newBuys.length > 0 && (
-                <span style={{ fontSize: 10, fontWeight: 700, background: "#e8f5e9", color: "#2e7d32", borderRadius: 3, padding: "1px 5px" }}>
+                <span style={{ fontSize: 10, fontWeight: 700, background: T.buyBg, color: T.buy, border: `1px solid ${T.buy}30`, borderRadius: 3, padding: "1px 5px" }}>
                   +{fund.newBuys.length} new
                 </span>
               )}
               {fund.increased.length > 0 && (
-                <span style={{ fontSize: 10, fontWeight: 700, background: "#e3f2fd", color: "#1565c0", borderRadius: 3, padding: "1px 5px" }}>
+                <span style={{ fontSize: 10, fontWeight: 700, background: T.accentBg, color: T.accent, border: `1px solid ${T.accent}30`, borderRadius: 3, padding: "1px 5px" }}>
                   ↑{fund.increased.length} added
                 </span>
               )}
               {fund.reduced.length > 0 && (
-                <span style={{ fontSize: 10, fontWeight: 700, background: "#fff3e0", color: "#e65100", borderRadius: 3, padding: "1px 5px" }}>
+                <span style={{ fontSize: 10, fontWeight: 700, background: T.trimBg, color: T.trim, border: `1px solid ${T.trim}30`, borderRadius: 3, padding: "1px 5px" }}>
                   ↓{fund.reduced.length} trimmed
                 </span>
               )}
               {fund.exits.length > 0 && (
-                <span style={{ fontSize: 10, fontWeight: 700, background: "#fce4ec", color: "#c62828", borderRadius: 3, padding: "1px 5px" }}>
+                <span style={{ fontSize: 10, fontWeight: 700, background: T.sellBg, color: T.sell, border: `1px solid ${T.sell}30`, borderRadius: 3, padding: "1px 5px" }}>
                   ✕{fund.exits.length} exited
                 </span>
               )}
@@ -1464,8 +1500,8 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
           )}
         </div>
         <div style={{
-          fontSize: 18,
-          color: "#999",
+          fontSize: 16,
+          color: T.t3,
           transform: isOpen ? "rotate(180deg)" : "rotate(0)",
           transition: "transform 0.2s",
         }}>▾</div>
@@ -1473,52 +1509,54 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
 
       {showQ4 && (
         <div style={{
-          padding: "9px 16px 9px 28px",
-          background: "#f8f7f3",
-          borderTop: "1px solid #eae8e3",
+          padding: "9px 16px 9px 26px",
+          background: T.cardAlt,
+          borderTop: `1px solid ${T.border}`,
           fontSize: 11,
         }}>
-          <div style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: "#bbb", marginBottom: 5 }}>
+          <div style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: T.t3, marginBottom: 5 }}>
             Q4 2025 → Q1 2026
           </div>
           {!q4 ? (
-            <span style={{ color: "#aaa", fontStyle: "italic" }}>First 13F filing — no prior quarter data</span>
+            <span style={{ color: T.t3, fontStyle: "italic" }}>First 13F filing — no prior quarter data</span>
           ) : (
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
               <div>
-                <span style={{ color: "#aaa" }}>AUM </span>
-                <span style={{ fontWeight: 700, color: "#777" }}>{q4.aum}</span>
-                <span style={{ color: "#ccc" }}> → </span>
-                <span style={{ fontWeight: 700, color: "#333" }}>{fund.aum}</span>
+                <span style={{ color: T.t3 }}>AUM </span>
+                <span style={{ fontWeight: 700, color: T.t2 }}>{q4.aum}</span>
+                <span style={{ color: T.border2 }}> → </span>
+                <span style={{ fontWeight: 700, color: T.t1 }}>{fund.aum}</span>
                 {aumDelta && (
                   <span style={{
                     marginLeft: 5, fontWeight: 700, fontSize: 10,
-                    color: aumDelta.positive ? "#2e7d32" : "#c62828",
-                    background: aumDelta.positive ? "#e8f5e9" : "#fce4ec",
+                    color: aumDelta.positive ? T.buy : T.sell,
+                    background: aumDelta.positive ? T.buyBg : T.sellBg,
+                    border: `1px solid ${aumDelta.positive ? T.buy : T.sell}30`,
                     padding: "1px 5px", borderRadius: 3,
                   }}>{aumDelta.label}</span>
                 )}
               </div>
               <div>
-                <span style={{ color: "#aaa" }}>Holdings </span>
-                <span style={{ fontWeight: 700, color: "#777" }}>{q4.holdings.toLocaleString()}</span>
-                <span style={{ color: "#ccc" }}> → </span>
-                <span style={{ fontWeight: 700, color: "#333" }}>{typeof fund.holdings === "number" ? fund.holdings.toLocaleString() : fund.holdings}</span>
+                <span style={{ color: T.t3 }}>Holdings </span>
+                <span style={{ fontWeight: 700, color: T.t2 }}>{q4.holdings.toLocaleString()}</span>
+                <span style={{ color: T.border2 }}> → </span>
+                <span style={{ fontWeight: 700, color: T.t1 }}>{typeof fund.holdings === "number" ? fund.holdings.toLocaleString() : fund.holdings}</span>
                 {holdingsDelta !== 0 && (
                   <span style={{
                     marginLeft: 5, fontWeight: 700, fontSize: 10,
-                    color: holdingsDelta > 0 ? "#1565c0" : "#c62828",
-                    background: holdingsDelta > 0 ? "#e3f2fd" : "#fce4ec",
+                    color: holdingsDelta > 0 ? T.accent : T.sell,
+                    background: holdingsDelta > 0 ? T.accentBg : T.sellBg,
+                    border: `1px solid ${holdingsDelta > 0 ? T.accent : T.sell}30`,
                     padding: "1px 5px", borderRadius: 3,
                   }}>{holdingsDelta > 0 ? `+${holdingsDelta.toLocaleString()}` : holdingsDelta.toLocaleString()}</span>
                 )}
               </div>
               <div>
-                <span style={{ color: "#aaa" }}>Q1 activity </span>
-                {fund.newBuys.length > 0 && <span style={{ color: "#2e7d32", fontWeight: 700 }}>+{fund.newBuys.length} new</span>}
-                {fund.exits.length > 0  && <span style={{ color: "#c62828", fontWeight: 700 }}>{fund.newBuys.length ? " · " : ""}✕{fund.exits.length} exit{fund.exits.length > 1 ? "s" : ""}</span>}
-                {fund.increased.length > 0 && <span style={{ color: "#1565c0", fontWeight: 700 }}>{(fund.newBuys.length || fund.exits.length) ? " · " : ""}↑{fund.increased.length}</span>}
-                {fund.reduced.length > 0   && <span style={{ color: "#e65100", fontWeight: 700 }}>{(fund.newBuys.length || fund.exits.length || fund.increased.length) ? " · " : ""}↓{fund.reduced.length}</span>}
+                <span style={{ color: T.t3 }}>Q1 activity </span>
+                {fund.newBuys.length > 0 && <span style={{ color: T.buy, fontWeight: 700 }}>+{fund.newBuys.length} new</span>}
+                {fund.exits.length > 0  && <span style={{ color: T.sell, fontWeight: 700 }}>{fund.newBuys.length ? " · " : ""}✕{fund.exits.length} exit{fund.exits.length > 1 ? "s" : ""}</span>}
+                {fund.increased.length > 0 && <span style={{ color: T.accent, fontWeight: 700 }}>{(fund.newBuys.length || fund.exits.length) ? " · " : ""}↑{fund.increased.length}</span>}
+                {fund.reduced.length > 0   && <span style={{ color: T.trim, fontWeight: 700 }}>{(fund.newBuys.length || fund.exits.length || fund.increased.length) ? " · " : ""}↓{fund.reduced.length}</span>}
               </div>
             </div>
           )}
@@ -1526,28 +1564,28 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
       )}
 
       {isOpen && (
-        <div style={{ padding: "0 16px 16px 34px" }}>
+        <div style={{ padding: "0 16px 16px 28px", borderTop: `1px solid ${fund.color}25` }}>
           <div style={{
-            background: `linear-gradient(135deg, ${fund.color}11, ${fund.color}05)`,
+            background: `${fund.color}0d`,
             borderLeft: `3px solid ${fund.color}`,
             padding: "10px 14px",
-            borderRadius: "0 6px 6px 0",
-            marginBottom: 14,
+            borderRadius: "0 8px 8px 0",
+            margin: "12px 0 14px",
             fontSize: 13,
-            color: "#333",
-            lineHeight: 1.5,
+            color: T.t2,
+            lineHeight: 1.6,
             fontStyle: "italic",
           }}>
             {fund.theme}
           </div>
 
           <TopHoldings holdings={fund.topHoldings} color={fund.color} onTickerClick={onTickerClick} />
-          <Section label="New Buys" color="#2ecc71" prefix="+" items={fund.newBuys} query={sectionQuery} onTickerClick={onTickerClick} />
-          <Section label="Increased Positions" color="#3498db" prefix="↑" items={fund.increased} query={sectionQuery} onTickerClick={onTickerClick} />
-          <Section label="Reduced / Trimmed" color="#e67e22" prefix="↓" items={fund.reduced} query={sectionQuery} onTickerClick={onTickerClick} />
-          <Section label="Full Exits" color="#e74c3c" prefix="✕" items={fund.exits} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="New Buys" color={T.buy} prefix="+" items={fund.newBuys} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="Increased Positions" color={T.accent} prefix="↑" items={fund.increased} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="Reduced / Trimmed" color={T.trim} prefix="↓" items={fund.reduced} query={sectionQuery} onTickerClick={onTickerClick} />
+          <Section label="Full Exits" color={T.sell} prefix="✕" items={fund.exits} query={sectionQuery} onTickerClick={onTickerClick} />
 
-          <div style={{ fontSize: 11, color: "#aaa", borderTop: "1px solid #eee", paddingTop: 8, marginTop: 4 }}>
+          <div style={{ fontSize: 11, color: T.t3, borderTop: `1px solid ${T.border}`, paddingTop: 8, marginTop: 4 }}>
             Sources: {fund.sources}
           </div>
         </div>
@@ -1631,91 +1669,162 @@ export default function HedgeFundTracker() {
   return (
     <div style={{
       fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif",
-      background: "#f5f4f0",
+      background: T.bg,
       minHeight: "100vh",
-      padding: "20px 16px",
-      maxWidth: 720,
+      padding: "0 0 40px",
+      maxWidth: 760,
       margin: "0 auto",
     }}>
+      <style>{`
+        body { background: ${T.bg}; margin: 0; }
+        * { box-sizing: border-box; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: ${T.card}; }
+        ::-webkit-scrollbar-thumb { background: ${T.border2}; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: ${T.t3}; }
+        mark { background: ${T.accent}28; color: ${T.accent}; border-radius: 2px; padding: 0 1px; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { animation: fadeUp 0.35s ease both; }
+      `}</style>
       <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
-      <div style={{ textAlign: "center", marginBottom: 24 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: "#999", marginBottom: 4 }}>Q1 2026 · 13F Filings</div>
-        <h1 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 28, fontWeight: 900, color: "#1a1a1a", margin: 0, lineHeight: 1.15 }}>
-          13F Position Tracker
-        </h1>
-        <div style={{ fontSize: 12, color: "#888", marginTop: 6 }}>
-          10 funds · 10 individuals · Filed May 2026 · Data as of Mar 31, 2026
+      {/* ── HERO ──────────────────────────────────────────────── */}
+      <div style={{
+        background: "linear-gradient(160deg, #0c1628 0%, #0d1117 55%, #07090f 100%)",
+        padding: "36px 20px 28px",
+        position: "relative",
+        overflow: "hidden",
+        borderBottom: `1px solid ${T.border}`,
+      }}>
+        {/* Grid overlay */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          backgroundImage: `linear-gradient(${T.border} 1px, transparent 1px), linear-gradient(90deg, ${T.border} 1px, transparent 1px)`,
+          backgroundSize: "48px 48px",
+          opacity: 0.4,
+        }} />
+        {/* Radial glow */}
+        <div style={{
+          position: "absolute", top: "-40%", left: "50%", transform: "translateX(-50%)",
+          width: 600, height: 300,
+          background: "radial-gradient(ellipse, #58a6ff12, transparent 70%)",
+          pointerEvents: "none",
+        }} />
+
+        <div style={{ position: "relative", textAlign: "center" }}>
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 6,
+            background: T.accentBg, border: `1px solid ${T.accent}35`,
+            borderRadius: 20, padding: "4px 14px", marginBottom: 14,
+            fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: T.accent,
+          }}>
+            Q1 2026 · 13F Filings
+          </div>
+          <h1 style={{
+            fontFamily: "'Fraunces', Georgia, serif",
+            fontSize: 32, fontWeight: 900, color: T.t1, margin: "0 0 8px",
+            lineHeight: 1.1, letterSpacing: -0.5,
+          }}>
+            13F Institutional Tracker
+          </h1>
+          <p style={{ fontSize: 13, color: T.t2, margin: "0 0 20px", lineHeight: 1.5 }}>
+            SEC 13F filings from 20 elite hedge funds &amp; investors · Data as of Mar 31, 2026
+          </p>
+
+          {/* Stat pills */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap" }}>
+            {[
+              { label: "20 Filers",          icon: "◈" },
+              { label: "~$1.4T AUM tracked", icon: "◎" },
+              { label: "Filed May 2026",      icon: "◷" },
+              { label: "Long equity only",    icon: "⚑" },
+            ].map((s, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "center", gap: 5,
+                background: T.card, border: `1px solid ${T.border}`,
+                borderRadius: 8, padding: "5px 11px",
+                fontSize: 11, fontWeight: 600, color: T.t2,
+              }}>
+                <span style={{ color: T.accent, fontSize: 10 }}>{s.icon}</span>
+                {s.label}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
+      <div style={{ padding: "16px 16px 0" }}>
+
+      {/* ── SEARCH ────────────────────────────────────────────── */}
       <div style={{ position: "relative", marginBottom: 10 }}>
-        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 14, color: "#aaa", pointerEvents: "none" }}>🔍</span>
+        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", fontSize: 13, color: T.t3, pointerEvents: "none" }}>⌕</span>
         <input
           type="text"
-          placeholder="Search ticker or name… e.g. MSFT, GOOGL, Druckenmiller"
+          placeholder="Search ticker or fund… e.g. NVDA, GOOGL, Druckenmiller"
           value={search}
           onChange={e => setSearch(e.target.value)}
           style={{
             width: "100%",
-            boxSizing: "border-box",
-            padding: "10px 36px 10px 34px",
-            borderRadius: 8,
-            border: "1px solid #ddd",
+            padding: "11px 36px 11px 34px",
+            borderRadius: 10,
+            border: `1px solid ${search ? T.accent : T.border}`,
             fontSize: 13,
-            background: "#fff",
+            background: T.card,
             outline: "none",
-            color: "#1a1a1a",
+            color: T.t1,
+            transition: "border-color 0.2s",
           }}
         />
         {search && (
           <button
             onClick={() => setSearch("")}
-            style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", fontSize: 16, color: "#aaa", lineHeight: 1 }}
+            style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", fontSize: 16, color: T.t3, lineHeight: 1 }}
           >×</button>
         )}
       </div>
 
       {query && (
-        <div style={{ fontSize: 12, color: "#888", marginBottom: 8 }}>
+        <div style={{ fontSize: 12, color: T.t3, marginBottom: 8 }}>
           {visibleFilers.length === 0
-            ? `No filers mention "${query}"`
-            : `${visibleFilers.length} filer${visibleFilers.length > 1 ? "s" : ""} mention "${query}"`}
+            ? <span style={{ color: T.sell }}>No filers mention "{query}"</span>
+            : <span><span style={{ color: T.accent, fontWeight: 700 }}>{visibleFilers.length}</span> filer{visibleFilers.length > 1 ? "s" : ""} mention "{query}"</span>}
         </div>
       )}
 
-      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "#f5f4f0", padding: "8px 0 10px", marginBottom: 8 }}>
-      <div style={{ display: "flex", gap: 6, background: "#e8e6e1", borderRadius: 8, padding: 3, boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
-        {[
-          { key: "funds",    label: "By Filer"         },
-          { key: "sectors",  label: "Sector Consensus" },
-          { key: "exits",    label: "Notable Exits"    },
-          { key: "analysis", label: "Analysis"         },
-        ].map(t => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            style={{
-              flex: 1,
-              padding: "9px 0",
-              border: "none",
-              borderRadius: 6,
-              fontSize: 12,
-              fontWeight: 700,
-              cursor: "pointer",
-              background: tab === t.key ? "#fff" : "transparent",
-              color: tab === t.key ? "#1a1a1a" : "#888",
-              boxShadow: tab === t.key ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
-              transition: "all 0.15s",
-            }}
-          >{t.label}</button>
-        ))}
-      </div>
+      {/* ── STICKY TAB BAR ────────────────────────────────────── */}
+      <div style={{ position: "sticky", top: 0, zIndex: 100, background: T.bg, padding: "8px 0 10px", marginBottom: 8 }}>
+        <div style={{ display: "flex", gap: 3, background: T.card, borderRadius: 10, padding: 3, border: `1px solid ${T.border}` }}>
+          {[
+            { key: "funds",    label: "By Filer"         },
+            { key: "sectors",  label: "Sector Consensus" },
+            { key: "exits",    label: "Notable Exits"    },
+            { key: "analysis", label: "Analysis"         },
+          ].map(t => (
+            <button
+              key={t.key}
+              onClick={() => setTab(t.key)}
+              style={{
+                flex: 1,
+                padding: "9px 0",
+                border: "none",
+                borderRadius: 7,
+                fontSize: 12,
+                fontWeight: 700,
+                cursor: "pointer",
+                background: tab === t.key ? T.accent : "transparent",
+                color: tab === t.key ? "#fff" : T.t3,
+                transition: "all 0.15s",
+                letterSpacing: 0.2,
+              }}
+            >{t.label}</button>
+          ))}
+        </div>
       </div>
 
       {tab === "funds" && (
-        <div>
-          <div style={{ display: "flex", gap: 6, marginBottom: 14, alignItems: "center", flexWrap: "wrap" }}>
+        <div className="fade-up">
+          {/* Type filter + expand/collapse */}
+          <div style={{ display: "flex", gap: 6, marginBottom: 12, alignItems: "center", flexWrap: "wrap" }}>
             {[
               { key: "all",        label: "All",         count: filterCounts.all        },
               { key: "fund",       label: "Funds",       count: filterCounts.fund       },
@@ -1726,46 +1835,47 @@ export default function HedgeFundTracker() {
                 onClick={() => setTypeFilter(f.key)}
                 style={{
                   padding: "5px 12px",
-                  border: typeFilter === f.key ? "1.5px solid #1a1a1a" : "1.5px solid #ddd",
+                  border: `1px solid ${typeFilter === f.key ? T.accent : T.border}`,
                   borderRadius: 20,
                   fontSize: 12,
                   fontWeight: 600,
                   cursor: "pointer",
-                  background: typeFilter === f.key ? "#1a1a1a" : "#fff",
-                  color: typeFilter === f.key ? "#fff" : "#666",
+                  background: typeFilter === f.key ? T.accent : "transparent",
+                  color: typeFilter === f.key ? "#fff" : T.t2,
                   transition: "all 0.15s",
                 }}
               >
-                {f.label} <span style={{ opacity: 0.65, fontWeight: 400 }}>{f.count}</span>
+                {f.label} <span style={{ opacity: 0.7, fontWeight: 400 }}>{f.count}</span>
               </button>
             ))}
             <div style={{ marginLeft: "auto", display: "flex", gap: 4 }}>
               <button
                 onClick={() => setOpenFunds(Object.fromEntries(allFilers.map(f => [f.name, true])))}
-                style={{ padding: "4px 9px", border: "1px solid #ddd", borderRadius: 14, fontSize: 11, fontWeight: 600, cursor: "pointer", background: "#fff", color: "#888" }}
+                style={{ padding: "4px 9px", border: `1px solid ${T.border}`, borderRadius: 14, fontSize: 11, fontWeight: 600, cursor: "pointer", background: "transparent", color: T.t3, transition: "color 0.15s" }}
               >Expand all</button>
               <button
                 onClick={() => setOpenFunds({})}
-                style={{ padding: "4px 9px", border: "1px solid #ddd", borderRadius: 14, fontSize: 11, fontWeight: 600, cursor: "pointer", background: "#fff", color: "#888" }}
+                style={{ padding: "4px 9px", border: `1px solid ${T.border}`, borderRadius: 14, fontSize: 11, fontWeight: 600, cursor: "pointer", background: "transparent", color: T.t3, transition: "color 0.15s" }}
               >Collapse all</button>
             </div>
           </div>
 
+          {/* Sort + Q4 toggle */}
           <div style={{ display: "flex", gap: 6, marginBottom: 14, alignItems: "center", flexWrap: "wrap" }}>
-            <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: "#999", marginRight: 2 }}>Sort</span>
+            <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.t3, marginRight: 2 }}>Sort</span>
             {SORT_OPTIONS.map(opt => (
               <button
                 key={opt.key}
                 onClick={() => setSortBy(opt.key)}
                 style={{
                   padding: "4px 10px",
-                  border: sortBy === opt.key ? "1.5px solid #1a1a1a" : "1.5px solid #ddd",
+                  border: `1px solid ${sortBy === opt.key ? T.accent : T.border}`,
                   borderRadius: 16,
                   fontSize: 11,
                   fontWeight: 600,
                   cursor: "pointer",
-                  background: sortBy === opt.key ? "#1a1a1a" : "#fff",
-                  color: sortBy === opt.key ? "#fff" : "#666",
+                  background: sortBy === opt.key ? `${T.accent}20` : "transparent",
+                  color: sortBy === opt.key ? T.accent : T.t2,
                   transition: "all 0.15s",
                 }}
               >{opt.label}</button>
@@ -1775,16 +1885,16 @@ export default function HedgeFundTracker() {
               style={{
                 marginLeft: "auto",
                 padding: "4px 11px",
-                border: showQ4 ? "1.5px solid #6c3483" : "1.5px solid #ddd",
+                border: `1px solid ${showQ4 ? T.purple : T.border}`,
                 borderRadius: 16,
                 fontSize: 11,
                 fontWeight: 700,
                 cursor: "pointer",
-                background: showQ4 ? "#6c3483" : "#fff",
-                color: showQ4 ? "#fff" : "#888",
+                background: showQ4 ? T.purpleBg : "transparent",
+                color: showQ4 ? T.purple : T.t3,
                 transition: "all 0.15s",
               }}
-            >{showQ4 ? "▶ Q4 Compare ON" : "▶ Q4 Compare"}</button>
+            >{showQ4 ? "◈ Q4 ON" : "◈ Q4 Compare"}</button>
           </div>
 
           {visibleFilers.map((fund) => (
@@ -1794,32 +1904,30 @@ export default function HedgeFundTracker() {
       )}
 
       {tab === "sectors" && (
-        <div>
-          <div style={{ fontSize: 13, color: "#666", marginBottom: 14, lineHeight: 1.6 }}>
+        <div className="fade-up">
+          <div style={{ fontSize: 13, color: T.t3, marginBottom: 14, lineHeight: 1.6 }}>
             Where multiple top filers are converging in Q1 2026:
           </div>
           {sectorThemes.map((s, i) => (
             <div key={i} style={{
-              background: "#fff",
-              borderRadius: 10,
+              background: T.card,
+              borderRadius: 12,
               padding: "14px 16px",
               marginBottom: 10,
-              border: "1px solid #e0e0e0",
-            }}>
-              <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 15, color: "#1a1a1a" }}>{s.sector}</div>
-              <div style={{ fontSize: 12, color: "#555", marginTop: 6 }}>
-                <span style={{ fontWeight: 700, color: "#333" }}>Tickers:</span> {s.tickers}
+              border: `1px solid ${T.border}`,
+              transition: "border-color 0.2s",
+            }}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = T.border2}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = T.border}
+            >
+              <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 15, color: T.t1 }}>{s.sector}</div>
+              <div style={{ fontSize: 12, color: T.t2, marginTop: 6 }}>
+                <span style={{ fontWeight: 700, color: T.t1 }}>Tickers:</span> {s.tickers}
               </div>
-              <div style={{ fontSize: 12, color: "#555", marginTop: 4 }}>
-                <span style={{ fontWeight: 700, color: "#333" }}>Buyers:</span> {s.buyers}
+              <div style={{ fontSize: 12, color: T.t2, marginTop: 4 }}>
+                <span style={{ fontWeight: 700, color: T.t1 }}>Buyers:</span> {s.buyers}
               </div>
-              <div style={{
-                fontSize: 12,
-                color: "#2ecc71",
-                marginTop: 8,
-                fontWeight: 600,
-                fontStyle: "italic",
-              }}>
+              <div style={{ fontSize: 12, color: T.buy, marginTop: 8, fontWeight: 600, fontStyle: "italic" }}>
                 {s.signal}
               </div>
             </div>
@@ -1828,47 +1936,57 @@ export default function HedgeFundTracker() {
       )}
 
       {tab === "exits" && (
-        <div>
-          <div style={{ fontSize: 13, color: "#666", marginBottom: 14, lineHeight: 1.6 }}>
+        <div className="fade-up">
+          <div style={{ fontSize: 13, color: T.t3, marginBottom: 14, lineHeight: 1.6 }}>
             Notable full exits and large reductions by major filers in Q1 2026:
           </div>
           {exits.map((e, i) => (
             <div key={i} style={{
-              background: "#fff",
-              borderRadius: 10,
+              background: T.card,
+              borderRadius: 12,
               padding: "12px 16px",
               marginBottom: 8,
-              border: "1px solid #e0e0e0",
+              border: `1px solid ${T.border}`,
               display: "flex",
               gap: 12,
               alignItems: "flex-start",
-            }}>
-              <div style={{ color: "#e74c3c", fontWeight: 800, fontSize: 16, flexShrink: 0, marginTop: 1 }}>✕</div>
+              transition: "border-color 0.2s",
+            }}
+              onMouseEnter={(el) => el.currentTarget.style.borderColor = `${T.sell}40`}
+              onMouseLeave={(el) => el.currentTarget.style.borderColor = T.border}
+            >
+              <div style={{ color: T.sell, fontWeight: 800, fontSize: 14, flexShrink: 0, marginTop: 2, background: T.sellBg, borderRadius: 4, width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center" }}>✕</div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 14, color: "#1a1a1a" }}>{e.stock}</div>
-                <div style={{ fontSize: 12, color: "#777", marginTop: 2 }}>{e.funds}</div>
+                <div style={{ fontWeight: 700, fontSize: 14, color: T.t1 }}>{e.stock}</div>
+                <div style={{ fontSize: 12, color: T.t3, marginTop: 2 }}>{e.funds}</div>
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {tab === "analysis" && <AnalysisTab filers={allFilers} onTickerClick={openTicker} />}
+      {tab === "analysis" && (
+        <div className="fade-up">
+          <AnalysisTab filers={allFilers} onTickerClick={openTicker} />
+        </div>
+      )}
 
       {selectedTicker && (
         <TickerModal ticker={selectedTicker} filers={allFilers} onClose={closeTicker} />
       )}
 
       <div style={{
-        marginTop: 24,
+        marginTop: 28,
         padding: "14px 16px",
-        background: "#e8e6e1",
-        borderRadius: 10,
+        background: T.card,
+        borderRadius: 12,
+        border: `1px solid ${T.border}`,
         fontSize: 11,
-        color: "#888",
-        lineHeight: 1.6,
+        color: T.t3,
+        lineHeight: 1.7,
       }}>
-        <strong style={{ color: "#666" }}>Data sources:</strong> SEC EDGAR 13F-HR filings, Fortune, CNBC, Benzinga, Kiplinger, WhaleWisdom, Seeking Alpha, HedgeFollow, ValuSider, Insider Monkey, Fintel, TheStreet, Yahoo Finance, Quiver Quant, TipRanks, GuruFocus, HedgeFundAlpha, Institutional Investor, BusinessWire, Bloomberg. All data reflects positions as of Mar 31, 2026 with a 45-day disclosure lag. 13F filings only show long US equity positions — shorts, derivatives, and non-US holdings are excluded. This is not investment advice.
+        <strong style={{ color: T.t2 }}>Data sources:</strong> SEC EDGAR 13F-HR filings, Fortune, CNBC, Benzinga, Kiplinger, WhaleWisdom, Seeking Alpha, HedgeFollow, ValuSider, Insider Monkey, Fintel, TheStreet, Yahoo Finance, Quiver Quant, TipRanks, GuruFocus, HedgeFundAlpha, Institutional Investor, BusinessWire, Bloomberg. All data reflects positions as of Mar 31, 2026 with a 45-day disclosure lag. 13F filings only show long US equity positions — shorts, derivatives, and non-US holdings are excluded. This is not investment advice.
+      </div>
       </div>
     </div>
   );
