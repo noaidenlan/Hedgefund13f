@@ -817,74 +817,116 @@ const exits = [
 
 const macroNarrative = {
   quarter: "Q1 2026",
-  headline: "The Alphabet Convergence, Value's Vindication, and the First AI Chip Defectors",
+  edition: "Revised Edition · June 2026",
+  headline: "The Great De-Grossing: Conviction Fractures Across Every Layer of the AI Trade",
   paragraphs: [
     {
-      title: "The Platform Reshuffling",
-      body: "Q1 2026 marks the first major reshuffling of the AI consensus that dominated Q3–Q4 2025. The story is no longer simply 'buy AI infrastructure' — it is 'buy the right layer of AI at the right price.' Microsoft and Alphabet have emerged as the cross-filer 'safe harbor' AI plays: Pershing Square deployed $2.09B into MSFT at 21x forward earnings; Viking initiated GOOGL and added MSFT +32%; Berkshire tripled its Alphabet stake; Himalaya holds 44% in Alphabet combined; D.E. Shaw added MSFT +$1.9B. The common thread: these platforms generate AI revenue today, have durable competitive moats, and trade at discounts to their historical multiples. Meanwhile, pure-play AI chip bets are fracturing — Third Point cut Nvidia -94%, Druckenmiller fully exited GOOGL/AMZN, Burry bought Nvidia puts, and Gotham's quantitative screens began trimming on ROIC deterioration.",
+      title: "The De-Grossing Quarter",
+      body: "The defining feature of Q1 2026 — visible only after primary-source verification of the filings — is how aggressively the most storied stock-pickers shrank their books. Third Point executed the most dramatic reset in Dan Loeb's recent history, cutting 13F exposure from ~$7.26B to ~$2.08B and fully exiting both Microsoft and PG&E, its two former flagship positions. Druckenmiller's Duquesne shrank from $4.22B to $3.39B while fully exiting Alphabet and liquidating 99% of Amazon. Citadel reduced both Nvidia and Amazon. This was not a rotation between sectors — it was a withdrawal of gross exposure by the cohort's most experienced macro-aware managers, executed during a quarter when the S&P 500 fell -4.4%. The smartest money got smaller, not just different.",
+    },
+    {
+      title: "The Microsoft Schism",
+      body: "The 'MSFT as AI safe harbor' narrative did not survive verification — what the filings actually show is the widest single-stock disagreement in the cohort. On the buy side: Pershing Square deployed $2.09B into Microsoft at ~21x forward earnings, D.E. Shaw added $1.9B, and Viking increased +32.5%. On the sell side: Third Point fully exited, Appaloosa cut -82%, and Citadel trimmed $909M. Alphabet shows the same schism — Berkshire tripled its stake (+204%), Viking initiated, and Himalaya holds 44% combined, while Druckenmiller fully exited and Pershing sold ~95%. There is no platform consensus in Q1 2026. There are two camps with irreconcilable views on whether mega-cap AI platforms are the safest asset in the market or the most crowded.",
     },
     {
       title: "Value's Vindication",
-      body: "The S&P 500 returned -4.4% in Q1 2026. Greenlight Capital returned +6.5% net. Miller Deep Value returned +8.39%. Baupost's concentrated 22-position portfolio held and added at better prices. This is not coincidence — it reflects a structural dynamic: when macro uncertainty (tariff announcements, AI disruption fears, sovereign debt concerns) compresses valuation multiples, concentrated value investors with pre-identified catalysts dramatically outperform momentum/growth strategies. The Lebanese sovereign debt 66% IRR (Greenlight), Nabors Industries +58% (Miller), and Molina Healthcare re-rating (Burry) are all classic value-investing outcomes that required patience, asymmetry identification, and the willingness to be early. Q1 2026 may be the inflection point where value leadership persists beyond a single quarter.",
+      body: "The S&P 500 returned -4.4% in Q1 2026. Greenlight Capital returned +6.5% net. Miller Deep Value returned +8.39% — and grew to 55 holdings on ~$383M as inflows followed performance. Baupost quietly executed its most active quarter in years: AON ($248.2M) as the largest new buy, Amazon increased +47% to ~$649M, and four full exits (CRH, Dollar General, FIS, Fiserv). This is the structural dynamic at work: when macro uncertainty compresses multiples, concentrated value investors with pre-identified catalysts dramatically outperform momentum strategies. The Lebanese sovereign debt 66% IRR (Greenlight) and Molina Healthcare re-rating (Burry) are classic value outcomes that required patience and the willingness to be early.",
     },
     {
-      title: "The Abel Era Begins at Berkshire",
-      body: "Warren Buffett's retirement on January 1, 2026 produced the most significant portfolio overhaul in Berkshire's modern history. Greg Abel's first 13F: 16 full exits (from 42 to 29 positions), a tripling of Alphabet (now 8.5% of the portfolio), and a new Delta Air Lines position as the AI-era travel infrastructure bet. The Todd Combs departure explains the Visa, Mastercard, Domino's, and Aon exits — these were managed independently. Abel's signature moves show his own investment identity forming: quality compounders with durable competitive advantages, AI-aware (GOOGL), and less attached to Buffett's 1980s–2010s era holdings. Berkshire's record cash balance ($350B+) suggests Abel is not done — he is building dry powder for a major deployment at the right price.",
+      title: "The Abel Era and the Delta Divergence",
+      body: "Greg Abel's first 13F as Berkshire CEO produced 16 full exits (42 to 29 positions), a tripled Alphabet stake, and a new $2.6B Delta Air Lines position. The Delta buy contains the quarter's cleanest natural experiment: David Tepper's Appaloosa fully exited Delta in the exact same quarter — alongside full exits of American and United — completing a total withdrawal from the airline sector on tariff and demand-recession risk. Two of the most respected capital allocators alive looked at the same airline in the same ninety days and reached opposite conclusions. Abel is buying the quality carrier at a cyclical discount; Tepper is saying no airline is safe in a tariff war. One of them is wrong, and the resolution will be visible in Delta's 2026 results.",
     },
     {
       title: "The Macro Hedge Expansion",
-      body: "Four of twenty filers now carry explicit macro protection disclosed in 13F: Soros (SPY puts + energy puts), Burry ($85M in NVDA and PLTR puts), Greenlight (gold — drove Q1 outperformance), and Aschenbrenner ($8.46B in chip-sector puts — by far the largest bearish book in the cohort). This is a material expansion from prior quarters. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' for markets crystallizes the concern: the tariff shock (announced early April, post Q1 reporting period), sovereign debt trajectories, and AI capex disappointment risk are all visible to sophisticated managers. The fact that this level of hedging is visible in 13F filings — which only show long equity positions — means the true macro protection is even larger than what is disclosed.",
+      body: "Four of twenty filers carry explicit macro protection in their Q1 filings: Soros (SPY puts + energy puts, while cutting China via FXI −$111M and KWEB −$101M), Burry (~$85M in NVDA and PLTR puts plus $60M+ in cash), Greenlight (gold — which drove its Q1 outperformance), and Aschenbrenner (~$8.46B notional in puts against the entire chip complex, now including ASML). Aschenbrenner's book remains the purest expression of the 'infrastructure over chips' thesis: long Bitcoin-miners-turned-AI-hosts (CLSK +649%, new positions in Bitfarms, Solaris Energy, T1 Energy) against shorts on every chip incumbent. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' is the narrative backdrop — and since 13Fs only disclose long equity positions, the true defensive positioning across the cohort is larger than what is visible.",
     },
   ],
   keySignals: [
-    { label: "Cross-Filer Consensus Stock (Q1 2026)", value: "MSFT and GOOGL — independently added by 6+ filers each, bought as the 'undervalued AI platform' trade" },
-    { label: "Most Surprising Move", value: "Berkshire tripled Alphabet (GOOGL +204%) — Abel's first major independent stamp on the portfolio" },
-    { label: "Biggest Conviction Flip", value: "Druckenmiller: cut NVDA -70% after calling it 'highest-conviction theme ever' in Q4 2025 — DeepSeek changed his view" },
-    { label: "Value Beat in Q1", value: "Greenlight +6.5%, Miller Deep Value +8.39% vs. S&P 500 -4.4% — value managers dominated" },
-    { label: "Emerging AI Power Consensus", value: "Appaloosa +114% Vistra, D.E. Shaw +$687M IREN, +$605M Bloom Energy — AI power demand is Q2-Q3 2026's next crowded trade" },
-    { label: "Key Risk Signal", value: "5 of 20 filers have explicit macro hedges (SPY puts, NVDA puts, chip-sector puts, gold) — highest defensive positioning in the cohort's history" },
+    { label: "Widest Single-Stock Split (Q1 2026)", value: "MSFT — Pershing Square new $2.09B and D.E. Shaw +$1.9B vs. Third Point full exit, Appaloosa −82%, Citadel −$909M" },
+    { label: "Most Surprising Move", value: "Third Point's de-grossing — 13F book cut from ~$7.26B to ~$2.08B with full MSFT and PCG exits, the biggest reset of Loeb's recent career" },
+    { label: "Biggest Conviction Flip", value: "Druckenmiller fully exited Alphabet and cut Amazon −99% — the mega-cap platform trade he championed is gone from the book" },
+    { label: "Value Beat in Q1", value: "Greenlight +6.5%, Miller Deep Value +8.39% vs. S&P 500 −4.4% — value managers dominated the drawdown" },
+    { label: "Emerging AI Power Consensus", value: "Situational Awareness (CLSK +649%, new SEI/TE/BITF), D.E. Shaw (IREN +$687M, Bloom +$605M) — power infrastructure is the least crowded AI layer" },
+    { label: "The Delta Divergence", value: "Berkshire initiated $2.6B in DAL the same quarter Appaloosa fully exited it — the cleanest two-sided bet in the cohort" },
   ],
 };
+
+// Prior editions of the macro synthesis, preserved for the record.
+// Newest first. Each entry mirrors the macroNarrative shape plus an archivedNote.
+const macroArchive = [
+  {
+    quarter: "Q1 2026",
+    edition: "First Edition · May 2026",
+    headline: "The Alphabet Convergence, Value's Vindication, and the First AI Chip Defectors",
+    archivedNote: "Initial synthesis published on filing day from first-pass aggregator data. Superseded in June 2026 after primary-source verification: Third Point had fully exited MSFT and PCG (not added +175%), Druckenmiller had fully exited GOOGL and cut AMZN −99% (not added), and Citadel's reported $8.4B NFLX buy could not be verified. Preserved unedited for the record.",
+    paragraphs: [
+      {
+        title: "The Platform Reshuffling",
+        body: "Q1 2026 marks the first major reshuffling of the AI consensus that dominated Q3–Q4 2025. The story is no longer simply 'buy AI infrastructure' — it is 'buy the right layer of AI at the right price.' Microsoft and Alphabet have emerged as the cross-filer 'safe harbor' AI plays: Pershing Square deployed $2.09B into MSFT at 21x forward earnings; Third Point increased +175%; Viking initiated GOOGL; Berkshire tripled its Alphabet stake; Himalaya holds 44% in Alphabet combined. The common thread: these platforms generate AI revenue today, have durable competitive moats, and trade at discounts to their historical multiples. Meanwhile, pure-play AI chip bets are fracturing — Druckenmiller cut Nvidia -70% citing DeepSeek efficiency concerns, Burry bought Nvidia puts, and Gotham's quantitative screens began trimming on ROIC deterioration.",
+      },
+      {
+        title: "Value's Vindication",
+        body: "The S&P 500 returned -4.4% in Q1 2026. Greenlight Capital returned +6.5% net. Miller Deep Value returned +8.39%. Baupost's concentrated 22-position portfolio held and added at better prices. This is not coincidence — it reflects a structural dynamic: when macro uncertainty (tariff announcements, AI disruption fears, sovereign debt concerns) compresses valuation multiples, concentrated value investors with pre-identified catalysts dramatically outperform momentum/growth strategies. The Lebanese sovereign debt 66% IRR (Greenlight), Nabors Industries +58% (Miller), and Molina Healthcare re-rating (Burry) are all classic value-investing outcomes that required patience, asymmetry identification, and the willingness to be early. Q1 2026 may be the inflection point where value leadership persists beyond a single quarter.",
+      },
+      {
+        title: "The Abel Era Begins at Berkshire",
+        body: "Warren Buffett's retirement on January 1, 2026 produced the most significant portfolio overhaul in Berkshire's modern history. Greg Abel's first 13F: 16 full exits (from 42 to 29 positions), a tripling of Alphabet (now 8.5% of the portfolio), and a new Delta Air Lines position as the AI-era travel infrastructure bet. The Todd Combs departure explains the Visa, Mastercard, Domino's, and Aon exits — these were managed independently. Abel's signature moves show his own investment identity forming: quality compounders with durable competitive advantages, AI-aware (GOOGL), and less attached to Buffett's 1980s–2010s era holdings. Berkshire's record cash balance ($350B+) suggests Abel is not done — he is building dry powder for a major deployment at the right price.",
+      },
+      {
+        title: "The Macro Hedge Expansion",
+        body: "Five of twenty filers now carry explicit macro protection: Third Point (SPY puts — largest hedge in recent history), Soros (SPY puts + energy puts), Burry ($85M in NVDA and PLTR puts), Greenlight (gold — drove Q1 outperformance), and Aschenbrenner ($8.46B in chip-sector puts — by far the largest bearish book in the cohort). This is a material expansion from prior quarters. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' for markets crystallizes the concern: the tariff shock (announced early April, post Q1 reporting period), sovereign debt trajectories, and AI capex disappointment risk are all visible to sophisticated managers. The fact that this level of hedging is visible in 13F filings — which only show long equity positions — means the true macro protection is even larger than what is disclosed.",
+      },
+    ],
+    keySignals: [
+      { label: "Cross-Filer Consensus Stock (Q1 2026)", value: "MSFT and GOOGL — independently added by 6+ filers each, bought as the 'undervalued AI platform' trade" },
+      { label: "Most Surprising Move", value: "Berkshire tripled Alphabet (GOOGL +204%) — Abel's first major independent stamp on the portfolio" },
+      { label: "Biggest Conviction Flip", value: "Druckenmiller: cut NVDA -70% after calling it 'highest-conviction theme ever' in Q4 2025 — DeepSeek changed his view" },
+      { label: "Value Beat in Q1", value: "Greenlight +6.5%, Miller Deep Value +8.39% vs. S&P 500 -4.4% — value managers dominated" },
+      { label: "Emerging AI Power Consensus", value: "Appaloosa +114% Vistra, D.E. Shaw +$687M IREN, +$605M Bloom Energy — AI power demand is Q2-Q3 2026's next crowded trade" },
+      { label: "Key Risk Signal", value: "5 of 20 filers have explicit macro hedges (SPY puts, NVDA puts, chip-sector puts, gold) — highest defensive positioning in the cohort's history" },
+    ],
+  },
+];
 
 const divergences = [
   {
     ticker: "NVDA",
     subtitle: "AI Chip Supercycle vs. DeepSeek Efficiency Disruption",
     bulls: {
-      filers: ["Citadel (expanded to ~$4B)", "Bridgewater (+$253M)", "Tiger Global (added)", "Third Point (4th consecutive quarter add)"],
+      filers: ["Bridgewater (significant increase)", "Tiger Global (added)", "Soros (+61% to ~$187M)"],
       thesis: "The bull case remains demand-driven and supply-constrained: NVIDIA's Blackwell architecture is backlogged through 2026, hyperscalers (MSFT, AMZN, GOOGL) have all guided $650B+ in combined 2026 capex, and the CUDA software moat is decade-deep. DeepSeek's efficiency gains make AI more accessible — which increases total compute demand, not less. Every efficiency improvement in AI history has led to more total compute spend, not less.",
     },
     bears: {
-      filers: ["Druckenmiller (−70% cut, −80% over 2 quarters)", "Burry (NVDA put options, ~$85M total)", "Gotham (−$24M trim on ROIC screens)"],
-      thesis: "Druckenmiller's view: DeepSeek-style efficiency gains genuinely threaten the GPU capex supercycle. If AI workloads require 90% less compute for the same output, the hyperscaler capex cycle is structurally shorter than priced. At 30x+ revenue, NVDA has no margin for disappointment. Burry's puts echo his Big Short thesis template: when everyone agrees a trade is obvious, the market is not pricing in tail risk.",
+      filers: ["Third Point (−94%)", "Viking (full exit)", "Druckenmiller (exit completed)", "Citadel (reduced)", "Burry (NVDA put options, ~$85M total)", "Gotham (−$24M trim on ROIC screens)"],
+      thesis: "The bear camp grew dramatically in Q1: Third Point cut -94%, Viking fully exited, Druckenmiller completed the exit he began in Q4, and even Citadel reduced. The shared concern: DeepSeek-style efficiency gains genuinely threaten the GPU capex supercycle. If AI workloads require 90% less compute for the same output, the hyperscaler capex cycle is structurally shorter than priced. At 30x+ revenue, NVDA has no margin for disappointment. Burry's puts echo his Big Short template: when everyone agrees a trade is obvious, the market is not pricing in tail risk.",
     },
-    verdict: "This is the most consequential divergence in Q1 2026. Druckenmiller was the most vocal NVDA bull in Q4 2025 — his 180-degree reversal demands attention. The resolution: if AI capex from hyperscalers continues into Q2 despite tariff disruptions, the bulls are right. If CapEx guidance is revised down in Q2 earnings, the bears win decisively.",
+    verdict: "This is the most consequential divergence in Q1 2026 — and the bear camp now outnumbers the bulls among active managers. The resolution: if AI capex from hyperscalers continues into Q2 despite tariff disruptions, the remaining bulls are right. If CapEx guidance is revised down in Q2 earnings, the sellers win decisively.",
   },
   {
     ticker: "GOOGL",
     subtitle: "Undervalued AI Platform vs. Search-at-Risk Exit",
     bulls: {
-      filers: ["Berkshire Hathaway (tripled to +204%)", "Himalaya Capital (44% combined GOOG + GOOGL)", "Viking Global (new position)", "Druckenmiller (added $89M)", "Appaloosa (+29%)"],
+      filers: ["Berkshire Hathaway (tripled to +204%)", "Himalaya Capital (44% combined GOOG + GOOGL)", "Viking Global (new position)", "Third Point (new position)", "Bridgewater (new position)", "Appaloosa (+29%)"],
       thesis: "Alphabet at ~20x forward earnings is the cheapest mega-cap AI platform in the cohort. Gemini integration across Search, YouTube, Cloud, and Waymo creates compounding optionality. The Search-at-risk narrative is overblown — Google's AI Overviews have increased query volume, not reduced it. Abel's Berkshire tripling the GOOGL stake is the clearest institutional signal: a value-first investor at scale is saying the discount to intrinsic value is too wide.",
     },
     bears: {
-      filers: ["Pershing Square (sold ~95% — from 6.1M to 312K shares)"],
-      thesis: "Ackman rotated from Alphabet to Microsoft, believing MSFT has cleaner AI monetization per dollar. His concern: Google's advertising revenue is structurally at risk from AI-powered answer engines. OpenAI's ChatGPT search, Perplexity, and Microsoft's Bing integration are all attacking the core search-monetization business model. Even a 10% search revenue decline compresses GOOGL's multiple significantly.",
+      filers: ["Pershing Square (sold ~95% — from 6.1M to 312K shares)", "Druckenmiller (full exit)"],
+      thesis: "Ackman rotated from Alphabet to Microsoft, believing MSFT has cleaner AI monetization per dollar. His concern: Google's advertising revenue is structurally at risk from AI-powered answer engines. OpenAI's ChatGPT search, Perplexity, and Microsoft's Bing integration are all attacking the core search-monetization business model. Druckenmiller went further and sold his entire position. Even a 10% search revenue decline compresses GOOGL's multiple significantly.",
     },
-    verdict: "The widest split in the cohort — one filer sold 95% while five others independently added. The core question: is Search disruption real and permanent, or is the market overpricing a risk that Alphabet's own AI capabilities will neutralize? Watch GOOGL's AI Overviews ad revenue data in the Q2 2026 earnings report.",
+    verdict: "The widest split in the cohort — Pershing sold 95% and Druckenmiller fully exited while five other filers independently added or initiated. The core question: is Search disruption real and permanent, or is the market overpricing a risk that Alphabet's own AI capabilities will neutralize? Watch GOOGL's AI Overviews ad revenue data in the Q2 2026 earnings report.",
   },
   {
     ticker: "MSFT",
     subtitle: "AI Cloud Safe Harbor vs. Growth Multiple Concern",
     bulls: {
-      filers: ["Pershing Square (new $2.09B at 21x fwd earnings)", "Third Point (+175%)", "Viking Global (+32.5%)"],
+      filers: ["Pershing Square (new $2.09B at 21x fwd earnings)", "D.E. Shaw (+$1.9B)", "Viking Global (+32.5%)", "Soros (+$78M)"],
       thesis: "Microsoft Azure is growing AI revenue faster than any other hyperscaler. Copilot is genuinely increasing enterprise productivity — measurably so — creating a new $100B+ ARR opportunity. At 21x forward earnings (Ackman's entry price), MSFT is trading below its 10-year historical average multiple for a business compounding at 18%+ EPS growth. The AI platform with the broadest enterprise distribution wins — and MSFT has that via Office 365's 400M+ commercial users.",
     },
     bears: {
-      filers: ["Citadel (−$909M trim)", "Tiger Global (modest trim after 13 quarters at #1)"],
-      thesis: "Profit-taking after a large run, not a structural bear thesis. Citadel's trim is largely inventory management at scale. Tiger Global's gentle reduction reflects rebalancing after MSFT was its top holding for 13 consecutive quarters — not a view change. The actual structural bear case (few are making it): MSFT's Copilot adoption may disappoint vs. expectations, and at 30x+ earnings it leaves no room for misses.",
+      filers: ["Third Point (full exit)", "Appaloosa (−82%)", "Citadel (−$909M trim)", "Tiger Global (modest trim after 13 quarters at #1)"],
+      thesis: "This is no longer mechanical profit-taking — Third Point fully exited a former flagship position and Tepper cut -82%. The structural bear case: MSFT's Copilot adoption may disappoint vs. expectations, AI capex is compressing free cash flow margins, and at a premium multiple it leaves no room for misses. Loeb and Tepper appear to believe the AI monetization story is better expressed through Amazon (both made AMZN their largest or near-largest position) than through Microsoft's enterprise seat-license model.",
     },
-    verdict: "Not a true divergence — the 'bears' are trimming for mechanical reasons, not conviction. The unusual cross-filer MSFT buy consensus (3 new/large adds in a single quarter) is itself the signal. When concentrated fund managers who typically disagree all independently arrive at the same conclusion in the same quarter, it is directionally meaningful.",
+    verdict: "A genuine two-sided divergence, not consensus. Pershing and D.E. Shaw deployed ~$4B combined into MSFT in the same quarter that Third Point exited entirely and Appaloosa cut -82%. Both camps are sophisticated and concentrated. The pivot point: Azure growth and Copilot attach rates in the Q2 2026 earnings print — and whether AMZN (the stock both bears rotated toward) outperforms MSFT over the next two quarters.",
   },
   {
     ticker: "China (BABA / PDD)",
@@ -894,7 +936,7 @@ const divergences = [
       thesis: "Li Lu's thesis is unchanged: BABA and PDD trade at 7–9x forward earnings with massive cash reserves, aggressive buybacks, and AI monetization optionality (Tongyi Qianwen for Alibaba, Temu's global expansion for PDD). The regulatory crackdown is fully priced. Xi's capital allocation priorities are moving toward consumption support, which benefits both stocks. Investors who held through the 2021–2023 drawdown are now positioned for the re-rating that comes when geopolitical risk premium compresses.",
     },
     bears: {
-      filers: ["Appaloosa (BABA −33%)", "D.E. Shaw (BABA −$1.2B)", "Scion/Burry (full China exit)", "Druckenmiller (BAC, COF exits signal EM skepticism)"],
+      filers: ["Appaloosa (BABA −33%)", "D.E. Shaw (BABA −$1.2B)", "Scion/Burry (full China exit incl. BIDU)", "Third Point (BABA full exit)", "Soros (FXI −$111M, KWEB −$101M)"],
       thesis: "The tariff environment in early 2026 made the geopolitical risk premium genuinely unquantifiable. A US-China trade war escalation, secondary sanctions, or Taiwan tensions are not priceable by valuation frameworks — they are binary political risks. Burry's full exit is the starkest signal: even he, the classic contrarian who built large China positions, concluded geopolitical risk overwhelms fundamental cheapness. The rational response is to exit rather than underwrite an unquantifiable risk.",
     },
     verdict: "The most analytically pure bull/bear split in Q1 2026 filings. Both sides have legitimate, internally-consistent frameworks. Resolution requires a macro catalyst (US-China tariff resolution or escalation) rather than fundamentals alone. Li Lu's 44% Alphabet + 14.6% PDD concentration is either the most courageous or most dangerous portfolio in the cohort — that question will be answered in Q2 2026.",
@@ -1340,6 +1382,7 @@ function AnalysisTab({ filers, onTickerClick }) {
   const topBuys  = showAllConviction ? allBuys  : allBuys.slice(0, 9);
   const topSells = showAllConviction ? allSells : allSells.slice(0, 5);
   const [openDiv, setOpenDiv] = useState(null);
+  const [openArchive, setOpenArchive] = useState(null);
 
   const HeatRow = ({ e, positive }) => {
     const color = positive ? T.buy : T.sell;
@@ -1376,8 +1419,13 @@ function AnalysisTab({ filers, onTickerClick }) {
       <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, overflow: "hidden", marginBottom: 16 }}>
         <div style={{ background: "linear-gradient(135deg, #0d1830 0%, #111827 60%, #0d1117 100%)", padding: "20px 20px", borderBottom: `1px solid ${T.border}`, position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(ellipse at 80% 50%, #58a6ff10, transparent 60%)", pointerEvents: "none" }} />
-          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: T.t3, marginBottom: 6, position: "relative" }}>
-            {macroNarrative.quarter} · Macro Synthesis
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 6, position: "relative" }}>
+            <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 2, color: T.t3 }}>
+              {macroNarrative.quarter} · Macro Synthesis
+            </div>
+            <div style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.accent, background: T.accentBg, border: `1px solid ${T.accent}40`, borderRadius: 4, padding: "2px 7px", whiteSpace: "nowrap" }}>
+              {macroNarrative.edition}
+            </div>
           </div>
           <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 20, fontWeight: 900, color: T.t1, lineHeight: 1.25, position: "relative" }}>
             {macroNarrative.headline}
@@ -1406,6 +1454,65 @@ function AnalysisTab({ filers, onTickerClick }) {
           ))}
         </div>
       </div>
+
+      {/* ── ARTICLE ARCHIVE ─────────────────────────────────────── */}
+      {macroArchive.length > 0 && (
+        <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, padding: "14px 20px", marginBottom: 16 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: T.t3, marginBottom: 4 }}>
+            Article Archive
+          </div>
+          <div style={{ fontSize: 12, color: T.t3, marginBottom: 10 }}>
+            Earlier editions of the macro synthesis, preserved unedited as filings data was verified and revised.
+          </div>
+          {macroArchive.map((a, i) => {
+            const isOpen = openArchive === i;
+            return (
+              <div key={i} style={{ border: `1px solid ${T.border}`, borderRadius: 8, marginBottom: 8, overflow: "hidden" }}>
+                <div
+                  onClick={() => setOpenArchive(isOpen ? null : i)}
+                  style={{ padding: "11px 14px", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, userSelect: "none", background: isOpen ? T.cardAlt : "transparent", transition: "background 0.15s" }}
+                >
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.trim, background: T.trimBg, border: `1px solid ${T.trim}40`, borderRadius: 4, padding: "2px 7px" }}>
+                        Superseded
+                      </span>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: T.t3 }}>{a.quarter} · {a.edition}</span>
+                    </div>
+                    <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 800, fontSize: 14, color: T.t2, lineHeight: 1.3 }}>
+                      {a.headline}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: 14, color: T.t3, flexShrink: 0, transform: isOpen ? "rotate(90deg)" : "none", transition: "transform 0.15s" }}>›</div>
+                </div>
+                {isOpen && (
+                  <div style={{ padding: "14px 14px 6px", borderTop: `1px solid ${T.border}` }}>
+                    <div style={{ fontSize: 12, color: T.trim, background: T.trimBg, border: `1px solid ${T.trim}30`, borderRadius: 6, padding: "10px 12px", lineHeight: 1.6, marginBottom: 14 }}>
+                      <span style={{ fontWeight: 700 }}>Editor's note:</span> {a.archivedNote}
+                    </div>
+                    {a.paragraphs.map((para, j) => (
+                      <div key={j} style={{ marginBottom: 14 }}>
+                        <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.t3, marginBottom: 4 }}>{para.title}</div>
+                        <div style={{ fontSize: 12.5, color: T.t3, lineHeight: 1.65 }}>{para.body}</div>
+                      </div>
+                    ))}
+                    <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.t3, margin: "4px 0 8px" }}>Key Signals (as published)</div>
+                    {a.keySignals.map((s, j) => (
+                      <div key={j} style={{ display: "flex", gap: 10, marginBottom: 8, fontSize: 11.5 }}>
+                        <div style={{ width: 5, height: 5, borderRadius: "50%", background: T.t3, marginTop: 6, flexShrink: 0 }} />
+                        <div>
+                          <span style={{ fontWeight: 700, color: T.t2 }}>{s.label}:</span>{" "}
+                          <span style={{ color: T.t3 }}>{s.value}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* ── CONVICTION HEATMAP ──────────────────────────────────── */}
       <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, padding: "16px 20px", marginBottom: 16 }}>
