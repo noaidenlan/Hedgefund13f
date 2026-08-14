@@ -888,6 +888,35 @@ const macroArchive = [
   },
 ];
 
+// ─── Q2 2026 EARLY PREVIEW ──────────────────────────────────────────────────
+// Position-level 13Fs for the June 30, 2026 quarter are due Aug 14, 2026.
+// As of this update only Berkshire's moves are confirmed (via its Q2 10-Q,
+// filed Aug 8, 2026). The fund-by-fund book below remains the verified Q1 2026
+// (Mar 31) data and will be refreshed once Q2 13Fs are public.
+const q2Preview = {
+  quarter: "Q2 2026",
+  status: "Preview — position-level 13Fs due Aug 14, 2026",
+  updated: "Aug 13, 2026",
+  headline: "Abel Breaks the 14-Quarter Selling Streak — Berkshire Turns Net Buyer and Adds $10B to Alphabet",
+  intro: "The only cohort member with confirmed Q2 2026 activity is Berkshire Hathaway, disclosed in its Q2 10-Q (filed Aug 8, 2026) ahead of the 13F deadline. The remaining 19 filers report position-level holdings by Aug 14 — the fund-by-fund breakdown below is still the verified Q1 2026 (Mar 31) book until then.",
+  confirmed: [
+    {
+      fund: "Berkshire Hathaway",
+      manager: "Greg Abel (CEO)",
+      points: [
+        p("Net equity BUYER of ~$20B", { note: "first net-buying quarter after 14 consecutive quarters of net selling — a historic reversal of the Buffett-era posture" }),
+        p("Alphabet (GOOGL) +~$10B", { note: "private placement supporting Alphabet's AI data-center buildout — GOOGL now a top-5 holding alongside AAPL, AXP, BAC, KO (top 5 ≈ 66% of the book)" }),
+        p("Buybacks ~$4.5B", { note: "up from just $235M in Q1 — first meaningful repurchase in several quarters" }),
+        p("Cash fell to $365.5B", { note: "down from a record $397.4B at Q1 close — Abel is deploying the hoard" }),
+        p("Operating acquisitions (outside the 13F)", { note: "OxyChem (~$9.7B) and homebuilder Taylor Morrison (~$6.8–8.5B) — full-company deals, not public-market equity" }),
+        p("~$3B additional net public-equity purchases", { note: "position-level detail lands in the Aug 14 13F" }),
+      ],
+    },
+  ],
+  note: "This preview reflects only confirmed Q2 disclosures. The Conviction Heatmap, Divergence Radar, and per-filer cards below are computed from the verified Q1 2026 book and are unaffected until the full Q2 refresh.",
+  sources: "Berkshire Q2 2026 10-Q, CNBC, Seeking Alpha, KuCoin, The Motley Fool",
+};
+
 const divergences = [
   {
     ticker: "NVDA",
@@ -1415,6 +1444,56 @@ function AnalysisTab({ filers, onTickerClick }) {
 
   return (
     <div>
+      {/* ── Q2 2026 EARLY PREVIEW ────────────────────────────────── */}
+      <div style={{ background: "linear-gradient(135deg, #12220f 0%, #0f1a12 55%, #0d1117 100%)", borderRadius: 12, border: `1px solid ${T.buy}55`, overflow: "hidden", marginBottom: 16, position: "relative" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `radial-gradient(ellipse at 90% 0%, ${T.buy}18, transparent 55%)`, pointerEvents: "none" }} />
+        <div style={{ padding: "18px 20px", position: "relative" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+              <span style={{ fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, color: "#07090f", background: T.buy, borderRadius: 4, padding: "3px 8px" }}>
+                New · {q2Preview.quarter}
+              </span>
+              <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.buy }}>
+                Early Preview
+              </span>
+            </div>
+            <span style={{ fontSize: 10, fontWeight: 600, color: T.t3 }}>{q2Preview.status}</span>
+          </div>
+          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 18, fontWeight: 900, color: T.t1, lineHeight: 1.28, marginBottom: 8 }}>
+            {q2Preview.headline}
+          </div>
+          <div style={{ fontSize: 12.5, color: T.t2, lineHeight: 1.65, marginBottom: 14 }}>
+            {q2Preview.intro}
+          </div>
+
+          {q2Preview.confirmed.map((c, i) => (
+            <div key={i} style={{ background: "#0d111788", border: `1px solid ${T.border}`, borderRadius: 8, padding: "14px 16px", marginBottom: 12 }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 10, flexWrap: "wrap" }}>
+                <span style={{ fontWeight: 800, fontSize: 14, color: T.t1 }}>{c.fund}</span>
+                <span style={{ fontSize: 11, color: T.t3 }}>{c.manager}</span>
+                <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.buy, background: T.buyBg, border: `1px solid ${T.buy}40`, borderRadius: 4, padding: "2px 6px" }}>Confirmed</span>
+              </div>
+              {c.points.map((pt, j) => (
+                <div key={j} style={{ display: "flex", gap: 9, marginBottom: 8, fontSize: 12.5 }}>
+                  <div style={{ width: 5, height: 5, borderRadius: "50%", background: T.buy, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px ${T.buy}` }} />
+                  <div style={{ lineHeight: 1.55 }}>
+                    <span style={{ fontWeight: 700, color: T.t1 }}>{pt.label}</span>
+                    {pt.note && <span style={{ color: T.t2 }}> — {pt.note}</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+
+          <div style={{ fontSize: 11.5, color: T.t3, lineHeight: 1.6, borderLeft: `2px solid ${T.border2}`, paddingLeft: 10, marginBottom: 8 }}>
+            {q2Preview.note}
+          </div>
+          <div style={{ fontSize: 10, color: T.t3 }}>
+            <span style={{ fontWeight: 700 }}>Sources:</span> {q2Preview.sources} · Updated {q2Preview.updated}
+          </div>
+        </div>
+      </div>
+
       {/* ── MACRO NARRATIVE ─────────────────────────────────────── */}
       <div style={{ background: T.card, borderRadius: 12, border: `1px solid ${T.border}`, overflow: "hidden", marginBottom: 16 }}>
         <div style={{ background: "linear-gradient(135deg, #0d1830 0%, #111827 60%, #0d1117 100%)", padding: "20px 20px", borderBottom: `1px solid ${T.border}`, position: "relative", overflow: "hidden" }}>
