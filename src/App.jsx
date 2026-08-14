@@ -895,8 +895,8 @@ const macroArchive = [
 // (Mar 31) data and will be refreshed once Q2 13Fs are public.
 const q2Preview = {
   quarter: "Q2 2026",
-  status: "Preview — position-level 13Fs due Aug 14, 2026",
-  updated: "Aug 13, 2026",
+  status: "Preview — position-level 13Fs landing now (due Aug 14, 2026)",
+  updated: "Aug 14, 2026",
   headline: "Abel Breaks the 14-Quarter Selling Streak — Berkshire Turns Net Buyer and Adds $10B to Alphabet",
   intro: "The only cohort member with confirmed Q2 2026 activity is Berkshire Hathaway, disclosed in its Q2 10-Q (filed Aug 8, 2026) ahead of the 13F deadline. The remaining 19 filers report position-level holdings by Aug 14 — the fund-by-fund breakdown below is still the verified Q1 2026 (Mar 31) book until then.",
   confirmed: [
