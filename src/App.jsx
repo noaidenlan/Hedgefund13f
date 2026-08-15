@@ -7,47 +7,43 @@ const funds = [
   {
     type: "fund",
     name: "Berkshire Hathaway",
-    manager: "Greg Abel (CEO — first quarter post-Buffett)",
-    aum: "~$263.1B",
-    quarter: "Q1 2026",
-    filed: "May 15, 2026",
+    manager: "Greg Abel (CEO)",
+    aum: "~$299.3B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
     holdings: 29,
     topHoldings: [
       { ticker: "AAPL",  weight: "~22.0%" },
-      { ticker: "AXP",   weight: "~17.4%" },
-      { ticker: "KO",    weight: "~11.6%" },
-      { ticker: "BAC",   weight: "~9.5%"  },
-      { ticker: "GOOGL", weight: "~8.5%"  },
-      { ticker: "CVX",   weight: "~6.6%"  },
-      { ticker: "OXY",   weight: "~4.2%"  },
-      { ticker: "DAL",   weight: "~1.0%"  },
+      { ticker: "AXP",   weight: "~17.1%" },
+      { ticker: "KO",    weight: "~10.9%" },
+      { ticker: "GOOGL", weight: "~9.4%"  },
+      { ticker: "BAC",   weight: "~9.2%"  },
+      { ticker: "GOOG",  weight: "~top 10" },
+      { ticker: "DAL",   weight: "~1.8%"  },
+      { ticker: "OXY",   weight: "~4.0%"  },
     ],
     newBuys: [
-      p("DAL (Delta Air Lines)", { val: "~$2.6B", note: "~39.8M shares — Abel's domestic travel conviction" }),
-      p("M (Macy's)", { val: "~$55M", note: "small new value stake" }),
+      p("ULTA (Ulta Beauty)", { val: "~$267M", note: "~690K shares — re-entry after exiting in 2024" }),
+      p("HEI (Heico)",        { val: "~$185M", note: "~1.0M shares — new aerospace/defense position" }),
+      p("DHI (D.R. Horton)",  { note: "small toe-hold re-established (immaterial size)" }),
     ],
     increased: [
-      p("GOOGL (Alphabet)", { pct: "+204%", note: "tripled stake — now top 5 holding at ~8.5%" }),
-      p("NYT (New York Times)", { pct: "+199%" }),
-      p("LEN (Lennar)", { pct: "+43%" }),
+      p("GOOGL + GOOG (Alphabet)", { val: "+~$10B", pct: "+224%", note: "AI-infrastructure private placement — Alphabet now effectively the #3 holding by company" }),
+      p("DAL (Delta Air Lines)",   { val: "+17.5M sh", note: "to ~57M shares (~$5.4B) — doubled down on the Q1 initiation" }),
+      p("LEN (Lennar)",            { pct: "+30%", note: "housing/cyclical tilt" }),
+      p("OXY (Occidental)",        { val: "+~7M sh" }),
+      p("M (Macy's)",              { note: "more than doubled" }),
+      p("NYT (New York Times)",    { pct: "+4%" }),
     ],
     reduced: [
-      p("BAC (Bank of America)", { pct: "−7.2%", val: "−$2.15B" }),
-      p("CVX (Chevron)",         { pct: "−35%" }),
+      p("BAC (Bank of America)", { val: "−30M+ sh", note: "~8th consecutive quarter paring the bank" }),
+      p("AAPL (Apple)",          { note: "modest continued trim — still ~22% of the book" }),
     ],
     exits: [
-      p("V (Visa)",              { val: "~$2.91B", note: "Combs portfolio — fully exited" }),
-      p("MA (Mastercard)",       { val: "~$2.28B", note: "Combs portfolio — fully exited" }),
-      p("UNH (UnitedHealth)",    { val: "~$1.66B" }),
-      p("DPZ (Domino's Pizza)",  { val: "~$1.40B", note: "Combs position" }),
-      p("AON",                   { val: "~$1.27B" }),
-      p("C (Citigroup)",         { val: "~$1.12B" }),
-      p("NU (Nu Holdings)",      { val: "~$527M" }),
-      p("AMZN (Amazon)",         { val: "~$525M", note: "paradoxically Baupost & Appaloosa added heavily" }),
-      p("POOL (Pool Corp), HEI (Heico), LLYVA (Liberty Live)", { note: "6 other complete exits this quarter" }),
+      p("STZ (Constellation Brands)", { note: "full exit — immaterial position initiated Q4 2024" }),
     ],
-    theme: "Greg Abel's first quarter as CEO produced the largest portfolio overhaul in Berkshire history — 16 full exits, reducing holdings from 42 to 29. The Todd Combs departure explains many exits (Visa, Mastercard, Domino's, Aon). Abel's own signature: tripling Alphabet stake (now 8.5% of portfolio) and initiating Delta Air Lines. This quarter is the clearest signal yet that Berkshire under Abel will be AI-aware and more concentrated, not the sprawling portfolio of the Buffett era.",
-    sources: "SEC EDGAR, Fortune, Benzinga, Kiplinger, WhaleWisdom, Seeking Alpha, IBTimes",
+    theme: "Abel's second quarter is a regime shift. Berkshire flipped from a multi-year net seller to a ~$20B net equity buyer — the first net-buying quarter in over three years — plus ~$4.5B of buybacks, drawing cash down to $365.5B from a record $397.4B. The signature move is the aggressive Alphabet build (~$10B via an AI-infrastructure placement), vaulting Google to a top-3 holding and signaling comfort with mega-cap AI/compute exposure Buffett historically avoided. Abel paired that with a clear housing/cyclical tilt (Lennar, D.R. Horton, plus Delta and Occidental), funded partly by continued trimming of the legacy Apple and Bank of America mega-positions. The message: gradual diversification away from the concentrated Apple/financials core toward growth and real-economy cyclicals, while keeping the book concentrated (top 5 ≈ 66%).",
+    sources: "SEC EDGAR, Berkshire Q2 2026 10-Q, CNBC, Benzinga, ValueSider, HoldingsChannel, Motley Fool",
     color: "#8B0000",
   },
   {
@@ -57,6 +53,7 @@ const funds = [
     aum: "$22.4B (13F) / ~$97B total",
     quarter: "Q1 2026",
     filed: "May 2026",
+    pending: "Q2 2026 13F not yet indexed — Bridgewater files near the deadline; showing last confirmed quarter",
     holdings: 993,
     newBuys: [
       p("TSM (Taiwan Semiconductor)", { note: "new position — fresh stake in global chip supply conviction" }),
@@ -92,138 +89,152 @@ const funds = [
     type: "fund",
     name: "Citadel Advisors",
     manager: "Ken Griffin",
-    aum: "$618B (13F, incl. market-making)",
-    quarter: "Q1 2026",
-    filed: "May 2026",
-    holdings: "12,857",
+    aum: "~$875B (13F gross — options/notional-inflated)",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: "~13,000",
+    topHoldings: [
+      { ticker: "SPY",  weight: "~top 1" },
+      { ticker: "QQQ",  weight: "~top 2" },
+      { ticker: "NVDA", weight: "~top 3" },
+      { ticker: "TSLA", weight: "~top 4" },
+      { ticker: "GLD",  weight: "~top 5" },
+    ],
     newBuys: [
-      p("AstraZeneca (AZN)",      { note: "new position — pharma/biotech diversification" }),
-      p("iShares Silver Trust (SLV)", { note: "new position — precious metals macro hedge" }),
+      p("SpaceX (private)",     { note: "pre-IPO stake — frontier aerospace exposure" }),
+      p("Cerebras Systems (private)", { note: "AI-chip hardware — pre-IPO" }),
+      p("Quantinuum (private)", { note: "quantum computing — pre-IPO" }),
     ],
     increased: [
-      p("MU (Micron)",   { note: "increased — AI memory demand" }),
-      p("META",          { note: "increased — AI advertising platform" }),
-      p("WBD (Warner Bros. Discovery)", { note: "increased — media consolidation thesis" }),
-      p("AVGO (Broadcom)", { val: "+$2.2B" }),
+      p("SPY (S&P 500 ETF)", { val: "+~$4.3B" }),
+      p("MSFT (Microsoft)",  { val: "+~$3.4B" }),
+      p("MU (Micron)",       { val: "+~$2.8B", note: "AI memory demand" }),
+      p("IVV (iShares S&P 500)", { val: "+~$2.5B" }),
     ],
     reduced: [
-      p("NVDA (Nvidia)",    { note: "reduced — profit-taking after large prior stake" }),
-      p("AMZN (Amazon)",    { note: "reduced" }),
-      p("V (Visa)",         { note: "reduced" }),
-      p("SPY (S&P 500 ETF)", { val: "−$8.1B", note: "inventory rotation, not directional" }),
-      p("QQQ (Nasdaq ETF)", { val: "−$8.0B" }),
-      p("MSFT (Microsoft)", { val: "−$909M" }),
+      p("TSLA (Tesla)",   { val: "−~$4.8B" }),
+      p("NVDA (Nvidia)",  { val: "−~$3.0B", note: "trimming the crowded momentum leader" }),
+      p("NFLX (Netflix)", { val: "−~$2.5B" }),
+      p("QQQ (Nasdaq ETF)", { val: "−~$2.2B" }),
     ],
-    exits: [p("Various smaller positions across diversified book")],
-    theme: "Citadel's Q1 2026 across 12,857 positions reflects a nuanced shift: NVDA and AMZN reduced after large prior stakes, AVGO increased +$2.2B as the preferred AI chip. MU, META, and WBD increased. New positions in AstraZeneca and iShares Silver Trust add pharma and precious-metals diversification. SPY/QQQ reductions are market-making inventory adjustments, not directional bets. At $618B in 13F holdings, Citadel remains the largest 13F filer in the cohort — every move represents a statistically significant signal at institutional scale.",
-    sources: "TheStreet, Insider Monkey, Yahoo Finance, WhaleWisdom",
+    exits: [p("Various smaller positions across the diversified book")],
+    theme: "Citadel's 13F is dominated by index ETFs (SPY, QQQ, IVV, GLD) and options overlays reflecting its multi-strategy market-making and systematic books rather than concentrated stock-picking — the ~$875B gross and ~42% QoQ jump largely reflect derivatives notional and inventory, not directional conviction. The genuinely informative signal is the trio of new private-market stakes — SpaceX, Cerebras, and Quantinuum — pointing to deliberate exposure to frontier AI hardware, space, and quantum. Position-level flow shows Citadel rotating out of crowded momentum longs (TSLA, NVDA, NFLX) while adding broad-index and Micron/MSFT. Postscript: in late July Citadel bought the bulk of the imploding Situational Awareness book, and posted one of its best months in years.",
+    sources: "SEC EDGAR, CryptoBriefing, HoldingsChannel, Insider Monkey, HedgeFollow, WSJ, Bloomberg",
     color: "#2c3e50",
   },
   {
     type: "fund",
     name: "Pershing Square",
     manager: "Bill Ackman",
-    aum: "$13.71B",
-    quarter: "Q1 2026",
-    filed: "May 15, 2026",
-    holdings: 11,
+    aum: "~$14.5B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: 14,
     topHoldings: [
-      { ticker: "BN",   weight: "17.62%" },
-      { ticker: "AMZN", weight: "17.39%" },
-      { ticker: "UBER", weight: "15.71%" },
-      { ticker: "MSFT", weight: "15.26%" },
-      { ticker: "QSR",  weight: "12.20%" },
+      { ticker: "MSFT", weight: "~12.4%" },
+      { ticker: "UBER", weight: "~12.0%" },
+      { ticker: "META", weight: "~top 3" },
+      { ticker: "AMZN", weight: "~top 4" },
+      { ticker: "BN",   weight: "~top 5" },
     ],
     newBuys: [
-      p("MSFT (Microsoft)", { val: "~$2.09B", note: "5.65M shares — bought during Feb–Mar pullback at ~21x forward earnings" }),
+      p("NFLX (Netflix)",   { val: "3.15M sh (~4.9%)", note: "notable re-entry — the stock cost Ackman ~$400M in 2022" }),
+      p("V (Visa)",         { note: "new — payments-network compounder, landed in top 10" }),
+      p("MA (Mastercard)",  { note: "new — payments-network compounder, top 10" }),
+      p("SPGI (S&P Global)", { note: "new — data/ratings duopoly, top 10" }),
     ],
     increased: [
-      p("AMZN (Amazon)", { pct: "+19%", note: "+1.84M shares" }),
+      p("MSFT (Microsoft)", { note: "added — now the #1 position" }),
+      p("META (Meta Platforms)", { note: "added — leaning further into mega-cap AI/advertising" }),
     ],
     reduced: [
-      p("GOOGL (Alphabet)", { pct: "−95%", note: "from ~6.1M to ~312K shares — near-full exit" }),
-      p("GOOG (Alphabet C)", { pct: "−95%", note: "from ~678K to ~32K shares" }),
+      p("AMZN (Amazon)", { note: "trimmed after Q1 build" }),
     ],
     exits: [
-      p("HLT (Hilton Hotels)",              { note: "full exit, ~3.03M shares — successful multi-year investment" }),
-      p("CMG (Chipotle Mexican Grill)",      { note: "full exit" }),
-      p("CP (Canadian Pacific Kansas City)", { note: "full exit" }),
+      p("GOOGL + GOOG (Alphabet)", { note: "full exit of both classes — completes the rotation out of Google into MSFT/Meta" }),
     ],
-    theme: "Ackman's Q1 2026 pivot: out of Alphabet (and Chipotle and Canadian Pacific), into Microsoft. He sold ~95% of GOOGL/GOOG and deployed $2.09B into MSFT at what he called 'well below its historical trading average.' His thesis: Azure AI is the more durable cloud franchise vs. GOOGL's search-at-risk narrative. Three full exits (HLT, CMG, CP) free capital for tech conviction bets. AUM at $13.71B. Pershing remains one of the most concentrated portfolios in the universe — 11 positions, top 5 holdings over 78% of the book.",
-    sources: "CNBC, Quiver Quant, Seeking Alpha, GuruFocus",
+    theme: "Q2 was Pershing Square's biggest portfolio overhaul in years — Ackman expanded from a hyper-concentrated 11 names to 14, adding four new wide-moat compounders that fit his template (Netflix, Visa, Mastercard, S&P Global). The headline move is completing the Alphabet exit while doubling down on Microsoft and Meta, a clean rotation within mega-cap tech toward the AI-cloud and advertising names he prefers. The surprising re-entry into Netflix — the stock that cost him ~$400M in 2022 — signals renewed conviction in streaming economics and pricing power. Net effect: a still-concentrated but noticeably more diversified book tilted toward payments networks, data/ratings, and mega-cap platforms. (Alcon and ICE, reported in some coverage, appear to be post-June-30 Q3 additions.)",
+    sources: "SEC EDGAR, Benzinga, Insider Monkey, HoldingsChannel, ValueSider, Quiver Quant",
     color: "#6c3483",
   },
   {
     type: "fund",
     name: "Appaloosa Management",
     manager: "David Tepper",
-    aum: "$5.93B",
-    quarter: "Q1 2026",
-    filed: "May 15, 2026",
-    holdings: 31,
+    aum: "~$7.47B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: 35,
+    topHoldings: [
+      { ticker: "AMZN", weight: "~15.95%" },
+      { ticker: "MU",   weight: "~15.06%" },
+      { ticker: "TSM",  weight: "~10.55%" },
+      { ticker: "GOOG", weight: "~8.75%"  },
+      { ticker: "UBER", weight: "~7.43%"  },
+    ],
     newBuys: [
-      p("SNDK (SanDisk / WD Flash)", { val: "~$179M", note: "281K shares — flash storage for AI workloads" }),
+      p("6 new positions", { note: "concentrated in mega-cap tech/AI (full name list not yet fully indexed)" }),
     ],
     increased: [
-      p("AMZN (Amazon)",        { pct: "+98%",  val: "+~$400M", note: "total stake ~$900M — largest position" }),
-      p("UBER",                 { pct: "+242%", val: "+~$455M total" }),
-      p("MU (Micron)",          { pct: "+200%", note: "from 500K to 1.5M shares, ~$285M added" }),
-      p("VST (Vistra Energy)",  { pct: "+114%" }),
-      p("GOOGL (Alphabet)",     { pct: "+29%"  }),
-      p("META",                 { note: "increased" }),
-      p("TSM (TSMC)",           { pct: "+18%"  }),
+      p("AMZN (Amazon)",    { val: "+~$470M", note: "biggest dollar add — now the #1 position at ~16%" }),
+      p("TSM (TSMC)",       { pct: "+24.3%" }),
+      p("UBER",             { pct: "+21.5%" }),
+      p("GOOG (Alphabet)",  { pct: "+6.8%"  }),
+      p("EWY (South Korea ETF)", { note: "small new EM/semiconductor-adjacent tilt" }),
     ],
     reduced: [
-      p("BABA (Alibaba)", { pct: "−33%", note: "from 15.61% to 10.88% of portfolio — China de-risk" }),
-      p("MSFT (Microsoft)", { pct: "−82%", note: "major reduction — rotating away from legacy tech" }),
-      p("NVDA (Nvidia)",    { note: "trimmed" }),
+      p("MU (Micron)", { pct: "−41%", note: "booked gains after memory names soared ~+258% Mar–Jun — still the #2 position (~$1.13B)" }),
     ],
     exits: [
-      p("AAL (American Airlines)", { note: "all 14.1M shares — tariff/recession risk" }),
-      p("UAL (United Airlines)",   { note: "full exit — same thesis as AAL" }),
-      p("DAL (Delta Air Lines)",   { note: "full exit — (same quarter Berkshire bought Delta)" }),
-      p("OC (Owens Corning)"),
-      p("MHK (Mohawk Industries)"),
-      p("IQV (IQVIA Holdings)"),
+      p("SNDK (SanDisk)", { val: ">$400M", note: "full exit — striking, as it was a NEW buy just one quarter ago (Q1)" }),
+      p("Kohl's, Occidental, Mosaic + others", { note: "12 full exits total (non-SanDisk names reported/less-verified)" }),
     ],
-    theme: "Tepper's Q1 2026 is a crisp AI infrastructure rotation: out of all airlines (AAL, UAL, DAL — full exits across the entire airline sector) and legacy tech (MSFT −82%), into AI enablers. Amazon (+98%), Micron (+200%), SanDisk (AI flash storage), Uber (platform scale), and Vistra (AI power demand) all reflect the 'AI needs cloud, memory, and power' thesis. Notably, Tepper fully exited Delta the same quarter Berkshire initiated it — a direct divergence of conviction between two legendary investors. BABA reduced but not abandoned — maintaining China optionality while de-risking.",
-    sources: "CNBC, Seeking Alpha, TipRanks, HedgeFollow, SEC EDGAR",
+    theme: "Tepper rotated OUT of the AI-memory trade he had just championed and INTO Magnificent-Seven mega-caps. He exited SanDisk entirely (>$400M) and cut Micron ~41% after the memory names had roughly tripled Mar–Jun, effectively booking gains on the AI-memory theme near its peak. He simultaneously loaded up on Amazon, TSMC, Alphabet and Uber — shifting exposure from volatile memory hardware toward diversified mega-cap compute/platform names. Classic Tepper 'sell the parabola, concentrate in quality': the book stayed heavily AI-tilted but de-risked from single-commodity memory pricing. The tell of the quarter is fully dumping SanDisk one quarter after initiating it — a striking round-trip that, in hindsight, sidestepped the July memory-name drawdown.",
+    sources: "SEC EDGAR, CNBC, ValueSider, HedgeFollow, TheStreet, TipRanks",
     color: "#b7950b",
   },
   {
     type: "fund",
     name: "Tiger Global Management",
     manager: "Chase Coleman",
-    aum: "$22.8B",
-    quarter: "Q1 2026",
-    filed: "May 15, 2026",
-    holdings: 54,
+    aum: "~$23.98B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: 46,
+    topHoldings: [
+      { ticker: "GOOGL", weight: "~top 1" },
+      { ticker: "NVDA",  weight: "~top 2" },
+      { ticker: "AMZN",  weight: "~top 3" },
+      { ticker: "TSM",   weight: "~top 4" },
+      { ticker: "META",  weight: "~top 5" },
+    ],
     newBuys: [
-      p("INTC (Intel)", { note: "new position — foundry restructuring + US semiconductor supply chain thesis" }),
+      p("CBRS (Cerebras Systems)", { note: "new AI-chip stake — also filed a 13G for up to 9.99% of Class A" }),
+      p("APLD (Applied Digital)",  { note: "AI data-center / infrastructure" }),
+      p("AMD",                     { note: "new position — second-source AI accelerator" }),
+      p("SpaceX (private)",        { note: "unusual private stake via SPCX vehicle" }),
     ],
     increased: [
-      p("AVGO (Broadcom)",    { note: "significant increase" }),
-      p("NVDA (Nvidia)",      { note: "added to" }),
-      p("NFLX (Netflix)",     { pct: "+21%" }),
-      p("NOW (ServiceNow)",   { pct: "+42%" }),
-      p("CPNG (Coupang)",     { pct: "+66%" }),
-      p("AMAT (Applied Materials)", { pct: "+85.09%", val: "+$260M", note: "semiconductor equipment — wafer fab expansion" }),
+      p("INTC (Intel)",     { val: "1.64M → 4.25M sh", note: "more than doubled — foundry/US-supply-chain bet" }),
+      p("TSM (TSMC)",       { val: "+$622M" }),
+      p("AMAT (Applied Materials)", { val: "+$260M" }),
+      p("MELI (MercadoLibre)", { val: "+$233M" }),
+      p("AVGO (Broadcom)",  { val: "+$220M" }),
     ],
     reduced: [
-      p("MSFT (Microsoft)", { note: "trimmed — was top holding for 13 quarters" }),
-      p("TTWO (Take-Two Interactive)", { note: "reduced" }),
+      p("GOOGL (Alphabet)", { pct: "−45.4%", note: "the standout cut — to 5.81M shares" }),
+      p("MSFT (Microsoft)", { pct: "−9.3%" }),
+      p("META",             { pct: "−8.5%" }),
+      p("NVDA (Nvidia)",    { pct: "−6.8%" }),
+      p("AMZN (Amazon)",    { pct: "−3.2%" }),
     ],
     exits: [
-      p("WDAY (Workday)",     { note: "full exit — AI-native HR alternatives threat" }),
-      p("FLUT (Flutter Entertainment)", { note: "full exit" }),
-      p("VEEV (Veeva Systems)", { note: "full exit" }),
-      p("GRAB (Grab Holdings)", { note: "full exit — SE Asia super-app" }),
-      p("ESTC (Elastic NV)",  { note: "full exit" }),
-      p("HNGE (Hinge Health)", { note: "full exit" }),
-      p("CRCL (Circle Internet)", { note: "full exit" }),
+      p("NFLX (Netflix)", { val: "2.44M sh (~$234.5M)", note: "full exit — the same quarter Ackman re-entered NFLX" }),
+      p("BULL (Webull)",  { note: "full exit" }),
+      p("ZS (Zscaler)",   { note: "full exit" }),
     ],
-    theme: "Tiger Global's Q1 2026 combined meaningful exits with selective additions. Six full exits (Flutter, Veeva, Grab, Elastic, Hinge Health, Circle) show Coleman clearing out positions that don't fit the AI-era conviction framework. AMAT +85% (+$260M) is the surprise aggressive add — semiconductor equipment for the next wafer fab cycle. AVGO/NVDA additions reinforce AI chip conviction; Netflix and ServiceNow increases signal AI-embedded platforms. Workday exit reflects skepticism about traditional enterprise HR vs. AI-native alternatives. GOOGL is now Tiger's top holding — the first time in 13 quarters MSFT was not #1.",
-    sources: "Seeking Alpha, HedgeFollow, WhaleWisdom, Fintel",
+    theme: "Coleman meaningfully de-weighted his Big Tech core — cutting Alphabet almost in half and trimming Nvidia, Microsoft, Meta and Amazon — while rotating into the next leg of AI infrastructure and hardware: new stakes in Cerebras (up to a 9.99% position), Applied Digital and AMD, a doubled Intel bet, and adds to Applied Materials, Broadcom and TSMC. The move reads as Tiger taking profits on the crowded mega-cap AI leaders and redeploying toward semis/compute-infra names earlier in their re-rating, plus a headline-grabbing private SpaceX position. Net portfolio value still rose slightly, so this was rotation rather than de-grossing. Note the mirror-image trade with Pershing Square: Tiger fully exited Netflix the very quarter Ackman re-entered it.",
+    sources: "SEC EDGAR, AP/Reuters, Seeking Alpha, HoldingsChannel, StockTitan, ValueSider",
     color: "#e67e22",
   },
   {
@@ -233,6 +244,7 @@ const funds = [
     aum: "$35.75B",
     quarter: "Q1 2026",
     filed: "May 15, 2026",
+    pending: "Q2 2026 13F not yet indexed as of Aug 15 — showing last confirmed quarter",
     holdings: 77,
     topHoldings: [
       { ticker: "V",    weight: "5.35%" },
@@ -282,6 +294,7 @@ const funds = [
     aum: "~$7.3B (~$2.1B 13F)",
     quarter: "Q1 2026",
     filed: "May 15, 2026",
+    partial: "Q2 2026 filed (Aug 14): Alphabet increased +850K shares; flagship Offshore Fund +7.7% in Q2, led by SK Hynix, TSMC, Atom Computing (private) and Hut 8. Full Q2 position table not yet indexed — detail below is the confirmed Q1 book.",
     holdings: 33,
     topHoldings: [
       { ticker: "AMZN", weight: "19.40%" },
@@ -331,6 +344,7 @@ const funds = [
     aum: "$9.12B",
     quarter: "Q1 2026",
     filed: "May 15, 2026",
+    pending: "Q2 2026 13F not yet indexed as of Aug 15 — showing last confirmed quarter",
     holdings: 263,
     newBuys: [
       p("127 new positions incl. CRWV (CoreWeave), SPOT (Spotify), WEC, D (Dominion), BILL (Bill Holdings), DBOX (Dropbox)"),
@@ -360,6 +374,7 @@ const funds = [
     aum: "$166.3B (13F)",
     quarter: "Q1 2026",
     filed: "May 2026",
+    pending: "Q2 2026 13F not yet indexed as of Aug 15 — showing last confirmed quarter",
     holdings: "~4,558",
     newBuys: [p("~165 new positions across systematic screens")],
     increased: [
@@ -398,6 +413,7 @@ const individuals = [
     aum: "$3.39B",
     quarter: "Q1 2026",
     filed: "May 2026",
+    pending: "Q2 2026 13F not yet cleanly indexed as of Aug 15 (search leads conflicted with Q1) — showing last confirmed quarter",
     holdings: 68,
     topHoldings: [
       { ticker: "NTRA", weight: "18.1%" },
@@ -440,149 +456,116 @@ const individuals = [
     type: "individual",
     name: "Scion Asset Management",
     manager: "Michael Burry",
-    aum: "~$68M",
-    quarter: "Q1 2026",
-    filed: "May 2026",
-    holdings: 8,
-    topHoldings: [
-      { ticker: "MOH",  weight: "~35%" },
-      { ticker: "LULU", weight: "~26%" },
-      { ticker: "SLM",  weight: "~19.5%" },
-      { ticker: "BRKR", weight: "~19.3%" },
-    ],
+    aum: "Wound down",
+    quarter: "No 13F filed",
+    filed: "Last 13F: Q3 2025",
+    defunct: "Burry deregistered Scion with the SEC (Nov 10, 2025) and returned outside capital by year-end 2025 — no 13F has been filed since Q3 2025. The bets below are self-disclosed via his 'Cassandra Unchained' Substack / X, NOT a regulated 13F.",
+    holdings: "—",
     newBuys: [
-      p("MOH (Molina Healthcare)",  { weight: "35.11%", note: "managed care mispriced vs. Medicaid reform fears" }),
-      p("SLM Corp",                 { weight: "19.5%",  note: "student loan servicer — 30% of shares buybackable over 3 years" }),
-      p("BRKR (Bruker Corp)",       { weight: "19.3%",  note: "scientific instruments for biopharma" }),
-      p("MELI (MercadoLibre)",      { note: "bought in $1600s after -13% earnings drop per Burry Substack, May 9, 2026" }),
-      p("ADBE (Adobe)",             { note: "new position — bought in 'low $250s' after AI disruption selloff" }),
-      p("PYPL (PayPal)",            { note: "new position — fintech value at depressed multiples" }),
+      p("MOH (Molina Healthcare)", { note: "self-disclosed contrarian long — bought more; stock down ~54% from its high" }),
     ],
-    increased: [
-      p("LULU (Lululemon)", { pct: "+100%", note: "doubled position at multi-year lows" }),
+    increased: [],
+    reduced: [
+      p("NVDA (Nvidia) puts", { note: "self-disclosed — ~1M shares, $110 strike, 2027 expiry; part of a ~$1.1B notional bearish book (~80% of capital)" }),
+      p("PLTR (Palantir) puts + short", { note: "self-disclosed — $100 strike (Dec 2026) & $50 strike (Jun 2027), plus direct short" }),
+      p("ORCL (Oracle) short", { note: "self-disclosed short" }),
+      p("CAT (Caterpillar) short", { note: "self-disclosed short" }),
     ],
-    reduced: [],
     exits: [
-      p("BABA (Alibaba)",  { note: "full China tech liquidation — geopolitical de-risk" }),
-      p("BIDU (Baidu)",    { note: "full exit — completed China tech de-risking" }),
-      p("JD (JD.com)",     { note: "full exit" }),
-      p("HCA (HCA Healthcare)", { note: "full exit" }),
-      p("ESTC (Elastic NV)",    { note: "full exit" }),
-      p("GME (GameStop)",       { note: "sold all shares May 5 — regulatory concern / meme-stock catalyst passed" }),
+      p("Entire regulated long book", { note: "funds liquidated and capital returned by year-end 2025 — Scion no longer manages outside money" }),
     ],
-    theme: "Burry's Q1 2026 is a complete portfolio overhaul — full exit of all Chinese tech holdings (BABA, BIDU, JD) for geopolitical de-risk, replaced with deep-value US plays: Molina Healthcare (Medicaid mispricing), SLM Corp (aggressive buyback), Bruker (scientific instruments), MercadoLibre (LatAm e-commerce on panic drop), Adobe (bought in 'low $250s'), and PayPal. He doubled Lululemon on multi-year lows. GME sold May 5 — the meme-stock catalyst played out. The invisible but critical story: Burry disclosed NVDA and PLTR put options (~$85M total) — his 'Big Short 2.0' bet that AI euphoria valuations are not sustainable. Burry now has $60M+ in cash reserves — the most defensive he's been in years.",
-    sources: "SEC EDGAR, ForeignPolicyJournal, Yahoo Finance (puts), GuruFocus, Burry Substack",
+    theme: "The biggest change in the cohort this cycle isn't a trade — it's an exit from the regulated world entirely. Michael Burry deregistered Scion Asset Management with the SEC on Nov 10, 2025, telling investors 'my estimation of value in securities is not, and has not been for some time, in sync with the markets,' and returned outside capital. Scion's last 13F was Q3 2025 — meaning the Q1 2026 'Scion holdings' previously shown here (Molina, Lululemon, SLM, etc.) were never an actual filing and have been removed. Burry now publishes via his paid 'Cassandra Unchained' Substack, where he has disclosed an aggressively bearish, concentrated options book — roughly $1.1B notional in NVDA and PLTR puts (~80% of his capital, about double his final 13F's bearish bet), plus shorts in Oracle and Caterpillar and a contrarian long in beaten-down Molina. The through-line from his Scion days is intact: high-conviction, contrarian, bubble-focused bets — now expressed through options and self-disclosure rather than a reportable equity book.",
+    sources: "Bloomberg, CNBC, Sherwood News, Yahoo Finance (deregistration); Cassandra Unchained Substack, Benzinga (self-disclosed positions)",
     color: "#c0392b",
   },
   {
     type: "individual",
     name: "Greenlight Capital",
     manager: "David Einhorn",
-    aum: "~$3.19B",
-    quarter: "Q1 2026",
-    filed: "May 2026",
-    holdings: 45,
+    aum: "~$3.91B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: 46,
     topHoldings: [
-      { ticker: "GRBK", weight: "~20.8%" },
-      { ticker: "ACHC", weight: "~top 3" },
-      { ticker: "FLR",  weight: "~7.7%"  },
-      { ticker: "CNR",  weight: "~6.5%"  },
-      { ticker: "BHF",  weight: "~6.4%"  },
+      { ticker: "GRBK", weight: "~high teens" },
+      { ticker: "CNC",  weight: "~top 3 (+96% in Q2)" },
+      { ticker: "FLR",  weight: "~6.9%"  },
+      { ticker: "CNR",  weight: "~6.1%"  },
+      { ticker: "BHF",  weight: "~5.3%"  },
     ],
     newBuys: [
-      p("VSNT (Versant Media Group)", { note: "new medium position" }),
-      p("CROX (Crocs Inc.)",          { note: "entry at ~$83.49 — ~6x 2026 EPS estimate" }),
-      p("SLM Corp",                   { note: "entry at ~$18.95 — attracted to 30% buyback capacity over 3 years" }),
+      p("CMCSA (Comcast)",       { note: "entry ~$23.91 / ~5x EBITDA — classic Greenlight FCF-value; kept deliberately small" }),
+      p("FBIN (Fortune Brands)", { note: "new small value position" }),
+      p("PYPL (PayPal)",         { note: "new small position — fintech value at depressed multiples" }),
     ],
     increased: [
-      p("ACHC (Acadia Healthcare)", { note: "strong performer, added during Q1 pullback" }),
-      p("DHT (DHT Holdings tankers)", { note: "tight tanker supply market thesis" }),
-      p("Gold (GLD/physical)",        { note: "de-dollarization hedge — drove Q1 outperformance" }),
+      p("CNC (Centene)", { pct: "+96% in-quarter", note: "top positive contributor — managed-care re-rating" }),
     ],
     reduced: [
-      p("GPK (Graphic Packaging)", { note: "partial reduction — was a portfolio detractor" }),
+      p("(short/macro book)", { note: "short basket of AI-adjacent names −12.3%; gold & SOFR-futures macro detracted" }),
     ],
     exits: [
-      p("WBD (Warner Bros. Discovery)", { note: "exited legacy media position" }),
-      p("KD (Kyndryl)",                 { note: "full exit" }),
-      p("GPN (Global Payments)",        { note: "full exit — payments processor de-rated on fintech disruption" }),
-      p("Lebanese sovereign debt",       { note: "66% IRR realized over 1-year hold — standout trade of the quarter" }),
+      p("WFRD (Weatherford)", { note: "full exit" }),
     ],
-    theme: "Einhorn's Q1 2026 is textbook value investing working exactly as designed: Greenlight returned +6.5% net vs. S&P 500 −4.4% — one of the best relative quarters in years. Gold drove the outperformance (de-dollarization rally). The Lebanese sovereign debt 66% IRR is the standout exotic trade. New buys in Crocs and SLM are classic Einhorn: cheap on earnings, clear buyback catalyst, misunderstood by market. His Q1 letter warns of a 'checkmark recovery trap' — investors expecting a simple V-shaped recovery will be disappointed. GRBK remains the multi-year top holding with unmatched homebuilder capital allocation quality.",
-    sources: "HedgeFundAlpha, Seeking Alpha, Greenlight Q1 letter, SEC EDGAR",
+    theme: "Einhorn kept 'capital preservation' as the stated priority — the Solasglas fund fell ~5.4% in Q2 (long book positive, but the short basket of AI-adjacent names −12.3% and macro/gold detracted), before rebounding +4.9% in July. The 13F long book still grew to ~$3.9B on winners, with Centene's near-doubling (+96%) the single biggest driver alongside Green Brick and Penn Entertainment. Rather than swing the portfolio, Einhorn nibbled at cheap large caps — Comcast at ~5x EBITDA is a textbook Greenlight FCF-value entry — keeping them deliberately small while the short/macro book expresses his caution. Net: a defensively-postured book leaning on a concentrated value long anchor (GRBK) with a few new small value/cyclical toeholds. The fund remains closed to new investors.",
+    sources: "SEC EDGAR, Greenlight Re Q2 2026 call, Yahoo Finance, Seeking Alpha, Benzinga",
     color: "#2980b9",
   },
   {
     type: "individual",
     name: "Baupost Group",
     manager: "Seth Klarman",
-    aum: "$5.115B",
-    quarter: "Q1 2026",
-    filed: "May 2026",
-    holdings: 22,
+    aum: "$5.416B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: 23,
     topHoldings: [
-      { ticker: "AMZN", weight: "12.70%" },
-      { ticker: "QSR",  weight: "11.67%" },
-      { ticker: "WCC",  weight: "7.69%"  },
-      { ticker: "UNP",  weight: "7.31%"  },
-      { ticker: "ELV",  weight: "7.30%"  },
+      { ticker: "AMZN", weight: "~16.5%" },
+      { ticker: "QSR",  weight: "~11-12%" },
+      { ticker: "WCC",  weight: "~7.7%"  },
+      { ticker: "UNP",  weight: "~7.3%"  },
+      { ticker: "ELV",  weight: "~7.3%"  },
     ],
     newBuys: [
-      p("AON (Aon PLC)",                    { val: "$248.2M", note: "largest new buy — insurance brokerage with durable fee revenue" }),
-      p("NCLH (Norwegian Cruise Line)",     { val: "$67.9M",  note: "travel recovery at discounted valuation" }),
-      p("DNOW (NOW Inc.)",                  { val: "$43.2M",  note: "industrial distribution — energy/industrial supply" }),
-      p("V (Visa)",                         { note: "new position — payments network moat" }),
-      p("TFX (Teleflex)",                   { note: "new position — medical devices" }),
+      p("CME (CME Group)",           { val: "~$137M", note: "largest new buy — derivatives-exchange franchise, durable fee revenue" }),
+      p("AXTA (Axalta Coating)",     { val: "~$43.6M", note: "1.27M shares (~0.81%) — industrial coatings value" }),
+      p("PSH (Pershing Square)",     { val: "~$13M",  note: "surprising new stake in Bill Ackman's own vehicle" }),
     ],
     increased: [
-      p("AMZN (Amazon)", { pct: "+47.01%", val: "3.12M shares / ~$649M", note: "largest holding increase — durable cloud/commerce moat" }),
-      p("QSR (Restaurant Brands Intl)",  { note: "massive increase to #2 holding — BK/Tim Hortons/Popeyes franchise model" }),
-      p("ELV (Elevance Health)",          { pct: "+120%", note: "more than doubled to 1.319M shares (~$426M) — Medicaid value play" }),
-      p("WCC (Wesco International)",      { val: "+$88M" }),
-      p("UNP (Union Pacific)",            { val: "+$30M" }),
+      p("AMZN (Amazon)", { pct: "+20%", val: "3.74M sh / ~$892M", note: "now the #1 holding — continued 'quality at scale' tilt" }),
+      p("GOOG (Alphabet)", { pct: "+16%", note: "to ~1.37M shares" }),
     ],
     reduced: [
-      p("ELV (Elevance Health)", { val: "−$17M", note: "minor position sizing trim" }),
-      p("QSR",                   { val: "−$12M", note: "minor trim after large build" }),
+      p("(broader trims reported, not individually verified)"),
     ],
     exits: [
-      p("CRH (CRH PLC)",         { note: "full exit — building materials position closed" }),
-      p("DG (Dollar General)",   { note: "full exit" }),
-      p("FIS (Fidelity Natl. Information Services)", { note: "full exit" }),
-      p("FISV (Fiserv)",         { note: "full exit" }),
-      p("Multiple smaller positions — portfolio concentrated to 22 holdings"),
+      p("WTW (Willis Towers Watson)", { note: "full exit — the single biggest Q2 move by weight (~−5.1% impact)" }),
     ],
-    theme: "Klarman's Q1 2026 exemplifies Baupost's margin-of-safety discipline at scale. AON at $248.2M is the largest new buy — a classic Klarman franchise (durable fee-based insurance brokerage). Amazon at 12.7% is the conviction anchor, increased +47% to 3.12M shares (~$649M). Restaurant Brands International at #2 reflects quality franchise assets at a discount. Elevance Health doubled as Klarman averaged into a beaten-up managed-care franchise. Four full exits (CRH, Dollar General, FIS, FISV) and four new positions (AON, NCLH, DNOW, V, TFX) show quiet but active portfolio reshaping. With 22 positions, every entry reflects multi-year conviction. Baupost is the 'slowest moving, highest-confidence' portfolio in the cohort.",
-    sources: "ValuSider, WhaleWisdom, 13Radar, SEC EDGAR",
+    theme: "Klarman leaned further into mega-cap tech/quality compounders while adding financial-infrastructure exposure. The headline surprise is a fund famous for deep-value patience taking a new stake in Bill Ackman's Pershing Square vehicle, and building Amazon into its outright #1 position (~$892M, +20%). New CME (~$137M) pairs a steady, cash-generative exchange franchise with a couple of opportunistic value names (Axalta), funded partly by exiting insurance-broker Willis Towers Watson. It's incremental repositioning, not a regime change — still a concentrated ~23-name book, but tilting toward AMZN/GOOGL beta more than classic Baupost distressed/special-situations. When the market's most patient value investor makes Amazon his largest position, it's a signal about where 'margin of safety' now lives.",
+    sources: "SEC EDGAR, CNBC, Yahoo Finance, Seeking Alpha, GuruFocus, ValueSider",
     color: "#8e44ad",
   },
   {
     type: "individual",
     name: "Icahn Capital",
     manager: "Carl Icahn",
-    aum: "~$8.55B",
-    quarter: "Q1 2026",
-    filed: "May 2026",
+    aum: "~$8.26B",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
     holdings: 12,
     topHoldings: [
-      { ticker: "IEP",  weight: "48.49%" },
-      { ticker: "CVI",  weight: "28.01%" },
-      { ticker: "UAN",  weight: "6.17%"  },
-      { ticker: "CTRI", weight: "4.90%"  },
-      { ticker: "IFF",  weight: "3.63%"  },
+      { ticker: "IEP",  weight: "~48.5%" },
+      { ticker: "CVI",  weight: "~26%"   },
+      { ticker: "UAN",  weight: "~6.2%"  },
+      { ticker: "CTRI", weight: "~4.9%"  },
+      { ticker: "IFF",  weight: "~3.6%"  },
     ],
     newBuys: [],
-    increased: [
-      p("IEP (Icahn Enterprises LP)", { pct: "+5.87%" }),
-    ],
-    reduced: [
-      p("SATS (EchoStar)",   { pct: "−58.1%", note: "significant reduction in satellite TV stake" }),
-    ],
-    exits: [
-      p("SWX (Southwest Gas)", { note: "full exit — ended post-activist-win holding" }),
-    ],
-    theme: "Icahn Capital's Q1 2026 reduced holdings from 13 to 12 with the full exit of Southwest Gas (SWX) and a -58% cut to EchoStar (SATS). The portfolio is dominated by Icahn's control stakes: IEP at 48.5% (self-referential vehicle), CVI (CVR Energy, refining) at 28%, and UAN (nitrogen fertilizer) at 6.2%. Centuri Holdings (CTRI) and IFF round out the top 5. The refining hedge book drag (-8.2% investment returns, +4.4% ex-hedges) continues to work against returns as oil prices stabilized. Icahn is in activist-maintenance mode — defending existing positions rather than initiating new campaigns.",
-    sources: "SEC EDGAR, Quiver Quant, Icahn Enterprises Q1 2026 earnings, Bloomberg",
+    increased: [],
+    reduced: [],
+    exits: [],
+    theme: "Icahn's 13F remains the most static and concentrated in the cohort — a de facto two-stock book (IEP + the CVR complex ≈ 76%) plus a handful of activist legacy stakes, unchanged at 12 positions with no verified buys, adds, trims or exits this quarter. The ~3% portfolio decline to $8.26B is a mark-to-market effect — CVR Energy fell ~$435M on refining weakness — rather than active selling. Separately, Icahn was busy in July M&A (a reported ~$34/share bid for Caesars), but that is an Icahn Enterprises corporate event, not a new Icahn Capital 13F line. Bottom line: hold-and-wait, with the energy/refining complex the swing factor for the whole book.",
+    sources: "SEC EDGAR, GuruFocus, HoldingsChannel, Acquirer's Multiple, CNBC",
     color: "#d35400",
   },
   {
@@ -592,6 +575,7 @@ const individuals = [
     aum: "$3.20B",
     quarter: "Q1 2026",
     filed: "May 2026",
+    pending: "Q2 2026 13F not yet indexed as of Aug 15 — showing last confirmed quarter",
     holdings: 14,
     topHoldings: [
       { ticker: "GOOGL", weight: "22.31%" },
@@ -626,6 +610,7 @@ const individuals = [
     aum: "~$32.65B (13F)",
     quarter: "Q1 2026",
     filed: "May 2026",
+    pending: "Q2 2026 13F not yet indexed as of Aug 15 — showing last confirmed quarter",
     holdings: "1,749",
     newBuys: [
       p("165 new positions incl. VIG, GD (General Dynamics), D (Dominion), SO (Southern), CVX (Chevron)"),
@@ -654,6 +639,7 @@ const individuals = [
     aum: "~$383M",
     quarter: "Q1 2026",
     filed: "May 2026",
+    pending: "Q2 2026 13F not yet indexed as of Aug 15 — showing last confirmed quarter",
     holdings: 55,
     topHoldings: [
       { ticker: "NBR",  weight: "11.53%" },
@@ -679,181 +665,200 @@ const individuals = [
     type: "individual",
     name: "Trian Fund Management",
     manager: "Nelson Peltz",
-    aum: "~$8.2B",
-    quarter: "Q1 2026",
-    filed: "May 2026",
-    holdings: 6,
+    aum: "sharply lower ex-JHG",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    partial: "Q2 confirmed structural change: the Janus Henderson take-private closed June 30, removing JHG (~42% of the Q1 book) from the 13F. Exact remaining share counts not yet indexed — residual public book below is reasoned from the confirmed exit.",
+    holdings: 5,
     topHoldings: [
-      { ticker: "JHG",  weight: "38.05%" },
-      { ticker: "GE",   weight: "31.16%" },
-      { ticker: "SOLV", weight: "16.38%" },
-      { ticker: "WEN",  weight: "6.36%"  },
-      { ticker: "FGS",  weight: "6.07%"  },
+      { ticker: "GE",   weight: "~largest (post-JHG)" },
+      { ticker: "SOLV", weight: "~top 2" },
+      { ticker: "FERG", weight: "~top 3" },
+      { ticker: "WEN",  weight: "~top 4" },
     ],
     newBuys: [],
     increased: [
-      p("GE (GE Aerospace)", { pct: "+0.01%", note: "holding steady — long-term compounding thesis intact" }),
-      p("GEHC (GE Healthcare)", { pct: "+0.37%" }),
+      p("FERG (Ferguson)", { note: "prior reporting flagged Trian boosting Ferguson (add not independently confirmed for Q2)" }),
+      p("WEN (Wendy's)",   { note: "prior reporting flagged an added stake (unconfirmed for Q2)" }),
     ],
-    reduced: [
-      p("SOLV (Solventum / 3M spin-off)", { pct: "−2.67%", note: "activist engagement ongoing" }),
-      p("JHG (Janus Henderson)", { note: "sold 6.21M shares at $51.60 ahead of take-private close" }),
+    reduced: [],
+    exits: [
+      p("JHG (Janus Henderson)", { note: "left the 13F — take-private closed June 30 ($52/sh); Trian's ~25.1M shares rolled into private Jupiter Topco LLC" }),
     ],
-    exits: [],
-    theme: "Trian's Q1 2026 is entirely defined by the Janus Henderson take-private. Shareholders approved the deal (99.7% in favor, April 2026) at $52/share — a massive win for Peltz at a significant gain to cost basis. Trian and General Catalyst plan a full 'AI makeover' of Janus Henderson, converting the traditional asset manager into an AI-native investment platform. GE Aerospace remains the marquee long-term activist compounding story — now a pure-play aerospace business after the GE Healthcare and GE Vernova spin-offs. Solventum (3M spin-off) is the active work-in-progress. Trian's portfolio is the least diversified in the cohort (6 positions) — every holding is an explicit multi-year activist engagement with an operational transformation thesis.",
-    sources: "BusinessWire, Bloomberg, SEC EDGAR, Trian 13F",
+    theme: "The dominant Q2 event is the completion of the Janus Henderson LBO (Trian / General Catalyst / QIA, ~$7.4B), which closed June 30 and converts Trian's single largest public holding into a private stake — mechanically removing ~42% of the reported book from 13F visibility and shrinking the disclosed portfolio sharply. Trian rolled ~25.1M JHG shares into the private holdco (Jupiter Topco) in exchange for equity interests, so the exposure isn't gone — it's just no longer public. The residual 13F book is Trian's remaining concentrated activist bets: GE Aerospace (the marquee long-term compounder), Solventum, Ferguson, and Wendy's. Confirm exact Q2 share counts against EDGAR once the filing is fully indexed.",
+    sources: "SEC EDGAR, Janus Henderson / BusinessWire (deal close), StockTitan (13D/A), CNBC, TipRanks",
     color: "#ba4a00",
   },
   {
     type: "individual",
     name: "Situational Awareness LP",
     manager: "Leopold Aschenbrenner",
-    aum: "~$13.67B (13F, incl. options notional)",
-    quarter: "Q1 2026",
-    filed: "May 15, 2026",
-    holdings: 42,
+    aum: "~$20B AI book (levered; 13F top-line reported inconsistently)",
+    quarter: "Q2 2026",
+    filed: "Aug 14, 2026",
+    holdings: "~26–42",
     topHoldings: [
-      { ticker: "BE",   weight: "top holding" },
-      { ticker: "SNDK", weight: "top 2" },
-      { ticker: "CRWV", weight: "top 3" },
-      { ticker: "IREN", weight: "top 4" },
-      { ticker: "CORZ", weight: "top 5" },
+      { ticker: "SNDK", weight: "~$5.7B" },
+      { ticker: "MU",   weight: "~$5.6B" },
+      { ticker: "BE",   weight: "~$1.9B" },
+      { ticker: "TSM",  weight: "~$1.3B" },
+      { ticker: "NBIS", weight: "~$1.2B" },
     ],
     newBuys: [
-      p("SEI (Solaris Energy Infrastructure)", { val: "$62.5M", note: "modular power for data centers" }),
-      p("TE (T1 Energy)",          { val: "$43.9M", note: "renewable energy for AI compute" }),
-      p("BITF (Bitfarms)",         { note: "19.88M shares — BTC miner / AI compute infrastructure" }),
+      p("MU (Micron) — now LONG", { val: "~$5.6B", note: "the tell of the quarter — Micron was a PUT in Q1, now the #2 long" }),
+      p("NBIS (Nebius Group)",    { val: "~$1.2B", note: "new AI-cloud/infrastructure long" }),
     ],
     increased: [
-      p("CLSK (CleanSpark)",     { val: "~$90.5M", pct: "+649%", note: "from 1.64M to 12.28M shares — BTC miner repurposed as AI compute host" }),
-      p("BE (Bloom Energy)",     { val: "~$879M", note: "solid-oxide fuel cells for off-grid data centers" }),
-      p("SNDK (SanDisk)",        { val: "~$724M + $389M calls", note: "NAND flash storage for AI workloads" }),
-      p("CRWV (CoreWeave)",      { val: "~$556M + $141M calls", pct: "+672% calls", note: "GPU cloud infrastructure" }),
-      p("IREN (IREN Ltd)",       { val: "~$401M", note: "BTC miner transitioning to AI data center hosting" }),
-      p("CORZ (Core Scientific)", { val: "~$389M" }),
-      p("APLD (Applied Digital)", { val: "~$320M", note: "HPC/AI data centers" }),
-      p("RIOT (Riot Platforms)",  { val: "~$142M" }),
+      p("SNDK (SanDisk)",   { val: "~$5.7B", note: "largest position — flipped bullish; largely call-option (notional) exposure" }),
+      p("BE (Bloom Energy)", { val: "~$1.9B", note: "off-grid data-center power" }),
+      p("CRWV (CoreWeave)", { val: "~$745M", note: "7.48M shares — GPU cloud" }),
+      p("CORZ (Core Scientific)", { val: "~$0.7B" }),
+      p("IREN (IREN Ltd)",  { val: "~$0.4B" }),
     ],
     reduced: [
-      p("SMH (Semiconductor ETF puts)", { val: "~$2.04B notional", note: "bearish bet on chip sector broadly" }),
-      p("NVDA (Nvidia puts)",    { val: "~$1.57B notional" }),
-      p("ORCL (Oracle puts)",    { val: "~$1.07B notional" }),
-      p("AVGO (Broadcom puts)",  { val: "~$1.01B notional" }),
-      p("AMD (puts)",            { val: "~$969M notional" }),
-      p("MU (Micron puts)",      { val: "~$584M notional" }),
-      p("TSM (TSMC puts)",       { val: "~$535M notional" }),
-      p("ASML (puts)",           { val: "~$494M notional", note: "bearish on European chip equipment" }),
-      p("INFY (Infosys puts)",   { val: "~$6.76M notional" }),
-      p("GLW (Corning puts)",    { note: "small put position" }),
+      p("Chip-sector put book", { note: "the ~$8.46B Q1 short book against NVDA/AVGO/AMD/SMH/ORCL/MU/TSM/ASML was slashed/rotated — no longer the top of the book; net exposure flipped LONG" }),
     ],
     exits: [
-      p("VST (Vistra Energy)", { note: "exited nuclear power position after large gains" }),
-      p("INTC (Intel) common", { note: "sold all 20.2M shares; retains 20.2M call options — bet on foundry optionality" }),
+      p("Net-short-chips posture", { note: "abandoned — the defining Q1 hedge was reversed into a levered long AI-memory/infra bet" }),
     ],
-    theme: "Aschenbrenner is the most ideologically coherent investor in the cohort. His June 2024 165-page manifesto 'Situational Awareness: The Decade Ahead' predicted AGI by ~2027 and framed the hardware buildout as the defining economic opportunity of the era. His thesis: the constraint on AI is not algorithms but electrons — data centers need gigawatts of power that the grid cannot supply on short notice. Bitcoin miners already have grid connections and stranded power assets; they become AI compute hosts overnight. Hence: long BE, SNDK, CRWV, IREN, CORZ, APLD. Q1 2026 adds: CLSK exploded from 1.64M to 12.28M shares (+649%), new positions in SEI (modular power), TE (T1 Energy), and BITF (Bitfarms, 19.88M shares). The contrarian short (~$8.46B in puts against NVDA, AVGO, AMD, SMH, ORCL, MU, TSM, ASML, INFY) is deliberate — he avoids the 'crowded AI chip trade' entirely, betting that the infrastructure layer captures more value than chip incumbents. Fund launched September 2024 with Collison brothers and Nat Friedman as seed investors. Reported 100%+ returns in calendar year 2025.",
-    sources: "SEC EDGAR (CIK 0002045724), Fortune, CoinDesk, HedgeFundAlpha, 13f.info, Blockspace, WhaleWisdom",
+    theme: "This 13F is effectively a tombstone. The June 30 snapshot shows Aschenbrenner had abandoned the Q1 'short-the-chips' hedge and loaded aggressively LONG into AI memory and infrastructure — SanDisk (~$5.7B) and Micron (~$5.6B) became the two largest positions (Micron had been a put just one quarter earlier), alongside Bloom Energy, Nebius, CoreWeave and the bitcoin-miner complex, at roughly 4x leverage. It was the wrong quarter for it: those exact names cratered in July, triggering margin calls that BofA, Goldman and JPMorgan helped manage, and Citadel bought the bulk of the public book in late July (then posted one of its best months in years). So the fund no longer holds most of what this filing shows. The wholesale reversal — from the cohort's largest chip-short to a highly-levered net-long memory/AI-infra book in a single quarter, followed by a forced unwind — is the cautionary tale of the AI-infrastructure trade's first real drawdown.",
+    sources: "SEC EDGAR (CIK 0002045724), CNBC, WSJ, Bloomberg, Yahoo Finance, Blockspace",
     color: "#0a3d62",
   },
 ];
 
 const allFilers = [...funds, ...individuals];
 
-// Q4 2025 snapshot data for quarter-over-quarter comparison
-// Holdings counts reflect position counts from Q4 2025 13F filings (period: Dec 31, 2025)
+// Prior-quarter snapshot for quarter-over-quarter comparison.
+// Confirmed Q2 2026 filers compare against Q1 2026 (Mar 31); filers whose
+// Q2 filing is not yet indexed still display their Q1 2026 book and compare
+// against Q4 2025 (Dec 31). Each entry carries its own label.
 const q4Data = {
-  "Berkshire Hathaway":         { aum: "~$265B",              holdings: 42   },
-  "Bridgewater Associates":     { aum: "~$26.5B (13F)",       holdings: 1020 },
-  "Citadel Advisors":           { aum: "~$632B",              holdings: 12200},
-  "Pershing Square":            { aum: "~$14.2B",             holdings: 9    },
-  "Appaloosa Management":       { aum: "~$7.3B",              holdings: 35   },
-  "Tiger Global Management":    { aum: "~$21.5B",             holdings: 54   },
-  "Viking Global Investors":    { aum: "~$33.8B",             holdings: 72   },
-  "Third Point":                { aum: "~$6.8B (~$1.9B 13F)", holdings: 31   },
-  "Soros Fund Management":      { aum: "~$8.5B",              holdings: 175  },
-  "D.E. Shaw & Co.":            { aum: "~$172B (13F)",        holdings: 4410 },
-  "Duquesne Family Office":     { aum: "~$3.9B",              holdings: 37   },
-  "Scion Asset Management":     { aum: "~$130M",              holdings: 8    },
-  "Greenlight Capital":         { aum: "~$2.72B",             holdings: 41   },
-  "Baupost Group":              { aum: "~$4.8B",              holdings: 26   },
-  "Icahn Capital":              { aum: "~$9.2B",              holdings: 13   },
-  "Himalaya Capital Management":{ aum: "~$2.9B",              holdings: 9    },
-  "Gotham Asset Management":    { aum: "~$10.5B",             holdings: 1612 },
-  "Miller Value Partners":      { aum: "~$262M",              holdings: 34   },
-  "Trian Fund Management":      { aum: "~$8.8B",              holdings: 7    },
-  // Situational Awareness LP: first known 13F filing — no Q4 2025 data
+  // ── Confirmed Q2 2026 filers → prior quarter is Q1 2026 ──
+  "Berkshire Hathaway":         { aum: "~$263.1B",            holdings: 29,    label: "Q1 2026" },
+  "Citadel Advisors":           { aum: "$618B",               holdings: 12857, label: "Q1 2026" },
+  "Pershing Square":            { aum: "$13.71B",             holdings: 11,    label: "Q1 2026" },
+  "Appaloosa Management":       { aum: "$5.93B",              holdings: 31,    label: "Q1 2026" },
+  "Tiger Global Management":    { aum: "$22.8B",              holdings: 54,    label: "Q1 2026" },
+  "Greenlight Capital":         { aum: "~$3.19B",             holdings: 45,    label: "Q1 2026" },
+  "Baupost Group":              { aum: "$5.115B",             holdings: 22,    label: "Q1 2026" },
+  "Icahn Capital":              { aum: "~$8.55B",             holdings: 12,    label: "Q1 2026" },
+  "Trian Fund Management":      { aum: "~$8.2B",              holdings: 6,     label: "Q1 2026" },
+  "Situational Awareness LP":   { aum: "~$13.67B",            holdings: 42,    label: "Q1 2026" },
+  // ── Q2 not yet indexed (still showing Q1 2026 book) → prior quarter is Q4 2025 ──
+  "Bridgewater Associates":     { aum: "~$26.5B (13F)",       holdings: 1020,  label: "Q4 2025" },
+  "Viking Global Investors":    { aum: "~$33.8B",             holdings: 72,    label: "Q4 2025" },
+  "Third Point":                { aum: "~$6.8B (~$1.9B 13F)", holdings: 31,    label: "Q4 2025" },
+  "Soros Fund Management":      { aum: "~$8.5B",              holdings: 175,   label: "Q4 2025" },
+  "D.E. Shaw & Co.":            { aum: "~$172B (13F)",        holdings: 4410,  label: "Q4 2025" },
+  "Duquesne Family Office":     { aum: "~$3.9B",              holdings: 37,    label: "Q4 2025" },
+  "Himalaya Capital Management":{ aum: "~$2.9B",              holdings: 9,     label: "Q4 2025" },
+  "Gotham Asset Management":    { aum: "~$10.5B",             holdings: 1612,  label: "Q4 2025" },
+  "Miller Value Partners":      { aum: "~$262M",              holdings: 34,    label: "Q4 2025" },
+  // Scion Asset Management: deregistered Nov 2025 — no prior-quarter comparison
 };
 
 const sectorThemes = [
-  { sector: "Cloud/AI Platform: MSFT & GOOGL as 'Safe Harbor'", tickers: "MSFT, GOOGL, GOOG, AMZN", buyers: "Pershing Square (MSFT new $2.09B), Viking (MSFT +32%, GOOGL new), Berkshire (GOOGL tripled), Himalaya (GOOGL 44%), Baupost (AMZN +47%), D.E. Shaw (MSFT +$1.9B)", signal: "The strongest cross-filer consensus of Q1 2026: Microsoft and Alphabet are being treated as the most durable AI cloud platforms at reasonable valuations. When 6+ filers independently converge on the same 2 stocks, the institutional re-rating is typically multi-year." },
-  { sector: "AI Semiconductors (Selective Conviction)", tickers: "NVDA, AVGO, MU, MRVL, INTC", buyers: "Bridgewater (+NVDA, +MU, +AVGO), Appaloosa (MU +200%), Tiger Global (INTC new, AVGO +, AMAT +85%), D.E. Shaw (+AVGO +$2.2B, MSFT +$1.9B), Druckenmiller (AVGO new $60.6M)", signal: "AI chip conviction at Bridgewater, D.E. Shaw, and Appaloosa. But the consensus is fracturing: Third Point cut NVDA -94%, Druckenmiller exited GOOGL/AMZN, Burry holds NVDA puts, and Aschenbrenner has $8.46B in puts against the entire chip sector (SMH, NVDA, AVGO, AMD, MU, TSM, ASML). The most contested trade in the cohort." },
-  { sector: "AI Power Infrastructure", tickers: "BE, IREN, CORZ, APLD, CLSK, RIOT", buyers: "Situational Awareness (BE ~$879M, IREN ~$401M, CORZ ~$389M, CLSK +$90.5M), D.E. Shaw (IREN +$687M, BE +$605M), Appaloosa (VST +114%), Druckenmiller (BE new)", signal: "Aschenbrenner's thesis is the purest expression: AI will consume all available electricity, and Bitcoin miners already have the grid connections. BE, CORZ, APLD, IREN, CLSK, RIOT are all 'power infrastructure repurposed as AI compute.' D.E. Shaw independently reached the same conclusion. This is the fastest-growing cross-filer theme in the cohort." },
-  { sector: "Value Working vs. Growth Compression", tickers: "GRBK, NBR, MOH, LULU, QSR, CROX", buyers: "Greenlight (+6.5% Q1), Miller Deep Value (+8.39% Q1), Baupost, Scion (MOH, LULU)", signal: "S&P 500 returned -4.4% in Q1 2026. Value managers dramatically outperformed. When the market sells growth on macro uncertainty, concentrated value investors with pre-identified catalysts generate the best risk-adjusted returns. Q1 2026 may mark the inflection point where value leadership persists." },
-  { sector: "China De-Risking (Broad Cohort)", tickers: "BABA, PDD, JD, FXI", buyers: "Counter-thesis: Himalaya (PDD at 14.6% unchanged)", signal: "Appaloosa (-33% BABA), D.E. Shaw (-$1.2B BABA), Scion (full China tech exit). The tariff environment is accelerating China position exits. Only Himalaya Capital (Li Lu) maintains meaningful China conviction — PDD unchanged at 14.6%. When all but one of 20 filers is exiting China, the contrarian setup for a re-rating is building." },
-  { sector: "Airlines: Near-Total Institutional Exit", tickers: "AAL, UAL, DAL", buyers: "Against consensus: Berkshire (DAL new — but buying the quality airline, not the weak one)", signal: "Appaloosa fully exited AAL and UAL in Q1 ahead of tariff-driven demand uncertainty. The cross-filer consensus: airlines are exposed to fuel costs, demand recession risk, and tariff disruption. Berkshire's DAL entry (buying Delta specifically — higher-margin, international-capable) is the only contrarian airline bet, and it distinguishes quality from commodity carriers." },
+  { sector: "AI Memory: The Round-Trip Trade", tickers: "SNDK, MU, WDC", buyers: "Bought the top: Situational Awareness (SNDK ~$5.7B, MU ~$5.6B — levered long). Sold the top: Appaloosa (exited SNDK >$400M, cut MU −41%). Added: Citadel (MU +$2.8B)", signal: "Memory was the parabola of Q2 — SanDisk and Micron roughly tripled Mar–Jun. The cohort split on timing, not thesis: Tepper booked gains and got out, Aschenbrenner levered in at 4x and blew up in July. The single clearest lesson of the quarter is that being right on the theme and wrong on the entry (and the leverage) can still be fatal." },
+  { sector: "Down the AI Stack: Chip-Infra & Private Frontier Tech", tickers: "CBRS, AMD, INTC, APLD, NBIS, SpaceX, Quantinuum", buyers: "Tiger Global (Cerebras ~10% stake, AMD new, INTC doubled, APLD new), Citadel (SpaceX, Cerebras, Quantinuum — private), Situational Awareness (Nebius, CoreWeave)", signal: "The most consistent Q2 rotation: take profits on crowded mega-cap AI leaders and move one layer down the stack — into merchant accelerators (AMD), foundry/compute-infra (Intel, Applied Digital), and pre-IPO frontier tech (Cerebras, SpaceX, Quantinuum). When Tiger and Citadel independently reach for the same private names, the public AI leaders are viewed as fully priced." },
+  { sector: "Alphabet: Berkshire's $10B Embrace vs. the Sellers", tickers: "GOOGL, GOOG", buyers: "Buying: Berkshire (+~$10B, now top-3), Baupost (+16%). Selling: Pershing Square (full exit), Tiger Global (−45%)", signal: "Alphabet remains the cohort's most two-sided mega-cap. Abel made it a top-3 Berkshire holding via a $10B AI-infrastructure placement the same quarter Ackman exited entirely and Coleman nearly halved his stake. The bull case is AI-platform optionality at a reasonable multiple; the bear case is search-monetization risk. No consensus." },
+  { sector: "Quality-at-Scale: Mega-Cap Platforms & Compounders", tickers: "AMZN, MSFT, META, V, MA, SPGI, CME", buyers: "Baupost (AMZN now #1, +CME, +PSH), Pershing (MSFT #1, +META, +V, +MA, +SPGI), Appaloosa (AMZN #1), D.E. Shaw (MSFT — Q1)", signal: "Even the deep-value houses are concentrating into mega-cap platforms and wide-moat compounders. Klarman making Amazon his #1 position and buying a stake in Ackman's Pershing Square is the tell: 'margin of safety' has migrated toward dominant, cash-generative franchises (payments networks, data/ratings duopolies) rather than classic distressed value." },
+  { sector: "The Netflix Mirror & Streaming Split", tickers: "NFLX", buyers: "In: Pershing Square (re-entry, 3.15M sh). Out: Tiger Global (full exit ~$234.5M), Citadel (−$2.5B trim)", signal: "The cleanest opposite-way trade of the quarter: Ackman bought back the stock that cost him ~$400M in 2022 the same quarter Coleman exited it entirely and Griffin trimmed hard. Streaming economics remain genuinely contested at the top of the market." },
+  { sector: "The AI-Infra Blow-Up & Forced Deleveraging", tickers: "SNDK, MU, BE, NBIS, CRWV", buyers: "Situational Awareness (levered long, ~4x) → margin calls (July) → Citadel bought the book", signal: "The AI-infrastructure trade took its first real drawdown. Aschenbrenner's reversal from the cohort's largest chip-short to a highly-levered net-long memory/infra book, followed by a July margin-driven fire-sale to Citadel, is the cautionary tale: in a crowded, leveraged trade, the exit door is narrow. Watch whether leverage across the AI-infra complex is being quietly reduced into H2." },
 ];
 
 const exits = [
-  { stock: "V (Visa) + MA (Mastercard)", funds: "Berkshire Hathaway — ~$5.19B combined, Todd Combs portfolio cleanup" },
-  { stock: "UNH (UnitedHealth)", funds: "Berkshire Hathaway — ~$1.66B, healthcare uncertainty" },
-  { stock: "AMZN (Amazon)", funds: "Berkshire Hathaway — ~$525M (paradoxically, Baupost added +$490M, Appaloosa +98%)" },
-  { stock: "HLT (Hilton Hotels)", funds: "Pershing Square — full exit after successful multi-year hold" },
-  { stock: "GOOGL (Alphabet)", funds: "Pershing Square — sold ~95%, rotating capital into MSFT" },
-  { stock: "AAL + UAL + DAL (All Airlines)", funds: "Appaloosa — full exit of all three airline positions (same quarter Berkshire bought DAL)" },
-  { stock: "WDAY (Workday)", funds: "Tiger Global + Bridgewater — full exits, AI-native HR software alternatives threat" },
-  { stock: "CRM (Salesforce)", funds: "Bridgewater — full exit, enterprise software pivot away from legacy players" },
-  { stock: "BABA + BIDU + JD (Chinese tech)", funds: "Scion (Burry) — complete China tech liquidation including Baidu, geopolitical de-risk" },
-  { stock: "NVDA (Nvidia) — major cuts", funds: "Third Point −94%, Druckenmiller −completed exit, Gotham −$24M, Citadel reduced — DeepSeek efficiency concerns" },
-  { stock: "MSFT (Microsoft) — exited/cut", funds: "Third Point full exit, Appaloosa −82%, Citadel −$909M — rotating away from legacy cloud at premium multiples" },
-  { stock: "PCG (PG&E)", funds: "Third Point — full exit, ended multi-year activist engagement" },
-  { stock: "SWX (Southwest Gas)", funds: "Icahn Capital — full exit of post-activist-win holding" },
-  { stock: "WBD (Warner Bros. Discovery)", funds: "Greenlight Capital — exited legacy media position" },
-  { stock: "C (Citigroup)", funds: "Berkshire (~$1.12B) + Druckenmiller — banking exposure reduction" },
-  { stock: "Lebanese sovereign debt", funds: "Greenlight Capital — 66% IRR realized over 1-year hold (standout exotic trade)" },
-  { stock: "GOOGL (Alphabet) — exited/cut", funds: "Pershing Square −95%, Druckenmiller full exit — paradoxically while Viking/Berkshire/Himalaya were buying" },
-  { stock: "CMG + CP exits", funds: "Pershing Square — full exits of Chipotle and Canadian Pacific" },
+  { stock: "GOOGL + GOOG (Alphabet)", funds: "Pershing Square — full exit of both classes (completing the rotation into MSFT/Meta), while Berkshire added ~$10B and Baupost +16%" },
+  { stock: "SNDK (SanDisk)", funds: "Appaloosa — full exit >$400M, just ONE quarter after initiating it; Tepper booked the AI-memory parabola near the top" },
+  { stock: "NFLX (Netflix)", funds: "Tiger Global — full exit ~$234.5M the same quarter Ackman re-entered; Citadel also trimmed −$2.5B" },
+  { stock: "WTW (Willis Towers Watson)", funds: "Baupost — full exit, its single biggest Q2 move by weight" },
+  { stock: "WFRD (Weatherford)", funds: "Greenlight Capital — full exit" },
+  { stock: "STZ (Constellation Brands)", funds: "Berkshire Hathaway — full exit of an immaterial position" },
+  { stock: "JHG (Janus Henderson)", funds: "Trian — leaves the 13F as the $52/sh take-private closed June 30 (~42% of the book rolled private)" },
+  { stock: "ZS (Zscaler) + BULL (Webull)", funds: "Tiger Global — full exits amid a broad Big-Tech de-weighting" },
+  { stock: "Chip-sector put book (~$8.46B)", funds: "Situational Awareness — abandoned its Q1 short-the-chips hedge entirely, flipping to a levered long that imploded in July" },
+  { stock: "Entire regulated book", funds: "Scion / Michael Burry — funds wound down and capital returned; deregistered Nov 2025, no 13F since Q3 2025" },
+  { stock: "TSLA / NVDA / NFLX (trims)", funds: "Citadel — rotated out of crowded momentum longs (−$4.8B / −$3.0B / −$2.5B)" },
+  { stock: "BAC (Bank of America)", funds: "Berkshire — pared 30M+ shares, ~8th consecutive quarter trimming the bank" },
 ];
 
 // ─── ANALYSIS DATA ────────────────────────────────────────────────────────────
 
 const macroNarrative = {
-  quarter: "Q1 2026",
-  edition: "Revised Edition · June 2026",
-  headline: "The Great De-Grossing: Conviction Fractures Across Every Layer of the AI Trade",
+  quarter: "Q2 2026",
+  edition: "First Read · August 2026",
+  headline: "The AI-Infrastructure Trade Breaks: A Blow-Up, Berkshire on Offense, and the Great Memory Round-Trip",
   paragraphs: [
     {
-      title: "The De-Grossing Quarter",
-      body: "The defining feature of Q1 2026 — visible only after primary-source verification of the filings — is how aggressively the most storied stock-pickers shrank their books. Third Point executed the most dramatic reset in Dan Loeb's recent history, cutting 13F exposure from ~$7.26B to ~$2.08B and fully exiting both Microsoft and PG&E, its two former flagship positions. Druckenmiller's Duquesne shrank from $4.22B to $3.39B while fully exiting Alphabet and liquidating 99% of Amazon. Citadel reduced both Nvidia and Amazon. This was not a rotation between sectors — it was a withdrawal of gross exposure by the cohort's most experienced macro-aware managers, executed during a quarter when the S&P 500 fell -4.4%. The smartest money got smaller, not just different.",
+      title: "The First Blow-Up",
+      body: "The Q2 filing that matters most is a tombstone. Leopold Aschenbrenner's Situational Awareness — the cohort's most ideologically pure AI bull — spent Q1 short the entire chip complex (~$8.46B of puts). By June 30 it had done a complete about-face: it abandoned the short book and went aggressively long AI memory and infrastructure at roughly 4x leverage, with SanDisk (~$5.7B) and Micron (~$5.6B) as its two largest positions — Micron having been a put just one quarter earlier — alongside Bloom Energy, Nebius, CoreWeave and the bitcoin-miner complex. It was precisely the wrong moment: those names cratered in July, margin calls followed, and Citadel bought the bulk of the public book in late July (then posted one of its best months in years). This is the AI-infrastructure trade's first real drawdown, and it happened to the person who wrote the manifesto for it.",
     },
     {
-      title: "The Microsoft Schism",
-      body: "The 'MSFT as AI safe harbor' narrative did not survive verification — what the filings actually show is the widest single-stock disagreement in the cohort. On the buy side: Pershing Square deployed $2.09B into Microsoft at ~21x forward earnings, D.E. Shaw added $1.9B, and Viking increased +32.5%. On the sell side: Third Point fully exited, Appaloosa cut -82%, and Citadel trimmed $909M. Alphabet shows the same schism — Berkshire tripled its stake (+204%), Viking initiated, and Himalaya holds 44% combined, while Druckenmiller fully exited and Pershing sold ~95%. There is no platform consensus in Q1 2026. There are two camps with irreconcilable views on whether mega-cap AI platforms are the safest asset in the market or the most crowded.",
+      title: "Berkshire Goes on Offense",
+      body: "Greg Abel used his second quarter to flip Berkshire from seller to buyer. Berkshire was a net equity buyer of ~$20B — its first net-buying quarter in over three years — added ~$4.5B of buybacks, and drew cash down to $365.5B from a record $397.4B. The signature move is a ~$10B build in Alphabet via an AI-infrastructure placement, vaulting Google to a top-3 holding and marking Berkshire's clearest embrace yet of mega-cap AI/compute — exposure Buffett historically avoided. Abel paired it with a housing/cyclical tilt (Lennar, D.R. Horton, more Delta and Occidental) and new stakes in Heico and Ulta, funded by continued trims of the legacy Apple and Bank of America mega-positions. When the market's most famously patient capital allocator turns aggressive buyer in the same quarter a levered AI fund implodes, the two moves frame the quarter's central tension.",
     },
     {
-      title: "Value's Vindication",
-      body: "The S&P 500 returned -4.4% in Q1 2026. Greenlight Capital returned +6.5% net. Miller Deep Value returned +8.39% — and grew to 55 holdings on ~$383M as inflows followed performance. Baupost quietly executed its most active quarter in years: AON ($248.2M) as the largest new buy, Amazon increased +47% to ~$649M, and four full exits (CRH, Dollar General, FIS, Fiserv). This is the structural dynamic at work: when macro uncertainty compresses multiples, concentrated value investors with pre-identified catalysts dramatically outperform momentum strategies. The Lebanese sovereign debt 66% IRR (Greenlight) and Molina Healthcare re-rating (Burry) are classic value outcomes that required patience and the willingness to be early.",
+      title: "The Great Memory Round-Trip",
+      body: "AI memory was the round-trip trade of the quarter, and the cohort split hard on timing. David Tepper's Appaloosa exited SanDisk entirely — a position it had initiated only one quarter earlier — and cut Micron ~41% after memory names roughly tripled from March to June, booking gains near the top and rotating into Amazon, TSMC, Alphabet and Uber. Aschenbrenner did the opposite, levering into SanDisk and Micron at the peak. Tiger Global threaded a third path: Chase Coleman cut his mega-cap AI core (Alphabet −45%, plus trims to Nvidia, Microsoft, Meta and Amazon) and rotated one layer down the stack — into Cerebras (a near-10% stake), Applied Digital, AMD, a doubled Intel, and adds to Applied Materials and Broadcom. The debate is no longer whether to own AI, but which layer — and, increasingly, whether the memory/infra layer has run too far.",
     },
     {
-      title: "The Abel Era and the Delta Divergence",
-      body: "Greg Abel's first 13F as Berkshire CEO produced 16 full exits (42 to 29 positions), a tripled Alphabet stake, and a new $2.6B Delta Air Lines position. The Delta buy contains the quarter's cleanest natural experiment: David Tepper's Appaloosa fully exited Delta in the exact same quarter — alongside full exits of American and United — completing a total withdrawal from the airline sector on tariff and demand-recession risk. Two of the most respected capital allocators alive looked at the same airline in the same ninety days and reached opposite conclusions. Abel is buying the quality carrier at a cyclical discount; Tepper is saying no airline is safe in a tariff war. One of them is wrong, and the resolution will be visible in Delta's 2026 results.",
+      title: "Ackman's Overhaul and the Netflix Mirror",
+      body: "Bill Ackman ran his biggest overhaul in years, expanding Pershing Square from 11 names to 14: he completed the full exit of Alphabet, made Microsoft his #1 position, added Meta, and initiated four wide-moat compounders — Netflix, Visa, Mastercard and S&P Global. The Netflix re-entry is remarkable (the stock cost him ~$400M in 2022) and produced the quarter's cleanest mirror trade: Tiger Global fully exited Netflix the very quarter Ackman bought back in. The 'quality at scale' drift ran through the value camp too — Seth Klarman's Baupost made Amazon its outright #1 holding (~$892M), added CME, and, most surprisingly for a deep-value house, took a stake in Ackman's own Pershing Square vehicle. Payments networks, data/ratings duopolies, and mega-cap platforms are where conviction pooled.",
     },
     {
-      title: "The Macro Hedge Expansion",
-      body: "Four of twenty filers carry explicit macro protection in their Q1 filings: Soros (SPY puts + energy puts, while cutting China via FXI −$111M and KWEB −$101M), Burry (~$85M in NVDA and PLTR puts plus $60M+ in cash), Greenlight (gold — which drove its Q1 outperformance), and Aschenbrenner (~$8.46B notional in puts against the entire chip complex, now including ASML). Aschenbrenner's book remains the purest expression of the 'infrastructure over chips' thesis: long Bitcoin-miners-turned-AI-hosts (CLSK +649%, new positions in Bitfarms, Solaris Energy, T1 Energy) against shorts on every chip incumbent. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' is the narrative backdrop — and since 13Fs only disclose long equity positions, the true defensive positioning across the cohort is larger than what is visible.",
+      title: "What We Can — and Can't — Yet See",
+      body: "A candid caveat: this is a filing-week read. Nine filers had clean, press-corroborated Q2 books by mid-August (Berkshire, Citadel, Pershing, Appaloosa, Tiger, Greenlight, Baupost, Icahn, Situational Awareness); Third Point and Trian had one confirmed structural change each (Loeb added 850K Alphabet shares and returned +7.7%; Trian's Janus Henderson take-private closed June 30, removing ~42% of its book from 13F view). Eight late/quant filers — Bridgewater, Soros, D.E. Shaw, Druckenmiller, Viking, Himalaya, Gotham and Miller — had not yet been indexed and still display their verified Q1 books, clearly flagged. And one name left the board entirely: Michael Burry deregistered Scion in November 2025, so its last 13F was Q3 2025; his bets are now known only through self-disclosure (a ~$1.1B NVDA/PLTR put book). The tracker will refresh the pending filers as their filings post.",
     },
   ],
   keySignals: [
-    { label: "Widest Single-Stock Split (Q1 2026)", value: "MSFT — Pershing Square new $2.09B and D.E. Shaw +$1.9B vs. Third Point full exit, Appaloosa −82%, Citadel −$909M" },
-    { label: "Most Surprising Move", value: "Third Point's de-grossing — 13F book cut from ~$7.26B to ~$2.08B with full MSFT and PCG exits, the biggest reset of Loeb's recent career" },
-    { label: "Biggest Conviction Flip", value: "Druckenmiller fully exited Alphabet and cut Amazon −99% — the mega-cap platform trade he championed is gone from the book" },
-    { label: "Value Beat in Q1", value: "Greenlight +6.5%, Miller Deep Value +8.39% vs. S&P 500 −4.4% — value managers dominated the drawdown" },
-    { label: "Emerging AI Power Consensus", value: "Situational Awareness (CLSK +649%, new SEI/TE/BITF), D.E. Shaw (IREN +$687M, Bloom +$605M) — power infrastructure is the least crowded AI layer" },
-    { label: "The Delta Divergence", value: "Berkshire initiated $2.6B in DAL the same quarter Appaloosa fully exited it — the cleanest two-sided bet in the cohort" },
+    { label: "Story of the Quarter", value: "Situational Awareness flipped from a ~$8.46B chip-short to a 4x-levered long AI-memory book, then blew up in July — Citadel bought the wreckage and posted one of its best months in years" },
+    { label: "Berkshire on Offense", value: "Abel net-bought ~$20B (first in 3+ years), added ~$10B to Alphabet (now top-3), and ran $4.5B of buybacks — cash down to $365.5B" },
+    { label: "The Memory Round-Trip", value: "Tepper exited SanDisk and cut Micron −41% near the top; Aschenbrenner levered into the same names into the peak — opposite reads, weeks apart" },
+    { label: "The Netflix Mirror Trade", value: "Ackman re-entered Netflix (which cost him ~$400M in 2022) the same quarter Tiger Global fully exited it" },
+    { label: "Quality-at-Scale Drift", value: "Baupost made Amazon its #1 holding and bought a stake in Ackman's Pershing Square — the deep-value house tilting to mega-cap platforms" },
+    { label: "Data Caveat", value: "9 of 20 fully confirmed at filing week; 8 late/quant filers still show Q1 (flagged); Scion deregistered — no 13F since Q3 2025" },
   ],
 };
 
 // Prior editions of the macro synthesis, preserved for the record.
 // Newest first. Each entry mirrors the macroNarrative shape plus an archivedNote.
 const macroArchive = [
+  {
+    quarter: "Q1 2026",
+    edition: "Revised Edition · June 2026",
+    headline: "The Great De-Grossing: Conviction Fractures Across Every Layer of the AI Trade",
+    archivedNote: "The Q1 2026 synthesis, after primary-source verification. Superseded by the Q2 2026 read as the tracker rolled to the June 30 quarter. Preserved unedited for the record.",
+    paragraphs: [
+      {
+        title: "The De-Grossing Quarter",
+        body: "The defining feature of Q1 2026 — visible only after primary-source verification of the filings — is how aggressively the most storied stock-pickers shrank their books. Third Point executed the most dramatic reset in Dan Loeb's recent history, cutting 13F exposure from ~$7.26B to ~$2.08B and fully exiting both Microsoft and PG&E, its two former flagship positions. Druckenmiller's Duquesne shrank from $4.22B to $3.39B while fully exiting Alphabet and liquidating 99% of Amazon. Citadel reduced both Nvidia and Amazon. This was not a rotation between sectors — it was a withdrawal of gross exposure by the cohort's most experienced macro-aware managers, executed during a quarter when the S&P 500 fell -4.4%. The smartest money got smaller, not just different.",
+      },
+      {
+        title: "The Microsoft Schism",
+        body: "The 'MSFT as AI safe harbor' narrative did not survive verification — what the filings actually show is the widest single-stock disagreement in the cohort. On the buy side: Pershing Square deployed $2.09B into Microsoft at ~21x forward earnings, D.E. Shaw added $1.9B, and Viking increased +32.5%. On the sell side: Third Point fully exited, Appaloosa cut -82%, and Citadel trimmed $909M. Alphabet shows the same schism — Berkshire tripled its stake (+204%), Viking initiated, and Himalaya holds 44% combined, while Druckenmiller fully exited and Pershing sold ~95%. There is no platform consensus in Q1 2026. There are two camps with irreconcilable views on whether mega-cap AI platforms are the safest asset in the market or the most crowded.",
+      },
+      {
+        title: "Value's Vindication",
+        body: "The S&P 500 returned -4.4% in Q1 2026. Greenlight Capital returned +6.5% net. Miller Deep Value returned +8.39% — and grew to 55 holdings on ~$383M as inflows followed performance. Baupost quietly executed its most active quarter in years: AON ($248.2M) as the largest new buy, Amazon increased +47% to ~$649M, and four full exits (CRH, Dollar General, FIS, Fiserv). This is the structural dynamic at work: when macro uncertainty compresses multiples, concentrated value investors with pre-identified catalysts dramatically outperform momentum strategies. The Lebanese sovereign debt 66% IRR (Greenlight) and Molina Healthcare re-rating (Burry) are classic value outcomes that required patience and the willingness to be early.",
+      },
+      {
+        title: "The Abel Era and the Delta Divergence",
+        body: "Greg Abel's first 13F as Berkshire CEO produced 16 full exits (42 to 29 positions), a tripled Alphabet stake, and a new $2.6B Delta Air Lines position. The Delta buy contains the quarter's cleanest natural experiment: David Tepper's Appaloosa fully exited Delta in the exact same quarter — alongside full exits of American and United — completing a total withdrawal from the airline sector on tariff and demand-recession risk. Two of the most respected capital allocators alive looked at the same airline in the same ninety days and reached opposite conclusions. Abel is buying the quality carrier at a cyclical discount; Tepper is saying no airline is safe in a tariff war. One of them is wrong, and the resolution will be visible in Delta's 2026 results.",
+      },
+      {
+        title: "The Macro Hedge Expansion",
+        body: "Four of twenty filers carry explicit macro protection in their Q1 filings: Soros (SPY puts + energy puts, while cutting China via FXI −$111M and KWEB −$101M), Burry (~$85M in NVDA and PLTR puts plus $60M+ in cash), Greenlight (gold — which drove its Q1 outperformance), and Aschenbrenner (~$8.46B notional in puts against the entire chip complex, now including ASML). Aschenbrenner's book remains the purest expression of the 'infrastructure over chips' thesis: long Bitcoin-miners-turned-AI-hosts (CLSK +649%, new positions in Bitfarms, Solaris Energy, T1 Energy) against shorts on every chip incumbent. Dawn Fitzpatrick's March 2026 warning of 'a painful 18–24 months' is the narrative backdrop — and since 13Fs only disclose long equity positions, the true defensive positioning across the cohort is larger than what is visible.",
+      },
+    ],
+    keySignals: [
+      { label: "Widest Single-Stock Split (Q1 2026)", value: "MSFT — Pershing Square new $2.09B and D.E. Shaw +$1.9B vs. Third Point full exit, Appaloosa −82%, Citadel −$909M" },
+      { label: "Most Surprising Move", value: "Third Point's de-grossing — 13F book cut from ~$7.26B to ~$2.08B with full MSFT and PCG exits, the biggest reset of Loeb's recent career" },
+      { label: "Biggest Conviction Flip", value: "Druckenmiller fully exited Alphabet and cut Amazon −99% — the mega-cap platform trade he championed is gone from the book" },
+      { label: "Value Beat in Q1", value: "Greenlight +6.5%, Miller Deep Value +8.39% vs. S&P 500 −4.4% — value managers dominated the drawdown" },
+      { label: "Emerging AI Power Consensus", value: "Situational Awareness (CLSK +649%, new SEI/TE/BITF), D.E. Shaw (IREN +$687M, Bloom +$605M) — power infrastructure is the least crowded AI layer" },
+      { label: "The Delta Divergence", value: "Berkshire initiated $2.6B in DAL the same quarter Appaloosa fully exited it — the cleanest two-sided bet in the cohort" },
+    ],
+  },
   {
     quarter: "Q1 2026",
     edition: "First Edition · May 2026",
@@ -895,104 +900,91 @@ const macroArchive = [
 // (Mar 31) data and will be refreshed once Q2 13Fs are public.
 const q2Preview = {
   quarter: "Q2 2026",
-  status: "Preview — position-level 13Fs landing now (due Aug 14, 2026)",
-  updated: "Aug 14, 2026",
-  headline: "Abel Breaks the 14-Quarter Selling Streak — Berkshire Turns Net Buyer and Adds $10B to Alphabet",
-  intro: "The only cohort member with confirmed Q2 2026 activity is Berkshire Hathaway, disclosed in its Q2 10-Q (filed Aug 8, 2026) ahead of the 13F deadline. The remaining 19 filers report position-level holdings by Aug 14 — the fund-by-fund breakdown below is still the verified Q1 2026 (Mar 31) book until then.",
-  confirmed: [
-    {
-      fund: "Berkshire Hathaway",
-      manager: "Greg Abel (CEO)",
-      points: [
-        p("Net equity BUYER of ~$20B", { note: "first net-buying quarter after 14 consecutive quarters of net selling — a historic reversal of the Buffett-era posture" }),
-        p("Alphabet (GOOGL) +~$10B", { note: "private placement supporting Alphabet's AI data-center buildout — GOOGL now a top-5 holding alongside AAPL, AXP, BAC, KO (top 5 ≈ 66% of the book)" }),
-        p("Buybacks ~$4.5B", { note: "up from just $235M in Q1 — first meaningful repurchase in several quarters" }),
-        p("Cash fell to $365.5B", { note: "down from a record $397.4B at Q1 close — Abel is deploying the hoard" }),
-        p("Operating acquisitions (outside the 13F)", { note: "OxyChem (~$9.7B) and homebuilder Taylor Morrison (~$6.8–8.5B) — full-company deals, not public-market equity" }),
-        p("~$3B additional net public-equity purchases", { note: "position-level detail lands in the Aug 14 13F" }),
-      ],
-    },
+  status: "Rolling update — filings posting through mid-August",
+  updated: "Aug 15, 2026",
+  headline: "Q2 2026 update in progress: 9 filers fully confirmed, 2 partial, 8 pending, 1 deregistered",
+  intro: "The Q2 13F deadline (June 30 holdings) was Aug 14. Marquee funds are already press-verified; several late-filing and quant managers had not yet been indexed at the time of this update and still display their verified Q1 2026 book, clearly flagged on each card. Analysis below reflects the confirmed and partial filers.",
+  groups: [
+    { label: "Confirmed Q2", tone: "buy", items: ["Berkshire Hathaway", "Citadel", "Pershing Square", "Appaloosa", "Tiger Global", "Greenlight", "Baupost", "Icahn", "Situational Awareness"] },
+    { label: "Partial (one confirmed change)", tone: "accent", items: ["Third Point — +850K Alphabet, +7.7% quarter", "Trian — Janus Henderson exits the 13F (take-private closed)"] },
+    { label: "Q2 pending (showing Q1)", tone: "trim", items: ["Bridgewater", "Soros", "D.E. Shaw", "Druckenmiller", "Viking", "Himalaya", "Gotham", "Miller"] },
+    { label: "Deregistered", tone: "sell", items: ["Scion / Michael Burry — no 13F since Q3 2025 (deregistered Nov 2025)"] },
   ],
-  note: "This preview reflects only confirmed Q2 disclosures. The Conviction Heatmap, Divergence Radar, and per-filer cards below are computed from the verified Q1 2026 book and are unaffected until the full Q2 refresh.",
-  sources: "Berkshire Q2 2026 10-Q, CNBC, Seeking Alpha, KuCoin, The Motley Fool",
+  note: "The Conviction Heatmap and Divergence Radar are computed across all cards; because 8 filers still show their Q1 book and Scion is wound down, read cross-filer tallies as directional until the pending filings post.",
+  sources: "SEC EDGAR, CNBC, Bloomberg, WSJ, Reuters, Seeking Alpha, HoldingsChannel, ValueSider",
 };
 
 const divergences = [
   {
-    ticker: "NVDA",
-    subtitle: "AI Chip Supercycle vs. DeepSeek Efficiency Disruption",
+    ticker: "SNDK / MU",
+    subtitle: "AI Memory — Book the Parabola vs. Lever Into It",
     bulls: {
-      filers: ["Bridgewater (significant increase)", "Tiger Global (added)", "Soros (+61% to ~$187M)"],
-      thesis: "The bull case remains demand-driven and supply-constrained: NVIDIA's Blackwell architecture is backlogged through 2026, hyperscalers (MSFT, AMZN, GOOGL) have all guided $650B+ in combined 2026 capex, and the CUDA software moat is decade-deep. DeepSeek's efficiency gains make AI more accessible — which increases total compute demand, not less. Every efficiency improvement in AI history has led to more total compute spend, not less.",
+      filers: ["Situational Awareness (SNDK ~$5.7B + MU ~$5.6B, ~4x levered long)", "Citadel (MU +$2.8B)"],
+      thesis: "AI memory is the highest-torque way to play the compute build-out: HBM and NAND are supply-constrained, pricing was inflecting sharply, and SanDisk and Micron roughly tripled from March to June. Aschenbrenner flipped his entire book from short-the-chips to a levered long on exactly these names, convinced the memory shortage would run further. Citadel independently added ~$2.8B to Micron. When the constraint on AI is physical (memory bandwidth, storage), the memory makers capture outsized economics.",
     },
     bears: {
-      filers: ["Third Point (−94%)", "Viking (full exit)", "Druckenmiller (exit completed)", "Citadel (reduced)", "Burry (NVDA put options, ~$85M total)", "Gotham (−$24M trim on ROIC screens)"],
-      thesis: "The bear camp grew dramatically in Q1: Third Point cut -94%, Viking fully exited, Druckenmiller completed the exit he began in Q4, and even Citadel reduced. The shared concern: DeepSeek-style efficiency gains genuinely threaten the GPU capex supercycle. If AI workloads require 90% less compute for the same output, the hyperscaler capex cycle is structurally shorter than priced. At 30x+ revenue, NVDA has no margin for disappointment. Burry's puts echo his Big Short template: when everyone agrees a trade is obvious, the market is not pricing in tail risk.",
+      filers: ["Appaloosa (exited SNDK >$400M, cut MU −41%)"],
+      thesis: "Tepper's read: the memory names had already tripled, and a commodity-cyclical trading at a parabolic premium is a sale, not a hold. He fully exited SanDisk one quarter after buying it and cut Micron 41%, rotating the proceeds into diversified mega-caps (Amazon, TSMC, Alphabet, Uber). The thesis wasn't 'AI is over' — it was 'this specific trade is too crowded and too parabolic to own at these prices.'",
     },
-    verdict: "This is the most consequential divergence in Q1 2026 — and the bear camp now outnumbers the bulls among active managers. The resolution: if AI capex from hyperscalers continues into Q2 despite tariff disruptions, the remaining bulls are right. If CapEx guidance is revised down in Q2 earnings, the sellers win decisively.",
+    verdict: "The July drawdown decisively vindicated the seller: the memory names cratered, and Situational Awareness's levered long triggered margin calls and a forced sale of the book to Citadel. The deeper lesson is about structure, not direction — Tepper and Aschenbrenner shared the AI-memory thesis, but position sizing, leverage, and entry timing separated a booked gain from a blow-up. The open question for H2: with the parabola broken, is memory now a value entry or a broken trade?",
   },
   {
     ticker: "GOOGL",
-    subtitle: "Undervalued AI Platform vs. Search-at-Risk Exit",
+    subtitle: "Berkshire's $10B Embrace vs. the Sellers",
     bulls: {
-      filers: ["Berkshire Hathaway (tripled to +204%)", "Himalaya Capital (44% combined GOOG + GOOGL)", "Viking Global (new position)", "Third Point (new position)", "Bridgewater (new position)", "Appaloosa (+29%)"],
-      thesis: "Alphabet at ~20x forward earnings is the cheapest mega-cap AI platform in the cohort. Gemini integration across Search, YouTube, Cloud, and Waymo creates compounding optionality. The Search-at-risk narrative is overblown — Google's AI Overviews have increased query volume, not reduced it. Abel's Berkshire tripling the GOOGL stake is the clearest institutional signal: a value-first investor at scale is saying the discount to intrinsic value is too wide.",
+      filers: ["Berkshire Hathaway (+~$10B — now top-3)", "Baupost (+16%)", "Himalaya Capital (~44% combined — Q1, pending)"],
+      thesis: "Abel made Alphabet a top-3 Berkshire holding in Q2 via a ~$10B AI-infrastructure placement — the clearest institutional signal in the cohort that Google is the mega-cap AI platform with the widest gap between price and intrinsic value. Gemini across Search, YouTube, Cloud and Waymo creates compounding optionality, and a value-first allocator at Berkshire's scale committing $10B says the discount is too wide. Klarman added 16% alongside him.",
     },
     bears: {
-      filers: ["Pershing Square (sold ~95% — from 6.1M to 312K shares)", "Druckenmiller (full exit)"],
-      thesis: "Ackman rotated from Alphabet to Microsoft, believing MSFT has cleaner AI monetization per dollar. His concern: Google's advertising revenue is structurally at risk from AI-powered answer engines. OpenAI's ChatGPT search, Perplexity, and Microsoft's Bing integration are all attacking the core search-monetization business model. Druckenmiller went further and sold his entire position. Even a 10% search revenue decline compresses GOOGL's multiple significantly.",
+      filers: ["Pershing Square (full exit — both classes)", "Tiger Global (−45%)"],
+      thesis: "Ackman completed his exit of Alphabet entirely, rotating into Microsoft and Meta on the view that MSFT has cleaner AI monetization per dollar and that Google's ad revenue is structurally exposed to AI answer engines. Coleman nearly halved Tiger's stake in the same quarter. The bear case: even a modest search-monetization leak compresses the multiple, and the capital is better deployed in platforms with less disruption risk.",
     },
-    verdict: "The widest split in the cohort — Pershing sold 95% and Druckenmiller fully exited while five other filers independently added or initiated. The core question: is Search disruption real and permanent, or is the market overpricing a risk that Alphabet's own AI capabilities will neutralize? Watch GOOGL's AI Overviews ad revenue data in the Q2 2026 earnings report.",
+    verdict: "Alphabet is the cohort's most two-sided mega-cap: Berkshire committed ~$10B the same quarter Pershing exited and Tiger cut 45%. The core question is unchanged but the stakes are higher now that Berkshire has planted a flag — is search-monetization risk real and permanent, or is the market overpricing a risk Alphabet's own AI will neutralize? Watch AI Overviews ad-revenue disclosure in upcoming prints.",
   },
   {
-    ticker: "MSFT",
-    subtitle: "AI Cloud Safe Harbor vs. Growth Multiple Concern",
+    ticker: "NFLX",
+    subtitle: "The Mirror Trade — Ackman Back In, Coleman Out",
     bulls: {
-      filers: ["Pershing Square (new $2.09B at 21x fwd earnings)", "D.E. Shaw (+$1.9B)", "Viking Global (+32.5%)", "Soros (+$78M)"],
-      thesis: "Microsoft Azure is growing AI revenue faster than any other hyperscaler. Copilot is genuinely increasing enterprise productivity — measurably so — creating a new $100B+ ARR opportunity. At 21x forward earnings (Ackman's entry price), MSFT is trading below its 10-year historical average multiple for a business compounding at 18%+ EPS growth. The AI platform with the broadest enterprise distribution wins — and MSFT has that via Office 365's 400M+ commercial users.",
+      filers: ["Pershing Square (re-entry, 3.15M sh ~4.9%)"],
+      thesis: "Ackman re-entered Netflix — the very stock that cost Pershing ~$400M in 2022 — a rare public reversal that signals renewed conviction in streaming economics: pricing power, a maturing ad tier, password-sharing monetization, and a widening content moat now throwing off real free cash flow. Buying back a name you were burned on requires believing the business has structurally changed, not just the price.",
     },
     bears: {
-      filers: ["Third Point (full exit)", "Appaloosa (−82%)", "Citadel (−$909M trim)", "Tiger Global (modest trim after 13 quarters at #1)"],
-      thesis: "This is no longer mechanical profit-taking — Third Point fully exited a former flagship position and Tepper cut -82%. The structural bear case: MSFT's Copilot adoption may disappoint vs. expectations, AI capex is compressing free cash flow margins, and at a premium multiple it leaves no room for misses. Loeb and Tepper appear to believe the AI monetization story is better expressed through Amazon (both made AMZN their largest or near-largest position) than through Microsoft's enterprise seat-license model.",
+      filers: ["Tiger Global (full exit ~$234.5M)", "Citadel (−$2.5B trim)"],
+      thesis: "Coleman exited Netflix entirely the same quarter, and Griffin trimmed hard. The bear read: streaming is maturing into a competitive, capital-hungry business where content spend keeps ratcheting, subscriber growth is decelerating in developed markets, and the multiple already prices the ad-tier upside. Better risk/reward exists one layer down the AI/compute stack.",
     },
-    verdict: "A genuine two-sided divergence, not consensus. Pershing and D.E. Shaw deployed ~$4B combined into MSFT in the same quarter that Third Point exited entirely and Appaloosa cut -82%. Both camps are sophisticated and concentrated. The pivot point: Azure growth and Copilot attach rates in the Q2 2026 earnings print — and whether AMZN (the stock both bears rotated toward) outperforms MSFT over the next two quarters.",
+    verdict: "The cleanest opposite-way trade of the quarter — one legendary manager buying exactly what another sold, on the same tape. It's a pure referendum on whether streaming's best days (pricing power, ad monetization) are ahead or already discounted. Netflix's H2 subscriber and ad-revenue trajectory settles it.",
   },
   {
-    ticker: "China (BABA / PDD)",
-    subtitle: "Geopolitical De-risking vs. Multi-Decade Conviction",
+    ticker: "AI Positioning",
+    subtitle: "Concentrate the Mega-Cap Leaders vs. Rotate Down the Stack",
     bulls: {
-      filers: ["Himalaya Capital (Li Lu — PDD unchanged at 14.6% of portfolio)", "Baupost (small residual China)"],
-      thesis: "Li Lu's thesis is unchanged: BABA and PDD trade at 7–9x forward earnings with massive cash reserves, aggressive buybacks, and AI monetization optionality (Tongyi Qianwen for Alibaba, Temu's global expansion for PDD). The regulatory crackdown is fully priced. Xi's capital allocation priorities are moving toward consumption support, which benefits both stocks. Investors who held through the 2021–2023 drawdown are now positioned for the re-rating that comes when geopolitical risk premium compresses.",
+      filers: ["Pershing Square (MSFT #1, +META, +V/MA/SPGI)", "Baupost (AMZN now #1, +CME)", "Appaloosa (AMZN #1, +TSMC/GOOG)"],
+      thesis: "The 'own the winners' camp is concentrating into proven mega-cap platforms and wide-moat compounders — the businesses already monetizing AI at scale with fortress balance sheets. Ackman made Microsoft his top position and added Meta; Klarman made Amazon his #1 and even the value house reached for quality-at-scale. The logic: in a maturing, capital-intensive AI cycle, the incumbents with distribution, data and cash flow compound most reliably — you don't need to guess the next winner.",
     },
     bears: {
-      filers: ["Appaloosa (BABA −33%)", "D.E. Shaw (BABA −$1.2B)", "Scion/Burry (full China exit incl. BIDU)", "Third Point (BABA full exit)", "Soros (FXI −$111M, KWEB −$101M)"],
-      thesis: "The tariff environment in early 2026 made the geopolitical risk premium genuinely unquantifiable. A US-China trade war escalation, secondary sanctions, or Taiwan tensions are not priceable by valuation frameworks — they are binary political risks. Burry's full exit is the starkest signal: even he, the classic contrarian who built large China positions, concluded geopolitical risk overwhelms fundamental cheapness. The rational response is to exit rather than underwrite an unquantifiable risk.",
+      filers: ["Tiger Global (cut GOOGL −45%/NVDA/MSFT/META; +Cerebras/AMD/Intel/APLD)", "Citadel (+SpaceX/Cerebras/Quantinuum private; trimmed TSLA/NVDA/NFLX)"],
+      thesis: "The 'rotate down the stack' camp argues the mega-cap leaders are fully priced and the incremental return now lives one layer down — merchant accelerators (AMD), foundry and compute-infra (Intel, Applied Digital), and pre-IPO frontier names (Cerebras, SpaceX, Quantinuum). Tiger de-weighted its entire Big-Tech core to fund it; Citadel independently reached for the same private names. The bet: the next re-rating is earlier-stage, not in the megacaps everyone already owns.",
     },
-    verdict: "The most analytically pure bull/bear split in Q1 2026 filings. Both sides have legitimate, internally-consistent frameworks. Resolution requires a macro catalyst (US-China tariff resolution or escalation) rather than fundamentals alone. Li Lu's 44% Alphabet + 14.6% PDD concentration is either the most courageous or most dangerous portfolio in the cohort — that question will be answered in Q2 2026.",
+    verdict: "Not a single-stock fight but a strategy fork — and the quarter's most important one. One camp says the safe compounding is in the proven leaders; the other says the alpha has moved to the picks-and-shovels and private frontier tech. Situational Awareness's July blow-up is a warning to the aggressive end of the down-the-stack trade; whether the megacaps or the infra names lead H2 decides who's right.",
   },
   {
-    ticker: "SMH",
-    subtitle: "AI value accrues to power infrastructure, not chip designers",
+    ticker: "AI-Infra Leverage",
+    subtitle: "Is the AI-Infrastructure Trade Over-Levered?",
     bulls: {
       filers: [
-        "Citadel (~$4B NVDA long, +$2.2B AVGO)",
-        "Bridgewater (+$253M NVDA, +MU, +MRVL new)",
-        "Tiger Global (+AVGO, +NVDA)",
-        "Appaloosa (+200% MU)",
-        "D.E. Shaw (+AVGO)",
-        "Third Point (4th consecutive NVDA add)",
+        "Situational Awareness (~4x levered long BE/SNDK/MU/NBIS/CRWV — pre-July)",
+        "Citadel (bought the distressed book in late July)",
       ],
-      thesis: "Six of the largest quantitative and fundamental managers remain structurally long AI chips. The bull case: NVIDIA Blackwell is backlogged through 2026, hyperscalers have guided $650B+ combined 2026 capex, and the CUDA software moat is irreplaceable. Chip designers capture value through proprietary architecture and software lock-in. DeepSeek-style efficiency gains historically increase total AI compute demand rather than reducing it — more people using cheaper AI means more total GPU-hours consumed.",
+      thesis: "The bull case for AI infrastructure is unchanged and, if anything, strengthened by the shakeout: the constraint on AI is physical — power, memory, data-center capacity — and the names that provide it (Bloom Energy, the memory makers, GPU-cloud and bitcoin-miner-turned-compute hosts) sit on genuine, growing demand. Aschenbrenner expressed maximum conviction via ~4x leverage. Tellingly, when his book was force-sold, Citadel stepped in to buy it — a sophisticated counterparty treating the fire-sale as opportunity, not contagion.",
     },
     bears: {
       filers: [
-        "Aschenbrenner / Situational Awareness ($8.46B puts: SMH $2.04B, NVDA $1.57B, ORCL $1.07B, AVGO $1.01B, AMD $969M, MU $584M, TSM $535M)",
-        "Druckenmiller (NVDA −70%, −80% over 2 quarters)",
-        "Burry (NVDA + PLTR puts ~$85M total)",
+        "The July drawdown itself (margin calls, forced deleveraging)",
+        "Appaloosa (booked memory gains and left before the drop)",
       ],
-      thesis: "The rotation thesis: AI value will accrue to the physical layer — electrons, grid connections, cooling capacity — not to chip designers. Bitcoin miners (CORZ, IREN, APLD, RIOT) already have the critical asset: utility-scale grid connections. Bloom Energy provides off-grid power. SanDisk provides NAND storage for inference. As chip architectures commoditize via open-source models and efficiency gains, gross margins compress toward hardware commodity levels. Aschenbrenner's $8.46B in sector-wide puts is simultaneously the largest single bearish position in the cohort and a paired long in AI power infrastructure — a structural rotation bet, not just a valuation call.",
+      thesis: "The bear case is about structure, not thesis: a crowded, high-beta trade financed with leverage has a narrow exit. When AI-memory and infra names rolled over in July, Situational Awareness couldn't hold — margin calls forced a sale of the entire public book, and BofA, Goldman and JPMorgan had to help manage the unwind. Tepper's pre-emptive exit from the same names shows the disciplined read: the trade was right for a while, but the leverage made it un-survivable at the top.",
     },
-    verdict: "The most architecturally sophisticated divergence of Q1 2026. Aschenbrenner is simultaneously the most bearish on chips ($8.46B puts) and most bullish on AI power infrastructure ($3B+ longs) in the entire cohort — a single-investor rotation that D.E. Shaw independently replicated at smaller scale (+$687M IREN, +$605M Bloom Energy). If AI training costs continue falling 10x every 18 months (historical trend), hardware margins compress and infrastructure moats strengthen. If proprietary architectures maintain pricing power (NVIDIA's historical outcome), the chip bulls win. Watch gross margin trends in NVDA's Q2 2026 earnings vs. power infrastructure revenue growth at BE and IREN for the first empirical test.",
+    verdict: "The first genuine drawdown of the AI-infrastructure trade, and its lesson is about leverage and liquidity, not whether AI is real. The same names can be a durable long (Citadel bought them) and a fatal one (Situational Awareness was levered into them) depending entirely on structure. The signal to watch in H2: whether leverage across the AI-infra complex is being quietly reduced, and whether the group re-rates once forced selling clears.",
   },
 ];
 
@@ -1451,10 +1443,10 @@ function AnalysisTab({ filers, onTickerClick }) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
               <span style={{ fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1.5, color: "#07090f", background: T.buy, borderRadius: 4, padding: "3px 8px" }}>
-                New · {q2Preview.quarter}
+                Live · {q2Preview.quarter}
               </span>
               <span style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, color: T.buy }}>
-                Early Preview
+                Rolling Update
               </span>
             </div>
             <span style={{ fontSize: 10, fontWeight: 600, color: T.t3 }}>{q2Preview.status}</span>
@@ -1466,26 +1458,27 @@ function AnalysisTab({ filers, onTickerClick }) {
             {q2Preview.intro}
           </div>
 
-          {q2Preview.confirmed.map((c, i) => (
-            <div key={i} style={{ background: "#0d111788", border: `1px solid ${T.border}`, borderRadius: 8, padding: "14px 16px", marginBottom: 12 }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 10, flexWrap: "wrap" }}>
-                <span style={{ fontWeight: 800, fontSize: 14, color: T.t1 }}>{c.fund}</span>
-                <span style={{ fontSize: 11, color: T.t3 }}>{c.manager}</span>
-                <span style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.buy, background: T.buyBg, border: `1px solid ${T.buy}40`, borderRadius: 4, padding: "2px 6px" }}>Confirmed</span>
-              </div>
-              {c.points.map((pt, j) => (
-                <div key={j} style={{ display: "flex", gap: 9, marginBottom: 8, fontSize: 12.5 }}>
-                  <div style={{ width: 5, height: 5, borderRadius: "50%", background: T.buy, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px ${T.buy}` }} />
-                  <div style={{ lineHeight: 1.55 }}>
-                    <span style={{ fontWeight: 700, color: T.t1 }}>{pt.label}</span>
-                    {pt.note && <span style={{ color: T.t2 }}> — {pt.note}</span>}
-                  </div>
+          {q2Preview.groups.map((g, i) => {
+            const c = { buy: T.buy, accent: T.accent, trim: T.trim, sell: T.sell }[g.tone] || T.t2;
+            const bg = { buy: T.buyBg, accent: T.accentBg, trim: T.trimBg, sell: T.sellBg }[g.tone] || T.cardAlt;
+            return (
+              <div key={i} style={{ marginBottom: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 6 }}>
+                  <span style={{ fontSize: 9, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, color: c, background: bg, border: `1px solid ${c}40`, borderRadius: 4, padding: "2px 7px" }}>
+                    {g.label}
+                  </span>
+                  <span style={{ fontSize: 10, color: T.t3 }}>{g.items.length}</span>
                 </div>
-              ))}
-            </div>
-          ))}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {g.items.map((it, j) => (
+                    <span key={j} style={{ fontSize: 11, color: T.t2, background: "#0d111788", border: `1px solid ${T.border}`, borderRadius: 5, padding: "3px 8px" }}>{it}</span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
 
-          <div style={{ fontSize: 11.5, color: T.t3, lineHeight: 1.6, borderLeft: `2px solid ${T.border2}`, paddingLeft: 10, marginBottom: 8 }}>
+          <div style={{ fontSize: 11.5, color: T.t3, lineHeight: 1.6, borderLeft: `2px solid ${T.border2}`, paddingLeft: 10, margin: "12px 0 8px" }}>
             {q2Preview.note}
           </div>
           <div style={{ fontSize: 10, color: T.t3 }}>
@@ -1688,7 +1681,7 @@ function AnalysisTab({ filers, onTickerClick }) {
       </div>
 
       <div style={{ fontSize: 11, color: T.t3, lineHeight: 1.6, padding: "0 4px" }}>
-        Analysis reflects Q1 2026 13F filings only. Conviction scores are mechanical — they do not account for position sizing, fund strategy, or non-disclosed short positions. This is not investment advice.
+        Analysis reflects Q2 2026 13F filings where confirmed; 8 late/quant filers still show their verified Q1 2026 book (flagged per card) and Scion is wound down. Conviction scores are mechanical — they do not account for position sizing, fund strategy, or non-disclosed short positions. This is not investment advice.
       </div>
     </div>
   );
@@ -1747,8 +1740,35 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
               color: fund.type === "individual" ? T.trim : T.buy,
               border: `1px solid ${fund.type === "individual" ? T.trim : T.buy}30`,
             }}>{fund.type === "individual" ? "Individual" : "Fund"}</span>
+            {(() => {
+              const badge = fund.defunct
+                ? { label: "Deregistered", c: T.sell, bg: T.sellBg }
+                : fund.pending
+                ? { label: "Q2 pending", c: T.trim, bg: T.trimBg }
+                : fund.partial
+                ? { label: "Q2 partial", c: T.accent, bg: T.accentBg }
+                : { label: fund.quarter, c: T.buy, bg: T.buyBg };
+              return (
+                <span style={{
+                  fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.8,
+                  padding: "1px 6px", borderRadius: 4,
+                  background: badge.bg, color: badge.c, border: `1px solid ${badge.c}30`,
+                }}>{badge.label}</span>
+              );
+            })()}
           </div>
           <div style={{ fontSize: 12, color: T.t3, marginTop: 2 }}>{fund.manager} · {fund.aum} · {fund.holdings} holdings</div>
+          {(fund.pending || fund.partial || fund.defunct) && (
+            <div style={{
+              fontSize: 11, marginTop: 5, lineHeight: 1.5,
+              color: fund.defunct ? T.sell : fund.partial ? T.accent : T.trim,
+              background: fund.defunct ? T.sellBg : fund.partial ? T.accentBg : T.trimBg,
+              border: `1px solid ${(fund.defunct ? T.sell : fund.partial ? T.accent : T.trim)}30`,
+              borderRadius: 6, padding: "6px 9px",
+            }}>
+              {fund.pending || fund.partial || fund.defunct}
+            </div>
+          )}
           {!isOpen && (
             <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 5 }}>
               {fund.newBuys.length > 0 && (
@@ -1790,10 +1810,10 @@ function FundCard({ fund, isOpen, onToggle, query, onTickerClick, showQ4 }) {
           fontSize: 11,
         }}>
           <div style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.5, color: T.t3, marginBottom: 5 }}>
-            Q4 2025 → Q1 2026
+            {q4 ? `${q4.label} → ${fund.quarter}` : "Prior-quarter comparison"}
           </div>
           {!q4 ? (
-            <span style={{ color: T.t3, fontStyle: "italic" }}>First 13F filing — no prior quarter data</span>
+            <span style={{ color: T.t3, fontStyle: "italic" }}>No prior-quarter comparison available</span>
           ) : (
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
               <div>
@@ -1993,7 +2013,7 @@ export default function HedgeFundTracker() {
             borderRadius: 20, padding: "4px 14px", marginBottom: 14,
             fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: T.accent,
           }}>
-            Q1 2026 · 13F Filings
+            Q2 2026 · 13F Filings
           </div>
           <h1 style={{
             fontFamily: "'Fraunces', Georgia, serif",
@@ -2003,7 +2023,7 @@ export default function HedgeFundTracker() {
             13F Institutional Tracker
           </h1>
           <p style={{ fontSize: 13, color: T.t2, margin: "0 0 20px", lineHeight: 1.5 }}>
-            SEC 13F filings from 20 elite hedge funds &amp; investors · Data as of Mar 31, 2026
+            SEC 13F filings from 20 elite hedge funds &amp; investors · Q2 2026 (as of Jun 30, 2026)
           </p>
 
           {/* Stat pills */}
@@ -2011,7 +2031,7 @@ export default function HedgeFundTracker() {
             {[
               { label: "20 Filers",          icon: "◈" },
               { label: "~$1.4T AUM tracked", icon: "◎" },
-              { label: "Filed May 2026",      icon: "◷" },
+              { label: "Filed Aug 2026",      icon: "◷" },
               { label: "Long equity only",    icon: "⚑" },
             ].map((s, i) => (
               <div key={i} style={{
@@ -2169,7 +2189,7 @@ export default function HedgeFundTracker() {
                 color: showQ4 ? T.purple : T.t3,
                 transition: "all 0.15s",
               }}
-            >{showQ4 ? "◈ Q4 ON" : "◈ Q4 Compare"}</button>
+            >{showQ4 ? "◈ QoQ ON" : "◈ QoQ Compare"}</button>
           </div>
 
           {visibleFilers.map((fund) => (
@@ -2181,7 +2201,7 @@ export default function HedgeFundTracker() {
       {tab === "sectors" && (
         <div className="fade-up">
           <div style={{ fontSize: 13, color: T.t3, marginBottom: 14, lineHeight: 1.6 }}>
-            Where multiple top filers are converging in Q1 2026:
+            Where multiple top filers are converging in Q2 2026:
           </div>
           {sectorThemes.map((s, i) => (
             <div key={i} style={{
@@ -2213,7 +2233,7 @@ export default function HedgeFundTracker() {
       {tab === "exits" && (
         <div className="fade-up">
           <div style={{ fontSize: 13, color: T.t3, marginBottom: 14, lineHeight: 1.6 }}>
-            Notable full exits and large reductions by major filers in Q1 2026:
+            Notable full exits and large reductions by major filers in Q2 2026:
           </div>
           {exits.map((e, i) => (
             <div key={i} style={{
