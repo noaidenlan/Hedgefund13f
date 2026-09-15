@@ -776,43 +776,79 @@ const exits = [
 
 const macroNarrative = {
   quarter: "Q2 2026",
-  edition: "Complete Read · September 2026",
-  headline: "The AI-Infrastructure Trade Breaks: A Blow-Up, Berkshire on Offense, and the Great Memory Round-Trip",
+  edition: "The Buying Map · September 2026",
+  headline: "Follow the Buying: Where 19 Elite Funds Actually Put Money to Work",
   paragraphs: [
     {
-      title: "The First Blow-Up",
-      body: "The Q2 filing that matters most is a tombstone. Leopold Aschenbrenner's Situational Awareness — the cohort's most ideologically pure AI bull — spent Q1 short the entire chip complex (~$8.46B of puts). By June 30 it had done a complete about-face: it abandoned the short book and went aggressively long AI memory and infrastructure at roughly 4x leverage, with SanDisk (~$5.7B) and Micron (~$5.6B) as its two largest positions — Micron having been a put just one quarter earlier — alongside Bloom Energy, Nebius, CoreWeave and the bitcoin-miner complex. It was precisely the wrong moment: those names cratered in July, margin calls followed, and Citadel bought the bulk of the public book in late July (then posted one of its best months in years). This is the AI-infrastructure trade's first real drawdown, and it happened to the person who wrote the manifesto for it.",
+      title: "The Market They Bought Into",
+      body: "Strip the Q2 filings down to a single question — what did the smart money buy? — and a coherent picture of the mid-2026 market emerges. After the tariff shock of Q1 and the AI-infrastructure blow-up of July, this cohort turned decisively net-buyer: Berkshire flipped to ~$20B of net equity purchases (its first net-buying quarter in over three years) plus $4.5B of buybacks; Soros was a ~$1.4B net buyer; Gotham poured ~$2.65B into a single ETF. But the buying was not indiscriminate risk-on. Capital pooled into a handful of deliberate themes — private frontier tech, Amazon, index beta, and off-consensus value — while the crowded middle of the AI trade (mega-cap chips and the memory names) was trimmed or, in one case, fatally over-bought. What follows is the buying map, and what it says about how the most sophisticated allocators are positioned into the back half of 2026.",
     },
     {
-      title: "Berkshire Goes on Offense",
-      body: "Greg Abel used his second quarter to flip Berkshire from seller to buyer. Berkshire was a net equity buyer of ~$20B — its first net-buying quarter in over three years — added ~$4.5B of buybacks, and drew cash down to $365.5B from a record $397.4B. The signature move is a ~$10B build in Alphabet via an AI-infrastructure placement, vaulting Google to a top-3 holding and marking Berkshire's clearest embrace yet of mega-cap AI/compute — exposure Buffett historically avoided. Abel paired it with a housing/cyclical tilt (Lennar, D.R. Horton, more Delta and Occidental) and new stakes in Heico and Ulta, funded by continued trims of the legacy Apple and Bank of America mega-positions. When the market's most famously patient capital allocator turns aggressive buyer in the same quarter a levered AI fund implodes, the two moves frame the quarter's central tension.",
+      title: "The SpaceX Consensus: Buying What You Can't Buy on an Exchange",
+      body: "The single most revealing buy pattern of the quarter is that three of the most sophisticated allocators alive independently reached for the same private company. Citadel initiated SpaceX, Cerebras, and Quantinuum; D.E. Shaw took a ~$912M SpaceX stake; Tiger Global bought SpaceX and a near-10% position in Cerebras. When Griffin, Shaw, and Coleman all buy pre-IPO frontier tech in the same quarter, the message is unambiguous: they view the listed AI leaders as fully priced, and believe the remaining asymmetry has migrated to what isn't yet public. It is the clearest 'where's the edge now?' signal in the data — the marginal high-conviction dollar is leaving the exchange.",
     },
     {
-      title: "The Great Memory Round-Trip",
-      body: "AI memory was the round-trip trade of the quarter, and the cohort split hard on timing. David Tepper's Appaloosa exited SanDisk entirely — a position it had initiated only one quarter earlier — and cut Micron ~41% after memory names roughly tripled from March to June, booking gains near the top and rotating into Amazon, TSMC, Alphabet and Uber. Aschenbrenner did the opposite, levering into SanDisk and Micron at the peak. Tiger Global threaded a third path: Chase Coleman cut his mega-cap AI core (Alphabet −45%, plus trims to Nvidia, Microsoft, Meta and Amazon) and rotated one layer down the stack — into Cerebras (a near-10% stake), Applied Digital, AMD, a doubled Intel, and adds to Applied Materials and Broadcom. The debate is no longer whether to own AI, but which layer — and, increasingly, whether the memory/infra layer has run too far.",
+      title: "Amazon: The One Mega-Cap They Agreed On",
+      body: "Alphabet split the room (Berkshire committed ~$10B while Pershing and Viking exited outright), Nvidia was net-trimmed across the cohort, and Microsoft drew both a $2B+ buy and a full exit — but Amazon was the mega-cap the buyers converged on. Seth Klarman's Baupost made it its outright #1 holding (~$892M); David Tepper's Appaloosa made it #1 too; Stanley Druckenmiller rebuilt it +1,000% after gutting the position in Q1; Ackman keeps it top-of-book. When a deep-value purist, a macro trader, and a momentum-macro legend all land on the same name, it is the closest thing to genuine cross-filer conviction in the entire book — a bet that AWS plus retail-margin recovery is the most durable, least-crowded way to own the AI build-out.",
     },
     {
-      title: "Ackman's Overhaul and the Netflix Mirror",
-      body: "Bill Ackman ran his biggest overhaul in years, expanding Pershing Square from 11 names to 14: he completed the full exit of Alphabet, made Microsoft his #1 position, added Meta, and initiated four wide-moat compounders — Netflix, Visa, Mastercard and S&P Global. The Netflix re-entry is remarkable (the stock cost him ~$400M in 2022) and produced the quarter's cleanest mirror trade: Tiger Global fully exited Netflix the very quarter Ackman bought back in. The 'quality at scale' drift ran through the value camp too — Seth Klarman's Baupost made Amazon its outright #1 holding (~$892M), added CME, and, most surprisingly for a deep-value house, took a stake in Ackman's own Pershing Square vehicle. Payments networks, data/ratings duopolies, and mega-cap platforms are where conviction pooled.",
+      title: "The Buy That Broke: A Lesson in Crowded Conviction",
+      body: "The most aggressive buying of the quarter went into AI memory — and it is the buy that broke. Aschenbrenner levered SanDisk and Micron to a combined ~$11B (more than half his book), Citadel added ~$2.8B to Micron, and Soros roughly septupled its Micron stake. The thesis was right and the entry was catastrophic: when memory names fell 40–50% in July, the most levered buyer was margin-called into a forced sale of essentially its entire book to Citadel. The counter-example is instructive — Tepper was selling the exact same names into the same strength. The buying data carries a warning that repeats through market history: consensus plus leverage is precisely where the risk concentrates, and the crowded buy is the dangerous one.",
     },
     {
-      title: "The Full Picture, and the Two Late Stragglers",
-      body: "By mid-September the Q2 book is complete for all nineteen active filers, and the last two to index delivered the sharpest rotations of the quarter. Viking Global de-concentrated hard — fully exiting Apple (~$912M), Alphabet and CoreWeave and cutting Tesla −78%, redeploying into a new ~$817M Ferrari stake, a doubled Sherwin-Williams and a +343% Carvana surge: a clean move out of crowded mega-cap AI beta into pricing-power industrials and luxury consumer. D.E. Shaw, the cohort's quant, pushed SPY to its #1 holding, took a ~$912M new SpaceX stake, and — cutting against its own 2024 reputation — added to Nvidia while slashing Broadcom −58% and running a Microsoft put. Soros's aggregate firmed up at ~$8.14B/266 (with a notable ~7× Micron add), and Gotham's SPY build proved even bigger than first reported (~$2.65B). One name stays off the board: Michael Burry deregistered Scion in November 2025 (last 13F Q3 2025); his bets are known only through self-disclosure (a ~$1.1B NVDA/PLTR put book).",
+      title: "Two Ways to Buy a Market: Beta vs. Idiosyncrasy",
+      body: "How the cohort bought is itself the market call, and it bifurcated sharply. The quants voted for breadth: Gotham scaled SPY by ~$2.65B to ~20% of its book, Bridgewater added SPY and IVV to ~25% combined, and D.E. Shaw pushed SPY to its #1 holding — a collective judgment that, with single-stock dispersion this high, the safest expression of 'buy' is the index itself. The stock-pickers who deployed went the opposite way, into off-consensus singles: Viking bought a ~$817M Ferrari stake, doubled Sherwin-Williams and surged Carvana +343%; Miller averaged down into beaten-up energy; Einhorn bought Comcast at ~5x EBITDA. The barbell — index beta on one end, high-conviction idiosyncratic names on the other, with the crowded AI middle being pared — tells you these managers see a market with no easy consensus left to ride, only breadth or edge.",
     },
   ],
   keySignals: [
-    { label: "Story of the Quarter", value: "Situational Awareness flipped from a ~$8.46B chip-short to a 4x-levered long AI-memory book, then blew up in July — Citadel bought the wreckage and posted one of its best months in years" },
-    { label: "Berkshire on Offense", value: "Abel net-bought ~$20B (first in 3+ years), added ~$10B to Alphabet (now top-3), and ran $4.5B of buybacks — cash down to $365.5B" },
-    { label: "The Memory Round-Trip", value: "Tepper exited SanDisk and cut Micron −41% near the top; Aschenbrenner levered into the same names into the peak — opposite reads, weeks apart" },
-    { label: "The Netflix Mirror Trade", value: "Ackman re-entered Netflix (which cost him ~$400M in 2022) the same quarter Tiger Global fully exited it" },
-    { label: "Quality-at-Scale Drift", value: "Baupost made Amazon its #1 holding and bought a stake in Ackman's Pershing Square — the deep-value house tilting to mega-cap platforms" },
-    { label: "Coverage", value: "All 19 active filers now confirmed for Q2 (incl. the late Viking & D.E. Shaw); Scion deregistered — no 13F since Q3 2025. A few aggregates (D.E. Shaw ~$202B; Soros count) rest on aggregator consensus" },
+    { label: "Most-Bought Private Company", value: "SpaceX — independently initiated by Citadel, D.E. Shaw (~$912M), and Tiger Global; the marginal high-conviction dollar is going private" },
+    { label: "Cross-Filer Mega-Cap of Choice", value: "Amazon — #1 holding at both Baupost (~$892M) and Appaloosa, and a +1,000% rebuild at Druckenmiller" },
+    { label: "Biggest New Public Buys", value: "Berkshire's ~$10B Alphabet build; largest activist new buy: Third Point's ~$533M Warner Bros. Discovery stake (its new #1)" },
+    { label: "The Crowded Buy That Broke", value: "AI memory — Aschenbrenner (~$11B SanDisk+Micron), Citadel (+$2.8B MU), Soros (~7× MU) all piled in; the names cratered in July" },
+    { label: "The Quant Vote: Index Beta", value: "SPY was the top buy at Gotham (+$2.65B), Bridgewater and D.E. Shaw — breadth over stock-picking when dispersion is high" },
+    { label: "Off-Consensus Conviction", value: "Viking's ~$817M Ferrari, a doubled Sherwin-Williams, and +343% Carvana — the clearest bet away from the AI crowd" },
   ],
 };
 
 // Prior editions of the macro synthesis, preserved for the record.
 // Newest first. Each entry mirrors the macroNarrative shape plus an archivedNote.
 const macroArchive = [
+  {
+    quarter: "Q2 2026",
+    edition: "Complete Read · September 2026",
+    headline: "The AI-Infrastructure Trade Breaks: A Blow-Up, Berkshire on Offense, and the Great Memory Round-Trip",
+    archivedNote: "The Q2 2026 quarter-in-review. Superseded by 'The Buying Map,' which reframes the same completed quarter around where capital was actually deployed. Preserved unedited.",
+    paragraphs: [
+      {
+        title: "The First Blow-Up",
+        body: "The Q2 filing that matters most is a tombstone. Leopold Aschenbrenner's Situational Awareness — the cohort's most ideologically pure AI bull — spent Q1 short the entire chip complex (~$8.46B of puts). By June 30 it had done a complete about-face: it abandoned the short book and went aggressively long AI memory and infrastructure at roughly 4x leverage, with SanDisk (~$5.7B) and Micron (~$5.6B) as its two largest positions — Micron having been a put just one quarter earlier — alongside Bloom Energy, Nebius, CoreWeave and the bitcoin-miner complex. It was precisely the wrong moment: those names cratered in July, margin calls followed, and Citadel bought the bulk of the public book in late July (then posted one of its best months in years). This is the AI-infrastructure trade's first real drawdown, and it happened to the person who wrote the manifesto for it.",
+      },
+      {
+        title: "Berkshire Goes on Offense",
+        body: "Greg Abel used his second quarter to flip Berkshire from seller to buyer. Berkshire was a net equity buyer of ~$20B — its first net-buying quarter in over three years — added ~$4.5B of buybacks, and drew cash down to $365.5B from a record $397.4B. The signature move is a ~$10B build in Alphabet via an AI-infrastructure placement, vaulting Google to a top-3 holding and marking Berkshire's clearest embrace yet of mega-cap AI/compute — exposure Buffett historically avoided. Abel paired it with a housing/cyclical tilt (Lennar, D.R. Horton, more Delta and Occidental) and new stakes in Heico and Ulta, funded by continued trims of the legacy Apple and Bank of America mega-positions. When the market's most famously patient capital allocator turns aggressive buyer in the same quarter a levered AI fund implodes, the two moves frame the quarter's central tension.",
+      },
+      {
+        title: "The Great Memory Round-Trip",
+        body: "AI memory was the round-trip trade of the quarter, and the cohort split hard on timing. David Tepper's Appaloosa exited SanDisk entirely — a position it had initiated only one quarter earlier — and cut Micron ~41% after memory names roughly tripled from March to June, booking gains near the top and rotating into Amazon, TSMC, Alphabet and Uber. Aschenbrenner did the opposite, levering into SanDisk and Micron at the peak. Tiger Global threaded a third path: Chase Coleman cut his mega-cap AI core (Alphabet −45%, plus trims to Nvidia, Microsoft, Meta and Amazon) and rotated one layer down the stack — into Cerebras (a near-10% stake), Applied Digital, AMD, a doubled Intel, and adds to Applied Materials and Broadcom. The debate is no longer whether to own AI, but which layer — and, increasingly, whether the memory/infra layer has run too far.",
+      },
+      {
+        title: "Ackman's Overhaul and the Netflix Mirror",
+        body: "Bill Ackman ran his biggest overhaul in years, expanding Pershing Square from 11 names to 14: he completed the full exit of Alphabet, made Microsoft his #1 position, added Meta, and initiated four wide-moat compounders — Netflix, Visa, Mastercard and S&P Global. The Netflix re-entry is remarkable (the stock cost him ~$400M in 2022) and produced the quarter's cleanest mirror trade: Tiger Global fully exited Netflix the very quarter Ackman bought back in. The 'quality at scale' drift ran through the value camp too — Seth Klarman's Baupost made Amazon its outright #1 holding (~$892M), added CME, and, most surprisingly for a deep-value house, took a stake in Ackman's own Pershing Square vehicle. Payments networks, data/ratings duopolies, and mega-cap platforms are where conviction pooled.",
+      },
+      {
+        title: "The Full Picture, and the Two Late Stragglers",
+        body: "By mid-September the Q2 book is complete for all nineteen active filers, and the last two to index delivered the sharpest rotations of the quarter. Viking Global de-concentrated hard — fully exiting Apple (~$912M), Alphabet and CoreWeave and cutting Tesla −78%, redeploying into a new ~$817M Ferrari stake, a doubled Sherwin-Williams and a +343% Carvana surge: a clean move out of crowded mega-cap AI beta into pricing-power industrials and luxury consumer. D.E. Shaw, the cohort's quant, pushed SPY to its #1 holding, took a ~$912M new SpaceX stake, and — cutting against its own 2024 reputation — added to Nvidia while slashing Broadcom −58% and running a Microsoft put. Soros's aggregate firmed up at ~$8.14B/266 (with a notable ~7× Micron add), and Gotham's SPY build proved even bigger than first reported (~$2.65B). One name stays off the board: Michael Burry deregistered Scion in November 2025 (last 13F Q3 2025); his bets are known only through self-disclosure (a ~$1.1B NVDA/PLTR put book).",
+      },
+    ],
+    keySignals: [
+      { label: "Story of the Quarter", value: "Situational Awareness flipped from a ~$8.46B chip-short to a 4x-levered long AI-memory book, then blew up in July — Citadel bought the wreckage and posted one of its best months in years" },
+      { label: "Berkshire on Offense", value: "Abel net-bought ~$20B (first in 3+ years), added ~$10B to Alphabet (now top-3), and ran $4.5B of buybacks — cash down to $365.5B" },
+      { label: "The Memory Round-Trip", value: "Tepper exited SanDisk and cut Micron −41% near the top; Aschenbrenner levered into the same names into the peak — opposite reads, weeks apart" },
+      { label: "The Netflix Mirror Trade", value: "Ackman re-entered Netflix (which cost him ~$400M in 2022) the same quarter Tiger Global fully exited it" },
+      { label: "Quality-at-Scale Drift", value: "Baupost made Amazon its #1 holding and bought a stake in Ackman's Pershing Square — the deep-value house tilting to mega-cap platforms" },
+      { label: "Coverage", value: "All 19 active filers confirmed for Q2 (incl. the late Viking & D.E. Shaw); Scion deregistered — no 13F since Q3 2025" },
+    ],
+  },
   {
     quarter: "Q1 2026",
     edition: "Revised Edition · June 2026",
